@@ -1,15 +1,16 @@
-if running in windows
-
+_if running in windows_
+```javascript
 "scripts": {
     "start": "tsc && node ./dist/app.js",
     "debug": "set DEBUG=app && npm run start",
     "test": "npm test"
   },
-
-  if running in linux
-
+```
+  _if running in linux_
+```javascript
 "scripts": {
-    "start": "tsc && node ./dist/app.js",
-    "debug": "export DEBUG=app && npm run start",
-    "test": "npm test"
-  },
+"start": "tsc && node ./dist/app.js",
+"debug": "export DEBUG=app && npm run start",
+"test": "npm test"
+},
+```
