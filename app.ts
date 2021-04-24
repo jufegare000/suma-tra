@@ -8,7 +8,7 @@ import { CommonRoutesConfig } from './common/routes/common.routes.config';
 
 const app: express.Application = express();
 const server: Server = createServer(app);
-const port = 3000;
+const port: number = 3000;
 const routesModule: RoutesModule = new RoutesModule(app);
 
 
@@ -21,7 +21,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
 });
 
 server.listen(port, () => {
-    debugLog(`Server running at http:/lñocalhost:${port}`);
+    debugLog(`Server running at http:/localhost:${port}`);
     routesModule.routes.forEach((route: CommonRoutesConfig) => {
         debugLog(`Routes configurd for ${route.getName()}`);
     });

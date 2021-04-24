@@ -9,7 +9,7 @@ export class UsersRoutes extends CommonRoutesConfig {
 
     configureRoutes(): Application {
 
-        this.app.route(`users`)
+        this.app.route(`/users`)
             .get((req: Request, res: Response) => {
                 res.status(200).send(`List of users`)
             })
