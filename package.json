@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node ./dist/app.js",
-    "debug": "set DEBUG=app && npm run start",
+    "debug": "export DEBUG=app && npm run start",
     "test": "npm test"
   },
   "keywords": [
