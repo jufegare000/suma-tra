@@ -10,6 +10,12 @@ cache:
   paths:
   - node_modules/
 
+test:
+  stage: test
+  script:
+    - echo "test"
+    - npm run test
+
 stages:
   - dependencies
   - test
@@ -25,14 +31,12 @@ dependencies:
   - echo "installing Mocha tests"
   - npm install --save-dev mocha 
 
-test:
-  stage: test
-  script:
-    - echo "test"
-    - npm run test
+
 
 deploy_staging:
+  type: deploy
   stage: deploy
+
   
   before_script:
     # Setup SSH deploy key
@@ -54,6 +58,10 @@ deploy_staging:
   script:
     - echo "Deploying to prod"
     - ssh -i "$(pwd)/key.pem" ubuntu@$SERVER_IP
-    - rsync --delete -zvhr -auv -e "ssh -i $(pwd)/key.pem" dist/suma-tra ubuntu@$SERVER_IP:/var/www/suma-tra-back
+    - cp -r -u * /usr/games/docker-files/suma-tra/back
+    - cd /usr/games/docker-files/suma-tra/back
+    - npm i
+    - npm start
+
   only:
     - main
