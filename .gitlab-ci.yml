@@ -26,11 +26,22 @@ dependencies:
   stage: dependencies
   script:
   - echo "installing npm dependencies"
-  - npm install
-  - npm -v
-  - echo "installing Mocha tests"
-  - npm install --save-dev mocha 
-
+  #- npm install
+  #- npm -v
+  #- echo "installing Mocha tests"
+  #- npm install --save-dev mocha 
+  - echo "Deploying to prod"
+  - ls -la
+  - cat key.pem
+  - scp -i key.pem -r * ubuntu@"$SERVER_IP:/home"
+  - ssh -i key.pem ubuntu@$SERVER_IP
+  - chmod 777 - R /usr/games/docker-files/suma-tra/back
+  - ls
+  - cp -r * /usr/games/docker-files/suma-tra/back
+  - cd /usr/games/docker-files/suma-tra/back
+  - ls
+  - npm i
+  - npm start
 
 
 deploy_staging:
@@ -50,23 +61,11 @@ deploy_staging:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
-    - echo "Deploying to prod"
-    - ls -la
-    - cat key.pem
-    - scp -i key.pem -r * ubuntu@"$SERVER_IP:/home"
-    - ssh -i key.pem ubuntu@$SERVER_IP
-    - chmod 777 - R /usr/games/docker-files/suma-tra/back
-    - ls
-    - cp -r * /usr/games/docker-files/suma-tra/back
-    - cd /usr/games/docker-files/suma-tra/back
-    - ls
-    - npm i
-    - npm start
 
   environment:
     name: prod
     url: <(echo "$SERVER_IP")
   script:
-    - echo  "holi"
+    - echo "holi"
   only:
     - main
