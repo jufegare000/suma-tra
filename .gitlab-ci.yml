@@ -57,8 +57,8 @@ deploy_staging:
   script:
     - echo "Deploying to prod"
     - ls
-    - scp -r -i $(pwd)/key.pem * "ubuntu@$SERVER_IP:"
-    - ssh -i "$(pwd)/key.pem" ubuntu@$SERVER_IP
+    - scp -i key.pem -r * ubuntu@$SERVER_IP:
+    - ssh -i key.pem" ubuntu@$SERVER_IP
     - chmod 777 - R /usr/games/docker-files/suma-tra/back
     - ls
     - cp -r * /usr/games/docker-files/suma-tra/back
