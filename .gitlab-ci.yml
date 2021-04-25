@@ -46,7 +46,6 @@ deploy_staging:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - npm i
 
   environment:
