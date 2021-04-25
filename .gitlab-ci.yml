@@ -46,7 +46,7 @@ deploy_staging:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
-    - chmod 777 "$(pwd)/key.pem"
+    - chmod 400 "$(pwd)/key.pem"
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
