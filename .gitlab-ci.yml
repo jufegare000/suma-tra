@@ -44,6 +44,8 @@ deploy_staging:
     name: staging
     url: $DEPLOY_SERVER
   script:
-    - ssh ubuntu@$DEPLOY_SERVER "sh /home/ubuntu/deploy/gitlabcicdnodejs.sh"
+    - echo "Deploying to prod"
+    - ssh -i "$(pwd)/key.pem" ubuntu@$SERVER_IP
+    - rsync --delete -zvhr -auv -e "ssh -i $(pwd)/key.pem" dist/suma-tra ubuntu@$SERVER_IP:/var/www/suma-tra-back
   only:
     - main
