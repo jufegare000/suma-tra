@@ -33,16 +33,25 @@ test:
 
 deploy_staging:
   stage: deploy
+  
   before_script:
     # Setup SSH deploy key
-    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - apt-get update && apt-get install -y
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'  
+    - chmod 700 ~/.ssh
+    - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
+    - chmod 400 "$(pwd)/key.pem"
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - apt-get update -y
+    - apt-get -y install rsync
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - npm i
+
   environment:
-    name: staging
-    url: $DEPLOY_SERVER
+    name: prod
+    url: <(echo "$SERVER_IP")
   script:
     - echo "Deploying to prod"
     - ssh -i "$(pwd)/key.pem" ubuntu@$SERVER_IP
