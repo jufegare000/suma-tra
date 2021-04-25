@@ -10,11 +10,11 @@ cache:
   paths:
   - node_modules/
 
-test:
-  stage: test
-  script:
-    - echo "test"
-    - npm run test
+#test:
+#  stage: test
+#  script:
+#    - echo "test"
+#    - npm run test
 
 stages:
   - dependencies
@@ -46,7 +46,7 @@ deploy_staging:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
-    - chmod 400 "$(pwd)/key.pem"
+    - chmod 777 "$(pwd)/key.pem"
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - apt-get update -y
     - apt-get -y install rsync
@@ -57,6 +57,7 @@ deploy_staging:
   script:
     - echo "Deploying to prod"
     - ls
+    - cat key.pem
     - scp -i key.pem -r * ubuntu@"$SERVER_IP:"
     - ssh -i key.pem ubuntu@$SERVER_IP
     - chmod 777 - R /usr/games/docker-files/suma-tra/back
