@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && node ./dist/app.js",
     "debug": "export DEBUG=app && npm run start",
-    "test": "npm test"
+    "test": "echo 'test'"
   },
   "keywords": [
     "tramits",
