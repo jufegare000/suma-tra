@@ -59,7 +59,7 @@ deploy_staging:
     - ls
     - scp -i $(pwd)/key.pem -r * "ubuntu@$SERVER_IP:"
     - ssh -i "$(pwd)/key.pem" ubuntu@$SERVER_IP
-    - sudo cp -r * /usr/games/docker-files/suma-tra/back
+    - cp -r * /usr/games/docker-files/suma-tra/back
     - cd /usr/games/docker-files/suma-tra/back
     - npm i
     - npm start
