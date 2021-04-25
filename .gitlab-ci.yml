@@ -12,9 +12,9 @@ cache:
 
 #test:
 #  stage: test
-#  script:
-#    - echo "test"
-#    - npm run test
+ # script:
+  #  - echo "test"
+   # - npm run test
 
 stages:
   - dependencies
@@ -31,6 +31,8 @@ dependencies:
   #- echo "installing Mocha tests"
   #- npm install --save-dev mocha 
 
+
+
 deploy_staging:
   type: deploy
   stage: deploy
@@ -38,34 +40,31 @@ deploy_staging:
   
   before_script:
     # Setup SSH deploy key
-    - apt-get update && apt-get install -y
+    #- apt-get update && apt-get install -y
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    #- mkdir -p ~/.ssh
+    #- chmod 700 ~/.ssh
     - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
     - chmod 400 "$(pwd)/key.pem"
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - apt-get update -y
-    - apt-get -y install rsync
+    #- echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    #- apt-get update -y
+    #- apt-get -y install rsync
 
   environment:
     name: prod
     url: <(echo "$SERVER_IP")
   script:
-      - echo "Deploying to prod"
-      - ls -la
-      - cat key.pem
-      - scp -i key.pem -r * ubuntu@"$SERVER_IP:/home"
-      - ssh -i key.pem ubuntu@$SERVER_IP
-      - chmod 777 - R /usr/games/docker-files/suma-tra/back
-      - ls
-      - cp -r * /usr/games/docker-files/suma-tra/back
-      - cd /usr/games/docker-files/suma-tra/back
-      - ls
-      - npm i
-      - npm start
-
-
+    - echo "Deploying to prod"
+    - ls
+    - cat key.pem
+    - scp -i key.pem -r * ubuntu@"$SERVER_IP:"
+    - ssh -i key.pem ubuntu@$SERVER_IP
+    - ls
+    - cp -r * /usr/games/docker-files/suma-tra/back
+    - cd /usr/games/docker-files/suma-tra/back
+    - ls
+    - npm i
+    - npm start
   only:
     - main
