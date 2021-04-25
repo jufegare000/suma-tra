@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import {logger} from 'express-winston';
-import {loggerOptions, debugLog} from  './common/loggers/logger';
-import {RoutesModule} from './common/routes/common.routes.module';
+import {loggerOptions, debugLog} from  './components/common/loggers/logger';
+import {RoutesModule} from './components/common/routes/common.routes.module';
 import {Server, createServer}from 'http';
-import { CommonRoutesConfig } from './common/routes/common.routes.config';
+import { CommonRoutesConfig } from './components/common/routes/common.routes.config';
 
 const app: express.Application = express();
 const server: Server = createServer(app);
