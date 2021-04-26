@@ -60,8 +60,6 @@ deploy_staging:
     - ssh -i key.pem ubuntu@$SERVER_IP
     - rsync --delete --exclude='*.pem' -zvhr -auv -e "ssh -i $(pwd)/key.pem" * ubuntu@$SERVER_IP:/usr/games/docker-files/suma-tra/back
     - ssh -i key.pem ubuntu@$SERVER_IP
-    - cd /usr/games/docker-files/suma-tra/back
-    - npm i
-    - npm start
+    - ls
   only:
     - main
