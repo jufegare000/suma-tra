@@ -43,8 +43,8 @@ deploy_staging:
     #- apt-get update && apt-get install -y
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
-    #- mkdir -p ~/.ssh
-    #- chmod 700 ~/.ssh
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
     - chmod 777 "$(pwd)/key.pem"
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
