@@ -40,7 +40,7 @@ deploy_staging:
   
   before_script:
     # Setup SSH deploy key
-    #- apt-get update && apt-get install -y
+    - apt-get update && apt-get install -y
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
@@ -48,8 +48,8 @@ deploy_staging:
     - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
     - chmod 400 "$(pwd)/key.pem"
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    #- apt-get update -y
-    #- apt-get -y install rsync
+    - apt-get update -y
+    - apt-get -y install rsync
 
   environment:
     name: prod
