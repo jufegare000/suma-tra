@@ -51,6 +51,7 @@ deploy_staging:
     - apt-get update -y
     - apt-get -y install node-typescript
     - apt-get -y install rsync
+    - npm install --global typescript@latest
 
   environment:
     name: prod
@@ -58,8 +59,8 @@ deploy_staging:
   script:
     - echo "Deploying to prod"
     - ls
-    - ssh -i key.pem ec2-user@$SERVER_IP
     - tsc
+    - ssh -i key.pem ec2-user@$SERVER_IP
     #- rsync --delete --exclude='*.pem' -zvhr -auv -e "ssh -i $(pwd)/key.pem" * ec2-user@$SERVER_IP:/home/ec2-user/suma-tra/application
     #- ssh -i key.pem ec2-user@$SERVER_IP "ls -la"
     - ls
