@@ -61,7 +61,7 @@ deploy_staging:
     - ls
     - tsc
     - ssh -i key.pem ec2-user@$SERVER_IP
-    - rsync --delete --exclude='*.pem' -zvhr -auv -e "ssh -i key.pem" dist ec2-user@$SERVER_IP:/home/ec2-user/suma-tra/application
+    - rsync --delete --exclude='*.pem' -zvhr -auv -e "ssh -i key.pem" * ec2-user@$SERVER_IP:/home/ec2-user/suma-tra/application
     - ssh -i key.pem ec2-user@$SERVER_IP "pm2 start /home/ec2-user/suma-tra/application/dist/app.js"
     - ls
   only:
