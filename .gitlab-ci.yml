@@ -52,7 +52,8 @@ deploy_staging:
     - apt-get -y install node-typescript
     - apt-get -y install rsync
     - npm install --global typescript@latest
-    - npm i
+    - npm install chai mocha ts-node @types/chai @types/mocha --save-dev
+
 
   environment:
     name: prod
