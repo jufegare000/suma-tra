@@ -8,7 +8,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Jest tests",
+            "name": "Mocha tests",
             "skipFiles": [
                 "<node_internals>/**"
             ],
