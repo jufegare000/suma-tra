@@ -52,6 +52,7 @@ deploy_staging:
     - apt-get -y install node-typescript
     - apt-get -y install rsync
     - npm install --global typescript@latest
+    - npm i
 
   environment:
     name: prod
