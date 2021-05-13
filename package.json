@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && node ./dist/app.js",
     "debug": "export DEBUG=app && npm run start",
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test": "mocha -r ts-node/register app/tests/**/*.test.ts",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test"
   },
   "keywords": [
@@ -20,8 +20,10 @@
   "dependencies": {
     "cors": "^2.8.5",
     "debug": "^4.3.1",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-winston": "^4.1.0",
+    "mysql2": "^2.2.5",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
     "sequelize-typescript": "^2.1.0",

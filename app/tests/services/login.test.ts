@@ -1,7 +1,7 @@
 import {CreateUserDto} from '../../components/users/model/dto/create-user.dto';
 
 describe('calculate', function() {
-    it('add', function() {
+    xit('add', function() {
       const createUserDto: CreateUserDto = {
           email: '',
           id: '',

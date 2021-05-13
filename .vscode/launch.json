@@ -15,9 +15,11 @@
             "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "args": [
                 "-r",
-                "ts-node/register",// set to bdd, not tdd
+                "ts-node/register",
+                "--timeout",
+                "999999",
                 "--colors",
-                "${workspaceFolder}/tests/**/*.ts"
+                "${workspaceFolder}/app/tests/**/*.ts"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
