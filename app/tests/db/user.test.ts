@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import {sequalize} from '../../config/db/db';
 import {TramiUserModel} from '../../models/tramiUser.model';
 
@@ -7,6 +8,6 @@ describe('get user from database', function() {
       const dummt = await repo.findOne({where: {
           id: 1
       }})
-      console.log(dummt?.email);
+      expect(dummt).to.be.instanceOf(TramiUserModel);
     }); 
   });
