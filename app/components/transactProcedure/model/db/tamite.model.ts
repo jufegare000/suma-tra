@@ -1,13 +1,13 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty } from "sequelize-typescript";
-import { TramiteI } from "../components/transactProcedure/model/interface/tramite.interface";
+import { TramiteI } from "../interface/tramite.interface";
 
 @Table(
     {
-        tableName: "trami_user",
+        tableName: "tramite",
         timestamps: false
     }
 )
-export class Tramite extends Model implements TramiteI{
+export class TramiteModel extends Model implements TramiteI{
     
     @AutoIncrement
     @PrimaryKey
@@ -17,7 +17,7 @@ export class Tramite extends Model implements TramiteI{
     @AllowNull(false)
     @NotEmpty
     @Column
-    solicitante_id!: string;
+    solicitante_id!: number;
 
     @AllowNull(true)
     @Column
@@ -33,7 +33,7 @@ export class Tramite extends Model implements TramiteI{
 
     @AllowNull(false)
     @Column
-    modelo!: string;
+    modelo!: number;
 
     @AllowNull(false)
     @Column

@@ -1,10 +1,10 @@
 export interface TramiteI {
     id?: number;
-    solicitante_id: string;
+    solicitante_id: number;
     tramitador_id?: number;
     tipo_vehiculo: number;
     placa: string;
-    modelo: string;
+    modelo: number;
     organismo_transito_id: number;
     direccion_solicitante: string;
     cedula_comprador: string;

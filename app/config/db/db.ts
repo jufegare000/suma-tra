@@ -1,6 +1,7 @@
 
 import * as dotenv from 'dotenv';
 import { Sequelize } from 'sequelize-typescript';
+import { TramiteModel } from '../../components/transactProcedure/model/db/tamite.model';
 import {TramiUserModel} from '../../models/tramiUser.model';
 
 dotenv.config();
@@ -8,7 +9,6 @@ dotenv.config();
 const userName: any = process.env.DB_USER;
 const pass: any = process.env.DB_PWD
 const dbn: any = process.env.DB_NAME
-
 
 export const sequalize = new Sequelize(dbn, userName, pass, {
     host: process.env.DB_HOST,
@@ -20,8 +20,7 @@ export const sequalize = new Sequelize(dbn, userName, pass, {
         idle:10000
     },
     repositoryMode: true
-    
 }
 )
 
-sequalize.addModels([TramiUserModel]);
+sequalize.addModels([TramiteModel, TramiUserModel]);
