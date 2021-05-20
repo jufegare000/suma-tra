@@ -1,7 +1,7 @@
 
 import * as dotenv from 'dotenv';
 import { Sequelize } from 'sequelize-typescript';
-import { TramiteModel } from '../../components/transactProcedure/model/db/tamite.model';
+import { TramiteModel } from '../../components/tramite/model/db/tamite.model';
 import {TramiUserModel} from '../../models/tramiUser.model';
 
 dotenv.config();

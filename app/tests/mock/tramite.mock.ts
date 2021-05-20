@@ -1,4 +1,4 @@
-import { TramiteI } from "../../components/transactProcedure/model/interface/tramite.interface";
+import { TramiteI } from "../../components/tramite/model/interface/tramite.interface";
 
 export const tramitePendienteDeaprobacionMock: TramiteI 
     = 

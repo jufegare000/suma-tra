@@ -1,3 +1,4 @@
+import { ignoredRoutes } from "express-winston";
 import { Repository } from "sequelize-typescript";
 import { DatabaseError } from "sequelize/types";
 import { sequalize } from "../../../config/db/db";
@@ -15,14 +16,18 @@ export class TramiteRepository {
         return this.repository;
     }
 
-    guardarTramiteModel(tramite: TramiteI){
+    async guardarTramiteModel(tramite: TramiteI){
         const tramiteRepo = this.getRepository();
+        return await tramiteRepo.create(tramite);
+    }
+
+    async eliminarTramite(tramiteModel: TramiteModel | null){
         try{
-            tramiteRepo.create(tramite);
-        }catch(exceptio){
-            console.log('Error al guardar tramite: ', tramite);
+            if(tramiteModel)
+            await tramiteModel.destroy();
+        }catch(error){
+            return null;
         }
-        
     }
     
 }
