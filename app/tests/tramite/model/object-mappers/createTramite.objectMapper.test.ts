@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import { CreateTramiteObjectMapper } from '../../../components/tramite/service/create-tramite/createTramite.objectMapper';
+import { CreateTramiteObjectMapper } from '../../../../components/tramite/service/create-tramite/createTramite.objectMapper';
 import { createTramiteDTOMock, createdTramiteDTOMock } from '../../mock/createTramite.mock.dto';
 import { tramitePendienteDeaprobacionMock } from '../../mock/tramite.mock'; 
-import { TramiteI } from '../../../components/tramite/model/interface/tramite.interface';
-import { TramiteModel } from '../../../components/tramite/model/db/tamite.model';
-import { TramiteRepository } from '../../../components/tramite/repository/tramite.repository';
-import { CreateTramiteDTO } from '../../../components/tramite/model/dto/createTramite.dto';
+import { TramiteI } from '../../../../components/tramite/model/interface/tramite.interface';
+import { TramiteModel } from '../../../../components/tramite/model/db/tamite.model';
+import { TramiteRepository } from '../../../../components/tramite/repository/tramite.repository';
+import { CreateTramiteDTO } from '../../../../components/tramite/model/dto/createTramite.dto';
 
 describe('Tramite object mapping testing', function() {
   const tramiteRepo: TramiteRepository = new TramiteRepository();
@@ -19,7 +19,7 @@ describe('Tramite object mapping testing', function() {
         expect(tramiteMapped).to.eql(tramitePendienteDeaprobacionMock);
     }); 
 
-    it.only('Map tramiteModel to CreateTramiteDTO', async function() {
+    it('Map tramiteModel to CreateTramiteDTO', async function() {
       
         const tramiteFromDB:TramiteModel|null = await tramiteRepo.getTramiteById(1);
         

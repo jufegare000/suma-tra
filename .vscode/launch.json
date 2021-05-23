@@ -19,7 +19,7 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/app/tests/services/object-mappers/*.ts"
+                "${workspaceFolder}/app/tests/tramite/db/*.ts"
                 //"${workspaceFolder}/app/tests/**/*.ts"
             ],
             "console": "integratedTerminal",

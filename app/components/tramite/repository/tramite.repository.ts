@@ -1,6 +1,4 @@
-import { ignoredRoutes } from "express-winston";
 import { Repository } from "sequelize-typescript";
-import { DatabaseError } from "sequelize/types";
 import { sequalize } from "../../../config/db/db";
 import { TramiteModel } from "../model/db/tamite.model";
 import { TramiteI } from "../model/interface/tramite.interface";
@@ -16,7 +14,16 @@ export class TramiteRepository {
         return this.repository;
     }
 
-    async guardarTramiteModel(tramite: TramiteI){
+    async getAllTramites(): Promise<TramiteModel[] | null> {
+        const tramiteRepo = this.getRepository();
+        try {
+            return await tramiteRepo.findAll();
+        }catch(ex) {
+            throw new Error(ex);
+        }
+    }
+
+    async guardarTramiteModel(tramite: TramiteI): Promise<TramiteModel>{
         const tramiteRepo = this.getRepository();
         return await tramiteRepo.create(tramite);
     }

@@ -1,10 +1,12 @@
 import { expect, assert } from 'chai';
-import { TramiteModel } from '../../components/tramite/model/db/tamite.model';
-import { TramiteRepository } from '../../components/tramite/repository/tramite.repository';
+import { TramiteModel } from '../../../components/tramite/model/db/tamite.model';
+import { TramiteRepository } from '../../../components/tramite/repository/tramite.repository';
 import { tramitePendienteDeaprobacionMock } from '../mock/tramite.mock';
 
 describe('Tramite model testing', function() {
+  
   const tramiteRepo: TramiteRepository = new TramiteRepository();
+
     it('Obtener el modelo de un trámite mockeado pendiente de aprobación', async function() {
       
       const nuevoTramite:TramiteModel = await tramiteRepo.guardarTramiteModel(tramitePendienteDeaprobacionMock);
