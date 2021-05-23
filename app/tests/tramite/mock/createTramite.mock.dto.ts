@@ -1,4 +1,4 @@
-import { CreateTramiteDTO } from "../../components/tramite/model/dto/createTramite.dto";
+import { CreateTramiteDTO } from "../../../components/tramite/model/dto/createTramite.dto"
 
 export const createTramiteDTOMock: CreateTramiteDTO = {
     cedula_comprador: '1133444',

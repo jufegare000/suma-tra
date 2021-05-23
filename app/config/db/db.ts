@@ -2,7 +2,7 @@
 import * as dotenv from 'dotenv';
 import { Sequelize } from 'sequelize-typescript';
 import { TramiteModel } from '../../components/tramite/model/db/tamite.model';
-import {TramiUserModel} from '../../models/tramiUser.model';
+import { UserModel } from '../../components/users/model/db/user.model';
 
 dotenv.config();
 
@@ -23,4 +23,4 @@ export const sequalize = new Sequelize(dbn, userName, pass, {
 }
 )
 
-sequalize.addModels([TramiteModel, TramiUserModel]);
+sequalize.addModels([TramiteModel, UserModel]);

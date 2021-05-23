@@ -19,7 +19,7 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/app/tests/tramite/db/*.ts"
+                "${workspaceFolder}/app/app.ts"
                 //"${workspaceFolder}/app/tests/**/*.ts"
             ],
             "console": "integratedTerminal",
