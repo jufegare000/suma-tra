@@ -14,3 +14,4 @@ _if running in windows_
 "test": "npm test"
 },
 ```
+ /*"test": "mocha -r ts-node/register app/tests/**/**/*.test.ts",*/

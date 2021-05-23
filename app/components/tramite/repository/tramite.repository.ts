@@ -29,5 +29,14 @@ export class TramiteRepository {
             return null;
         }
     }
+
+    async getTramiteById(id: number):Promise<TramiteModel|null>{
+        const tramiteRepo = this.getRepository();
+        try{
+            return tramiteRepo.findByPk(id);  
+        }catch(ex){
+            throw new Error('Not found exception');
+        }         
+    }
     
 }

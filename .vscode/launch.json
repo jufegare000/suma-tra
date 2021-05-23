@@ -19,7 +19,8 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/app/tests/**/*.ts"
+                "${workspaceFolder}/app/tests/services/object-mappers/*.ts"
+                //"${workspaceFolder}/app/tests/**/*.ts"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
