@@ -12,12 +12,10 @@ export class TramiteRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
 
         this.app.route(`/tramites`)
-        .get((req: express.Request, res: express.Response) => {
-            res.status(200).send(`List of users`);
-        })
-        .post((req: express.Request, res: express.Response) => {
-            res.status(200).send(`Post to users`);
-        });
+        .get(TramiteController.listTramites)
+        .post(
+            TramiteMiddleware.validateRequiredUserBodyFields,
+            TramiteController.createTramite);
 
             this.app.route(`/tramites/:tramiteId`)
             .all(TramiteMiddleware.validateTramiteExists)
