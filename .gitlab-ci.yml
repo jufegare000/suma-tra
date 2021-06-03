@@ -34,7 +34,10 @@ dependencies:
 
 test:
   stage: test
-  script: npm run test
+  script: 
+    - echo "$envfile" > "$(pwd)/.env"
+    - ls -a
+    - npm run test
 
 
 deploy_staging:
