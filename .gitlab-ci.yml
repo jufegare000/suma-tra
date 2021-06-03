@@ -26,11 +26,14 @@ dependencies:
   stage: dependencies
   script:
   - echo "installing npm dependencies"
-  #- npm install
+  - npm install
   #- npm -v
   #- echo "installing Mocha tests"
   #- npm install --save-dev mocha 
 
+test:
+  stage: test
+  script: npm run test
 
 
 deploy_staging:
@@ -41,18 +44,18 @@ deploy_staging:
   before_script:
     # Setup SSH deploy key
     - apt-get update && apt-get install -y
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$PRIVATE_KEY" > "$(pwd)/key.pem"
-    - chmod 400 "$(pwd)/key.pem"
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - apt-get update -y
-    - apt-get -y install node-typescript
-    - apt-get -y install rsync
-    - npm install --global typescript@latest
-    - npm install chai mocha ts-node @types/chai @types/mocha --save-dev
+    #- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    #- eval $(ssh-agent -s)
+    #- mkdir -p ~/.ssh
+    #- chmod 700 ~/.ssh
+    - echo "$envfile" > "$(pwd)/.env"
+    #- chmod 400 "$(pwd)/key.pem"
+    #- echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    #- apt-get update -y
+    #- apt-get -y install node-typescript
+    #- apt-get -y install rsync
+    #- npm install --global typescript@latest
+    #- npm install chai mocha ts-node @types/chai @types/mocha --save-dev
 
 
   environment:
@@ -60,12 +63,6 @@ deploy_staging:
     url: <(echo "$SERVER_IP")
   script:
     - echo "Deploying to prod"
-    - ls
-    - tsc
-    - ssh -i key.pem ec2-user@$SERVER_IP
-    - rsync --delete --exclude='*.pem' -zvhr -auv -e "ssh -i key.pem" * ec2-user@$SERVER_IP:/home/ec2-user/suma-tra/application
-    - ssh -i key.pem ec2-user@$SERVER_IP "pm2 delete all"
-    - ssh -i key.pem ec2-user@$SERVER_IP "pm2 start /home/ec2-user/suma-tra/application/dist/app.js"
-    - ls
+
   only:
     - main
