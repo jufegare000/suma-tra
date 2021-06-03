@@ -27,6 +27,7 @@ dependencies:
   script:
   - echo "installing npm dependencies"
   - npm install
+  - ls -a
   #- npm -v
   #- echo "installing Mocha tests"
   #- npm install --save-dev mocha 
@@ -49,6 +50,7 @@ deploy_staging:
     #- mkdir -p ~/.ssh
     #- chmod 700 ~/.ssh
     - echo "$envfile" > "$(pwd)/.env"
+    - ls -a
     #- chmod 400 "$(pwd)/key.pem"
     #- echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     #- apt-get update -y
