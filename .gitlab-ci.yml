@@ -35,7 +35,7 @@ dependencies:
 test:
   stage: test
   script: 
-    - echo "$envfile" > "$(pwd)/.env"
+    - echo "$envfile" > ".env"
     - ls -a
     - npm run test
 
