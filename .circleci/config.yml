@@ -1,0 +1,56 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
+jobs:
+  build:
+    working_directory: /app
+
+    executor: node/default
+
+  steps: 
+    - checkout
+    - node/install-npm
+    - echo "$envfile" > ".env"
+    - node/install-npm-packages:
+      app-dir: /app
+      cache-path: node_modules
+      override-ci-command: npm i
+
+    - persist_to_workspace:
+        root: .
+        paths:
+          - .
+    
+    test:
+      docker: 
+        - image: cimg/node:current
+          auth:
+            username: jufegaremchns
+            password: $DOCKERHUB_PASSWORD
+
+      steps: 
+
+        - attach_workspace: 
+            at: .
+        - run:
+            command: npm run test
+        - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
