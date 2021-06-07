@@ -11,4 +11,6 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-      - run: npm run test
+      - run: |
+      echo "$envfile" > "$(pwd)/.env"
+      npm run test
