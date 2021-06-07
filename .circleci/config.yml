@@ -1,60 +1,14 @@
-ersion: 2.1
-
+version: 2.1
 orbs:
-  node: circleci/node@3.0.0
-
+  node: circleci/node@1.1
 jobs:
   build:
-    working_directory: ~/app
-    # Reuse Docker container specification given by the node Orb
-    executor: 
+    executor:
       name: node/default
       tag: '10.4'
     steps:
       - checkout
-      # Install the latest npm - the node Orb takes care of it
       - node/with-cache:
           steps:
-          - run npm i
-
-      # Save workspace for subsequent jobs (i.e. test)
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
-  test:
-    docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
-      - image: cimg/node:current
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      # Reuse the workspace from the build job
-      - attach_workspace:
-          at: .
-      - run:
-          name: Test
-          command: 
-            - echo "$envfile" > "$(pwd)/.env"
-            - npm run test
-      - run:
-          name: Generate code coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      # You can specify either a single file or a directory to store as artifacts
-      - store_artifacts:
-          path: test-results.xml
-          destination: deliverable.xml
-      - store_artifacts:
-          path: coverage
-          destination: coverage
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+            - run: npm install
+      - run: npm run test
