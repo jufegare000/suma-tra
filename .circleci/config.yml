@@ -8,20 +8,19 @@ jobs:
     working_directory: /app
 
     executor: node/default
+    steps: 
+      - checkout
+      - node/install-npm
+      - echo "$envfile" > ".env"
+      - node/install-npm-packages:
+        app-dir: /app
+        cache-path: node_modules
+        override-ci-command: npm i
 
-  steps: 
-    - checkout
-    - node/install-npm
-    - echo "$envfile" > ".env"
-    - node/install-npm-packages:
-      app-dir: /app
-      cache-path: node_modules
-      override-ci-command: npm i
-
-    - persist_to_workspace:
-        root: .
-        paths:
-          - .
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
     
     test:
       docker: 
