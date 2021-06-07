@@ -12,5 +12,5 @@ jobs:
           steps:
             - run: npm install
       - run: |
-      echo "$envfile" > "$(pwd)/.env"
-      npm run test
+        echo "$envfile" > "$(pwd)/.env"
+        npm run test
