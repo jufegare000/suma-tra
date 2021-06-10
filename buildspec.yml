@@ -24,7 +24,7 @@ phases:
       - npm run test
       - echo "unit tests successful"
       - echo "creating docker image"
-      - docker build -t $REPOSITORY_URI:latest .
+      - docker build -t $DOCKER_REPO:latest .
       - docker tag $DOCKER_REPO:latest $DOCKER_REPO:$IMAGE_TAG
   
   post_build:
