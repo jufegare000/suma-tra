@@ -1,0 +1,39 @@
+version: 0.2
+
+phases: 
+  install:
+    runtime-versions:
+      nodejs: 10
+
+  pre_build:
+    commands:
+      - echo "installing dependencies"
+      - npm i
+      - echo "dependencies installed"
+      - echo "logging with dockerhub"
+      - echo $DOCKER_PASSWORD > docker login --username $DOCKER_USER
+      - echo "logged with dockerhub"
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+  
+  build:
+    commands:
+      - echo "start running tests"
+      - npm run test
+      - echo "unit tests successful"
+      - echo "creating docker image"
+      - docker build -t $DOCKER_REPO:latest .
+      - docker tag $DOCKER_REPO:latest $DOCKER_REPO:$IMAGE_TAG
+  
+  post_build:
+    commands:
+      - echo "pushing image to dockerhub"
+      - docker push $DOCKER_REPO:latest
+      - docker push $DOCKER_REPO:$IMAGE_TAG
+      - echo "docker image pushed successfully"
+      - echo "creating image definition"
+      - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $DOCKER_REPO:$IMAGE_TAG > imagedefinitions.json
+      - echo "build finished successfully"
+
+artifacts:
+  files: imagedefinitions.json
