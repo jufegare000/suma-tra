@@ -11,7 +11,7 @@ phases:
       - npm i
       - echo "dependencies installed"
       - echo "logging with dockerhub"
-      - echo $DOCKER_PASSWORD > docker login --username $DOCKER_USER
+      - docker login --username $DOCKER_USER --password $DOCKER_PASSWORD
       - echo "logged with dockerhub"
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
@@ -24,7 +24,7 @@ phases:
       - npm run test
       - echo "unit tests successful"
       - echo "creating docker image"
-      - docker build -t $DOCKER_REPO:latest .
+      - docker build -t $REPOSITORY_URI:latest .
       - docker tag $DOCKER_REPO:latest $DOCKER_REPO:$IMAGE_TAG
   
   post_build:
