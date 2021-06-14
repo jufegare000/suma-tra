@@ -18,7 +18,7 @@ app.use(cors());
 // app.use(logger(loggerOptions));
 
 app.get('/', (req: express.Request, res: express.Response) => {
-    res.status(200).send(`Server is running`);
+    res.status(200).send(`Suma-tra app Server is running`);
 });
 
 const routesModule: RoutesModule = new RoutesModule(app);
