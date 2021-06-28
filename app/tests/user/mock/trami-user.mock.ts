@@ -14,7 +14,6 @@ export const tramiUserSolicitanteMock: UserI
         {
             email: 'solicitante@tramisama.tr',
             role: 'solicitante',
-            id: 2,
             pass: '12313'
         };
 

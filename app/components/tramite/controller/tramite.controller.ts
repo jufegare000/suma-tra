@@ -19,15 +19,15 @@ class TramiteController {
     async createTramite(req: express.Request, res: express.Response){
         
         const createTramiteDTO: CreateTramiteDTO = req.body;
-        console.log('request: ', createTramiteDTO);
+        log('request: ', createTramiteDTO);
         const tramite = await tramiteService.createTramite(createTramiteDTO);
         res.status(StatusCodes.CREATED).send(tramite);
     }
 
     async getTramiteById(req:express.Request, res: express.Response){
-        console.log('request: ', req);
+        log('request: ', req);
         const idTramite: number = +req.params.tramiteId;
-        console.log('id: ', idTramite);
+        log('id: ', idTramite);
         const tramite: GetTramiteDTO|null = await tramiteService.getTramiteById(idTramite);
         res.status(StatusCodes.OK).send(tramite);
     }

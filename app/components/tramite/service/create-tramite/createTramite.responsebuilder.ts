@@ -1,8 +1,6 @@
 import { SumatraResponse } from "../../../common/response/sumatra.response";
 import { CreateTramiteDTO } from "../../model/dto/createTramite.dto";
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { TramiteModel } from "../../model/db/tamite.model";
-
 export class CreateTramiteResponseBuilder {
 
     async getSumatraResponse(tramiteDTO: CreateTramiteDTO): Promise<SumatraResponse> {
@@ -13,10 +11,4 @@ export class CreateTramiteResponseBuilder {
         };
         return response;
     }
-
-    /*mapTramiteModelToDto(tramiteModel: TramiteModel): CreateTramiteDTO {
-        const createTramiteDTO: CreateTramiteDTO = {
-            id:tramiteModel.ge
-        }
-    }*/
 }

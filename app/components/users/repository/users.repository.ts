@@ -14,9 +14,13 @@ export class UsersRepository {
         return this.repository;
     }
 
-    async guardarUsuarioModel(tramite: UserI): Promise<UserModel>{
-        const userRepo = this.getRepository();
-        return await userRepo.create(tramite);
+    async guardarUsuarioModel(tramiteUser: UserI): Promise<UserModel>{
+        try {
+            const userRepo = this.getRepository();
+            return await userRepo.create(tramiteUser);
+        }catch(ex){
+            throw new Error(`Error: ${ex}`);
+        }
     }
 
     async getUserById(id: number):Promise<UserModel|null>{
@@ -26,6 +30,15 @@ export class UsersRepository {
         }catch(ex){
             throw new Error('Not found exception');
         }         
+    }
+
+    async getUserByMail(email: string) {
+        const userRepo = this.getRepository();
+        try{
+            return userRepo.findOne({where:{email:email}});
+        }catch(ex){
+            throw new Error('Not found exception');
+        }      
     }
     
 }

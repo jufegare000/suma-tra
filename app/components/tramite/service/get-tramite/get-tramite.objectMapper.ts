@@ -1,9 +1,6 @@
 import { GetTramiteDTO } from "../../model/dto/getTramite.dto";
-import { GetUserDTO } from "../../../users/model/dto/get-user.dto";
 import { TramiteModel } from "../../model/db/tamite.model";
 import { TramiUserService } from "../../../users/services/trami-user.service";
-
-
 export class GetTramiteObjectMapper {
 
     private userService: TramiUserService = new TramiUserService();
@@ -37,6 +34,4 @@ export class GetTramiteObjectMapper {
         usuarios.push(solicitante, tramitador);
         return usuarios;
     }
-
-
 }

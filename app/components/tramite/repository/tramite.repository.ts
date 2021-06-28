@@ -19,7 +19,7 @@ export class TramiteRepository {
         try {
             return await tramiteRepo.findAll();
         }catch(ex) {
-            throw new Error(ex);
+            throw new Error(`Database error:${ex}`);
         }
     }
 
@@ -45,5 +45,24 @@ export class TramiteRepository {
             throw new Error('Not found exception');
         }         
     }
+
+    async getTramitesTramitador(idTramitador:number): Promise<TramiteModel[]|null>{
+        const tramiteRepo = this.getRepository();
+        try{
+            return tramiteRepo.findAll({where: {tramitador_id:idTramitador}});  
+        }catch(ex){
+            throw new Error('Not found exception');
+        }      
+    }
+
+    async getTramitesSolicitante(idSolicitante:number): Promise<TramiteModel[]|null>{
+        const tramiteRepo = this.getRepository();
+        try{
+            return tramiteRepo.findAll({where: {solicitante_id:idSolicitante}});  
+        }catch(ex){
+            throw new Error('Not found exception');
+        }      
+    }
+    
     
 }

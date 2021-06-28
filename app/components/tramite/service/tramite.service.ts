@@ -1,5 +1,4 @@
 import { CreateTramiteDTO } from "../model/dto/createTramite.dto";
-import { SumatraResponse } from "../../common/response/sumatra.response";
 import { CreateTramiteResponseBuilder } from "./create-tramite/createTramite.responsebuilder";
 import { TramiteRepository } from "../repository/tramite.repository";
 import { TramiteModel } from "../model/db/tamite.model";
@@ -24,7 +23,6 @@ export class TramiteService {
 
     async getTramiteById(tramiteId: number): Promise<GetTramiteDTO|null> {
         try {
-            
             const tramiteCrudo:TramiteModel|null = await this.tramiteRepository.getTramiteById(tramiteId);
             if(tramiteCrudo){
                 const tramiteDTO: GetTramiteDTO = await this.getTramiteObjectMapper.mapModelToDto(tramiteCrudo);

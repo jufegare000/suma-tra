@@ -20,7 +20,7 @@ export const createdTramiteDTOMock: CreateTramiteDTO = {
     modelo: 1994,
     organismo_transito_id: 1,
     placa: 'MMV11E',
-    solicitante_id: 1,
+    solicitante_id: 2,
     tipo_vehiculo: 1,
     observaciones: 'Esto es un trámite de prueba'
 }
