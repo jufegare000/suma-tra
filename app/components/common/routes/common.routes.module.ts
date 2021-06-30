@@ -1,5 +1,6 @@
 import { UsersRoutes } from '../../users/users.routes.config';
 import { TramiteRoutes } from '../../tramite/tramite.routes.config';
+import {TramiteSolicitanteRoutes} from '../../users/tramite-solicitante.routes.config'
 import {CommonRoutesConfig} from './common.routes.config';
 import {Application} from 'express';
 
@@ -10,6 +11,7 @@ export class RoutesModule {
     constructor(app: Application){
         this.app = app;
         this.routes.push(new UsersRoutes(app))
+        this.routes.push(new TramiteSolicitanteRoutes(app))
         this.routes.push(new TramiteRoutes(app))
     }
 
