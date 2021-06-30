@@ -2,6 +2,7 @@ import { TramiteService } from "../../../components/tramite/service/tramite.serv
 import {GetTramiteDTO} from '../../../components/tramite/model/dto/getTramite.dto';
 import { assert } from "chai";
 describe('Tramite service testing', function() {
+  
   const tramiUserService: TramiteService = new TramiteService();
 
     it('Get complete Tramite information', async function() {
