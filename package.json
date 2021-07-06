@@ -18,6 +18,7 @@
   "author": "jufegare000",
   "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.939.0",
     "cors": "^2.8.5",
     "debug": "^4.3.1",
     "dotenv": "^9.0.2",
