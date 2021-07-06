@@ -20,5 +20,7 @@ describe('Tramiusers database', function () {
     const createdTramiUser = await userRepo.guardarUsuarioModel(tramiUserSolicitanteMock);
     log.silly(Object.getPrototypeOf(createdTramiUser))
     expect(createdTramiUser).to.be.instanceOf(UserModel);
+
+    await userRepo.deleteUser(createdTramiUser.getDataValue("id"));
   });
 });

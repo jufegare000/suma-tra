@@ -6,7 +6,7 @@ describe('Solicitante Tramite user service testing', function () {
 
   const tramiUserService: SolicitanteTramitesService = new SolicitanteTramitesService();
 
-  it.only('get tramites for solicitante', async function () {
+  it('get tramites for solicitante', async function () {
     const tramiteMapped = await tramiUserService
       .getTramitesSolicitanteByMail(tramiUserSolicitanteMock.email);
     console.log('get tramites: ', tramiteMapped);

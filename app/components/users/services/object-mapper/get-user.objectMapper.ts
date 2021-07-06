@@ -6,7 +6,7 @@ export class GetUserObjectMapper {
     mapModelToDto(userModel: UserModel): GetUserDTO {
         return {
             email: userModel.getDataValue('email'),
-            id: userModel.getDataValue('email'),
+            id: userModel.getDataValue('id'),
             role: userModel.getDataValue('role')
         }
     }

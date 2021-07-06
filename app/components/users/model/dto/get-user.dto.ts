@@ -1,5 +1,5 @@
 export interface GetUserDTO {
-    id: string;
+    id: number;
     email: string;
     role: string;
 }

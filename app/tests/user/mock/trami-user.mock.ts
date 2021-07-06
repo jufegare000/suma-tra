@@ -1,4 +1,5 @@
 import { UserI } from "../../../components/users/model/interfaces/tramiUser.interface"; 
+import { SolicitanteEnum } from "../../../enums/user/solicitante.enum";
 
 export const tramiUserTramitadorMock: UserI 
     = 
@@ -13,7 +14,7 @@ export const tramiUserSolicitanteMock: UserI
     = 
         {
             email: 'solicitante@tramisama.tr',
-            role: 'solicitante',
+            role: SolicitanteEnum.role,
             pass: '12313'
         };
 

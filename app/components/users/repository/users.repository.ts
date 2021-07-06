@@ -40,5 +40,15 @@ export class UsersRepository {
             throw new Error('Not found exception');
         }      
     }
+
+    async deleteUser(id: number) {
+        try {
+            this.getRepository().destroy({where: {
+                id: id
+            }})
+        } catch (error) {
+            throw new Error(`User can not be deleted: ${error}`);
+        }
+    }
     
 }
