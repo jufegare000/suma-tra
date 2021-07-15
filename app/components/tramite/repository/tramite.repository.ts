@@ -63,6 +63,4 @@ export class TramiteRepository {
             throw new Error('Not found exception');
         }      
     }
-    
-    
 }
