@@ -1,5 +1,5 @@
 import { TramiteModel } from "../../model/db/tamite.model";
-import { CreateTramiteDTO } from "../../model/dto/createTramite.dto";
+import { CreateTramiteDTO } from "../../model/dto/create-tramite/create-tramite.dto";
 import { TramiteI } from "../../model/interface/tramite.interface";
 
 export class CreateTramiteObjectMapper {

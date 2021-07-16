@@ -1,6 +1,6 @@
-import { DocumentosImplicadosTramiteDTO } from "./create-tramite-documentos.dto";
+import { DocumentoTramiteDTO } from "./documento-tramite.dto";
 
 export interface ImagenesMatriculaDTO {
-    frontal?:DocumentosImplicadosTramiteDTO,
-    trasera?: DocumentosImplicadosTramiteDTO
+    frontal?:DocumentoTramiteDTO,
+    trasera?: DocumentoTramiteDTO
 }

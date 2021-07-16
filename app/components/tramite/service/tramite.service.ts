@@ -1,4 +1,4 @@
-import { CreateTramiteDTO } from "../model/dto/createTramite.dto";
+import { CreateTramiteDTO } from "../model/dto/create-tramite/create-tramite.dto";
 import { CreateTramiteResponseBuilder } from "./create-tramite/createTramite.responsebuilder";
 import { TramiteRepository } from "../repository/tramite.repository";
 import { TramiteModel } from "../model/db/tamite.model";
