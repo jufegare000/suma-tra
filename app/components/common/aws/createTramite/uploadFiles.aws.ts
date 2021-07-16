@@ -8,43 +8,33 @@ export class UploadFilesForTramiteCreation {
 
     bucketName: any = process.env.BUCKET_NAME
 
-    async uploadImageToS3(base64File: string, userUploader: UserI, tramiteId: string, fileName: string) {
+    async uploadImageToS3(params: AWSBucketParamsModel) {
         AWSConfig.getInstance();
         const s3 = new AWS.S3();
-        const bufferFile: Buffer = this.parseToBufferFromBase64(base64File);
-        const { role, email } = userUploader;
-        const pathForUpload: string = role + '/' + email + "/" + "tramite/" + tramiteId +"/" +fileName + ".png"
-        const params = {
-            Bucket: this.bucketName,
-            Body: bufferFile,
-            Key: pathForUpload,
-            ContentType: 'image/png',
-            ACL: 'public-read'
-        }
+
         try {
             const data: AWS.S3.ManagedUpload.SendData = await s3.upload(params).promise();
             return data.Location;
 
         } catch (error) {
-            throw new Error(`There was an error while uploading s3 bucket ${error}`)
+            throw new Error(`There was an error while uploading s3 bucket ${error}`);
         }
     }
 
-    buildUploadPath(userUploader: UserI, tramiteId: string, fileName: string) {
+    buildUploadPath(userUploader: UserI, tramiteId: string, fileName: string): string {
         const { role, email } = userUploader;
-        const pathForUpload: string = role + '/' + email + "/" + "tramite/" + tramiteId +"/" +fileName + "." + "png"
+        const pathForUpload: string = role + '/' + email + "/" + "tramite/" + tramiteId + "/" + fileName;
         return pathForUpload;
     }
 
-    buildParamsForS3Request(bufferFile: Buffer, contentType: string, uploadPath: string) {//AWSBucketPathModel
+    buildParamsForS3Request(bufferFile: Buffer, contentType: string, uploadPath: string): AWSBucketParamsModel {//AWSBucketPathModel
         const params: AWSBucketParamsModel = {
             Bucket: this.bucketName,
             Body: bufferFile,
-            ACL: AWS_CONSTANTS.ACCESS_DELIMITATOR,
+            Key: uploadPath,
             ContentType: contentType,
-            Key: uploadPath
-        }
-
+            ACL: AWS_CONSTANTS.ACCESS_DELIMITATOR,
+        };
         return params;
     }
 

@@ -1,0 +1,32 @@
+import { AWS_CONSTANTS } from "./aws-constants";
+import { AWSBucketPathModel } from "./aws-bucket-path.model";
+import { AWSBucketParamsModel } from "./aws-bucket-params.model";
+
+export class S3ParamsBuilder {
+
+    bucketName: any = process.env.BUCKET_NAME
+
+    buildUploadPath(awsBucketPathModel: AWSBucketPathModel) {
+        const {userUploader, tramiteId, fileName, extension} = awsBucketPathModel;
+        const { role, email } = userUploader;
+        const pathForUpload: string = role + '/' + email + "/" + "tramite/" + tramiteId +"/" +fileName + "." + extension
+        return pathForUpload;
+    }
+
+    buildParamsForS3Request(bufferFile: Buffer, contentType: string, uploadPath: string):AWSBucketParamsModel {//AWSBucketPathModel
+        const params: AWSBucketParamsModel ={
+            Bucket: this.bucketName,
+            Body: bufferFile,
+            ACL: AWS_CONSTANTS.ACCESS_DELIMITATOR,
+            ContentType: contentType,
+            Key: uploadPath
+        }
+
+        return params;
+    }
+
+    parseToBufferFromBase64(fileStringInBase64: string): Buffer {
+        return Buffer.from(fileStringInBase64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+    }
+
+}

@@ -1,3 +1,5 @@
+import { ArchivosTramiteDTO } from "./archivos-tramite.dto";
+
 export interface CreateTramiteDTO {
     id?: number;
     solicitante_id: number;
@@ -9,4 +11,5 @@ export interface CreateTramiteDTO {
     cedula_comprador: string;
     cedula_vendedor: string;
     observaciones?: string;
+    archivos?:ArchivosTramiteDTO
 }

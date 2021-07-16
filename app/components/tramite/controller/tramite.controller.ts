@@ -1,6 +1,6 @@
 import debug from 'debug';
 import express from 'express';
-import { CreateTramiteDTO } from '../model/dto/createTramite.dto';
+import { CreateTramiteDTO } from '../model/dto/create-tramite/create-tramite.dto';
 import { TramiteService } from '../service/tramite.service';
 import { GetTramiteDTO } from '../model/dto/getTramite.dto';
 import { StatusCodes } from 'http-status-codes';
