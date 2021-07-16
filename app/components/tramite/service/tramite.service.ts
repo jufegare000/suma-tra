@@ -1,5 +1,4 @@
 import { CreateTramiteDTO } from "../model/dto/create-tramite/create-tramite.dto";
-import { CreateTramiteResponseBuilder } from "./create-tramite/createTramite.responsebuilder";
 import { TramiteRepository } from "../repository/tramite.repository";
 import { TramiteModel } from "../model/db/tamite.model";
 import { GetTramiteObjectMapper } from "./get-tramite/get-tramite.objectMapper";
@@ -8,7 +7,6 @@ import { CreateTramiteObjectMapper } from "./create-tramite/createTramite.object
 
 export class TramiteService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
-    private createTramiteResponseBuilder: CreateTramiteResponseBuilder = new CreateTramiteResponseBuilder();
     private getTramiteObjectMapper: GetTramiteObjectMapper = new GetTramiteObjectMapper();
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
 

@@ -5,7 +5,7 @@ import { tramitePendienteDeaprobacionMock } from '../../mock/tramite.mock';
 import { TramiteI } from '../../../../components/tramite/model/interface/tramite.interface';
 import { TramiteModel } from '../../../../components/tramite/model/db/tamite.model';
 import { TramiteRepository } from '../../../../components/tramite/repository/tramite.repository';
-import { CreateTramiteDTO } from '../../../../components/tramite/model/dto/createTramite.dto';
+import { CreateTramiteDTO } from '../../../../components/tramite/model/dto/create-tramite/create-tramite.dto';
 
 describe('Tramite object mapping testing', function() {
   const tramiteRepo: TramiteRepository = new TramiteRepository();
