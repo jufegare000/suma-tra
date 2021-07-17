@@ -13,6 +13,7 @@ export class TramiteService {
     async createTramite(createTramiteDTO: CreateTramiteDTO){
 
         const tramiteI = this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO);
+        // const tramiteDocuments = 
         const tramiteCrudo = await this.tramiteRepository.guardarTramiteModel(tramiteI);
         
         const tramiteResponse = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
