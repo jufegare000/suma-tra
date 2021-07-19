@@ -5,10 +5,14 @@ import { TramiteService } from '../service/tramite.service';
 import { GetTramiteDTO } from '../model/dto/getTramite.dto';
 import { StatusCodes } from 'http-status-codes';
 import { debugLog } from '../../common/loggers/logger';
+import { UserValidators } from '../../users/midleware/user-validators.midleware';
+
 
 const log: debug.IDebugger = debug('app: tramite-controller');
 const tramiteService: TramiteService = new TramiteService();
 class TramiteController {
+
+    private userValidator: UserValidators = new UserValidators();
 
     async listTramites(req: express.Request, res: express.Response){
         const tramites = await tramiteService.getAllTramites();
@@ -17,7 +21,7 @@ class TramiteController {
     }
 
     async createTramite(req: express.Request, res: express.Response){
-        
+        const email =  this.userValidator.validateEmailInHeaders(req)
         const createTramiteDTO: CreateTramiteDTO = req.body;
         log('request: ', createTramiteDTO);
         const tramite = await tramiteService.createTramite(createTramiteDTO);

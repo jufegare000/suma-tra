@@ -20,7 +20,7 @@
                 "999999",
                 "--colors",
                 //"${workspaceFolder}/app/app.ts"
-                "${workspaceFolder}/app/tests/**/*.ts"
+                "${workspaceFolder}/app/tests/tramite/service/*.ts"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",

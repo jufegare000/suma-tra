@@ -28,11 +28,18 @@ export class UploadFilesForTramiteCreation {
     }
 
     buildParamsForS3Request(bufferFile: Buffer, contentType: string, uploadPath: string): AWSBucketParamsModel {//AWSBucketPathModel
+        let contentTypeS3: string;
+        if (contentType === 'pdf') {
+            contentTypeS3 = 'application/pdf';
+        } else {
+            contentTypeS3 = `image/${contentType}`;
+        }
+
         const params: AWSBucketParamsModel = {
             Bucket: this.bucketName,
             Body: bufferFile,
             Key: uploadPath,
-            ContentType: contentType,
+            ContentType: contentTypeS3,
             ACL: AWS_CONSTANTS.ACCESS_DELIMITATOR,
         };
         return params;
