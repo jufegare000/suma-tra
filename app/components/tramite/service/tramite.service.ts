@@ -4,19 +4,21 @@ import { TramiteModel } from "../model/db/tamite.model";
 import { GetTramiteObjectMapper } from "./get-tramite/get-tramite.objectMapper";
 import { GetTramiteDTO } from "../model/dto/getTramite.dto";
 import { CreateTramiteObjectMapper } from "./create-tramite/createTramite.objectMapper";
+import { CreateDocumentService } from "./create-document.service";
 
 export class TramiteService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private getTramiteObjectMapper: GetTramiteObjectMapper = new GetTramiteObjectMapper();
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
+    private createDocumentService: CreateDocumentService = new CreateDocumentService()
 
     async createTramite(createTramiteDTO: CreateTramiteDTO){
 
         const tramiteI = this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO);
         // const tramiteDocuments = 
-        const tramiteCrudo = await this.tramiteRepository.guardarTramiteModel(tramiteI);
-        
+        const tramiteCrudo = await this.tramiteRepository.guardarTramiteModel(tramiteI);       
         const tramiteResponse = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
+        await this.createDocumentService.createDocumentsForTramite(createTramiteDTO, tramiteResponse.id);
         return tramiteResponse;
     }
 

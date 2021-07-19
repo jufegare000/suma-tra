@@ -1,36 +1,16 @@
 import { TramiteModel } from "../../model/db/tamite.model";
 import { CreateTramiteDTO } from "../../model/dto/create-tramite/create-tramite.dto";
+import { DocumentoTramiteDTO } from "../../model/dto/create-tramite/documento-tramite.dto";
+import { TramiteDocumentoI } from "../../model/interface/document-tramite.interface";
 import { TramiteI } from "../../model/interface/tramite.interface";
 
 export class CreateDocumentObjectMapper {
 
-    mapModelToDto(tramiteModel: TramiteModel): CreateTramiteDTO {
+    mapDtoToTramiteI(descripcion: string, tramiteId: number, url: string): TramiteDocumentoI{
         return {
-            id: tramiteModel.getDataValue('id'),
-            cedula_comprador: tramiteModel.getDataValue('cedula_comprador'),
-            cedula_vendedor: tramiteModel.getDataValue('cedula_vendedor'),
-            direccion_solicitante: tramiteModel.getDataValue('direccion_solicitante'),
-            modelo: tramiteModel.getDataValue('modelo'),
-            organismo_transito_id: tramiteModel.getDataValue('organismo_transito_id'),
-            placa: tramiteModel.getDataValue('placa'),
-            solicitante_id: tramiteModel.getDataValue('solicitante_id'),
-            tipo_vehiculo: tramiteModel.getDataValue('tipo_vehiculo'),
-            observaciones: tramiteModel.getDataValue('observaciones')
-        }
-    }
-
-    mapDtoToTramiteI(createTramiteDTO:CreateTramiteDTO): TramiteI{
-        return {
-            cedula_comprador: createTramiteDTO.cedula_comprador,
-            cedula_vendedor: createTramiteDTO.cedula_vendedor,
-            direccion_solicitante: createTramiteDTO.direccion_solicitante,
-            estado_id: 1,
-            modelo: createTramiteDTO.modelo,
-            observaciones: createTramiteDTO.observaciones,
-            organismo_transito_id: createTramiteDTO.organismo_transito_id,
-            placa: createTramiteDTO.placa,
-            solicitante_id: createTramiteDTO.solicitante_id,
-            tipo_vehiculo: createTramiteDTO.tipo_vehiculo
+            descripcion: descripcion,
+            tramite_id: tramiteId,
+            url: url
         }
     }
 }
