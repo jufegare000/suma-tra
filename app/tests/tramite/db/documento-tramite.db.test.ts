@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { DocumentoTramiteModel } from '../../../components/tramite/model/db/documento-tramite.model';
 import { DocumentoTramiteRepository } from '../../../components/tramite/repository/documento-tramite.repository';
 import { Logger } from "tslog";
-import { CreateDocumentObjectMapper } from '../../../components/tramite/service/create-tramite/create-documents.object-mapper';
+import { CreateDocumentObjectMapper } from '../../../components/tramite/service/object-mappers/create-documents.object-mapper';
 import { TramiteDocumentoI } from '../../../components/tramite/model/interface/document-tramite.interface';
 
 const log: Logger = new Logger();

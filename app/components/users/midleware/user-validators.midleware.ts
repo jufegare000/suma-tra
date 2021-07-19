@@ -1,6 +1,5 @@
 import {Request} from 'express'
 import { Logger } from "tslog";
-import {StatusCodes} from 'http-status-codes';
 
 const log: Logger = new Logger();
 
@@ -15,5 +14,4 @@ export class UserValidators {
             return null;
         }
     }
-
 }

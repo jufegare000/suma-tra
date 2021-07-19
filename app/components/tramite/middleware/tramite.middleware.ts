@@ -1,8 +1,5 @@
 import express from 'express';
-import debug from 'debug';
-import { TramiteService } from '../service/tramite.service';
-
-const log: debug.IDebugger = debug('app:tramite-middleware');
+import { TramiteService } from '../service/create-tramite/tramite.service';
 
 const tramiteSetvice: TramiteService = new TramiteService();
 

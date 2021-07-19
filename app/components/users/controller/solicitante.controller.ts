@@ -3,7 +3,7 @@ import express from 'express';
 import { SolicitanteTramitesService } from "../services/solicitante-tramites.service";
 import { UserValidators } from "../midleware/user-validators.midleware";
 import { StatusCodes } from 'http-status-codes';
-import { GetTramiteDTO } from "../../tramite/model/dto/getTramite.dto";
+import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dto";
 
 const log: Logger = new Logger();
 
