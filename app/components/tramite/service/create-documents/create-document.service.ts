@@ -1,27 +1,19 @@
-
-import { CreateTramiteObjectMapper } from "./create-tramite/createTramite.objectMapper";
-import { DocumentoTramiteRepository } from "../repository/documento-tramite.repository";
-import { CreateTramiteDTO } from "../model/dto/create-tramite/create-tramite.dto";
-import { UploadFilesToS3Service } from "../../common/aws/createTramite/upload-files-s3.service";
-import { UploadFilesForTramiteCreation } from "../../common/aws/createTramite/uploadFiles.aws";
-import { AWSBucketParamsModel } from "../../common/aws/createTramite/aws-bucket-params.model";
-import { TramiteDocumentoI } from "../model/interface/document-tramite.interface";
-
+import { DocumentoTramiteRepository } from "../../repository/documento-tramite.repository";
+import { CreateTramiteDTO } from "../../model/dto/create-tramite/create-tramite.dto";
+import { UploadFilesForTramiteCreation } from "../../../common/aws/createTramite/uploadFiles.aws";
+import { AWSBucketParamsModel } from "../../../common/aws/createTramite/aws-bucket-params.model";
 import { Logger } from "tslog";
-import { ImagenesMatriculaDTO } from "../model/dto/create-tramite/imagenes-matricula.dto";
-import { DocumentoTramiteDTO } from "../model/dto/create-tramite/documento-tramite.dto";
-import { UserI } from "../../users/model/interfaces/tramiUser.interface";
-import { TramiUserService } from "../../users/services/trami-user.service";
-import { DocumentosImplicadosTramiteDTO } from "../model/dto/create-tramite/create-tramite-documentos.dto";
-import { CreateDocumentObjectMapper } from "./create-tramite/create-documents.object-mapper";
+import { ImagenesMatriculaDTO } from "../../model/dto/create-tramite/imagenes-matricula.dto";
+import { DocumentoTramiteDTO } from "../../model/dto/create-tramite/documento-tramite.dto";
+import { UserI } from "../../../users/model/interfaces/tramiUser.interface";
+import { TramiUserService } from "../../../users/services/trami-user.service";
+import { DocumentosImplicadosTramiteDTO } from "../../model/dto/create-tramite/create-tramite-documentos.dto";
+import { CreateDocumentObjectMapper } from "../object-mappers/create-documents.object-mapper";
 
 const log: Logger = new Logger();
 
 export class CreateDocumentService {
     private tramiteRepository: DocumentoTramiteRepository = new DocumentoTramiteRepository();
-
-    private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
-    private s3Service: UploadFilesToS3Service = new UploadFilesToS3Service();
     private uploadFilesForTramiteCreation: UploadFilesForTramiteCreation = new UploadFilesForTramiteCreation()
     private userOfTramite: UserI | null = null;
     private tramiUserService: TramiUserService = new TramiUserService();

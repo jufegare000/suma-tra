@@ -1,4 +1,4 @@
-import { GetTramiteDTO } from "../../model/dto/getTramite.dto";
+import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
 import { TramiteModel } from "../../model/db/tamite.model";
 import { TramiUserService } from "../../../users/services/trami-user.service";
 

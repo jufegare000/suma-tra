@@ -1,8 +1,7 @@
 import { SolicitanteEnum } from "../../../enums/user/solicitante.enum";
-import { TramiUserModel } from "../../../models/tramiUser.model";
-import { GetTramiteDTO } from "../../tramite/model/dto/getTramite.dto";
+import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dto";
 import { TramiteRepository } from "../../tramite/repository/tramite.repository";
-import { GetTramitesObjectMapper } from "../../tramite/service/get-tramite/get-tramites.objectMapper";
+import { GetTramitesObjectMapper } from "../../tramite/service/object-mappers/get-tramites.objectMapper";
 import { UserModel } from "../model/db/user.model";
 import { GetUserDTO } from "../model/dto/get-user.dto";
 import { UserI } from "../model/interfaces/tramiUser.interface";
@@ -20,9 +19,7 @@ export class SolicitanteTramitesService {
 
     async getTramitesSolicitanteByMail(email: string): Promise<GetTramiteDTO[] | null> {
         try {
-
             const userDto: GetUserDTO = await this.tramiUserService.validateTramiUserInDB(email, SolicitanteEnum.role);
-
             const solicitanteId = userDto.id;
             const tramitesOfSolicitante = await this.tramiteRepository.getTramitesSolicitante(solicitanteId);
             if (tramitesOfSolicitante) {
@@ -37,11 +34,10 @@ export class SolicitanteTramitesService {
 
     async getUserByMailOrCreate(email: string): Promise<GetUserDTO | undefined> {
         const possibleUsser = await this.userRepository.getUserByMail(email);
-        if(possibleUsser){
+        if (possibleUsser) {
             return this.getUserObjectMapper.mapModelToDto(possibleUsser);
-        }else{
-            await this.createInexistentSolicitanteByMail(email);
         }
+        await this.createInexistentSolicitanteByMail(email);
     }
 
 

@@ -1,4 +1,4 @@
-import { GetTramiteDTO } from "../../tramite/model/dto/getTramite.dto";
+import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dto";
 import { TramiteRepository } from "../../tramite/repository/tramite.repository";
 import { GetTramitesObjectMapper } from "../../tramite/service/get-tramite/get-tramites.objectMapper";
 import { UserModel } from "../model/db/user.model";

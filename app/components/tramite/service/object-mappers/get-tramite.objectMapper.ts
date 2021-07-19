@@ -1,4 +1,4 @@
-import { GetTramiteDTO } from "../../model/dto/getTramite.dto";
+import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
 import { TramiteModel } from "../../model/db/tamite.model";
 import { TramiUserService } from "../../../users/services/trami-user.service";
 export class GetTramiteObjectMapper {
@@ -21,6 +21,10 @@ export class GetTramiteObjectMapper {
             tipo_vehiculo: tramiteModel.getDataValue('tipo_vehiculo'),
             observaciones: tramiteModel.getDataValue('observaciones')
         }
+    }
+
+    addDocumentsToDTO() {
+        
     }
 
     async getUsuariosAsociadosAltramite(tramiteModel: TramiteModel) {

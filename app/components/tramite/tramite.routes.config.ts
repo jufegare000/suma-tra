@@ -12,7 +12,6 @@ export class TramiteRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
 
         this.app.route(`/tramites`)
-            .get(TramiteController.listTramites)
             .post(
                 TramiteController.createTramite);
 
@@ -28,7 +27,6 @@ export class TramiteRoutes extends CommonRoutesConfig {
             .delete((req: express.Request, res: express.Response) => {
                 res.status(200).send(`DELETE requested for id ${req.params.tramiteId}`);
             });
-
 
         return this.app;
     }

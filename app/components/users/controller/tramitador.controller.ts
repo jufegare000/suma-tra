@@ -4,7 +4,7 @@ import { SolicitanteTramitesService } from "../services/solicitante-tramites.ser
 import { UserValidators } from "../midleware/user-validators.midleware";
 import {StatusCodes} from 'http-status-codes';
 import { TramitadorTramitesService } from "../services/tramitador-tramites.service";
-import { GetTramiteDTO } from "../../tramite/model/dto/getTramite.dto";
+import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dto";
 
 const log: Logger = new Logger();
 
