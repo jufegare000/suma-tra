@@ -20,17 +20,7 @@ describe('Tramite service testing', function() {
     it.only('Create tramite in service', async function() {
       const tramiteForCreation: CreateTramiteDTO = createTramiteDTOMock;
       log.info(`Creating tramite: ${tramiteForCreation}`)
-      const tramiteMapped: GetTramiteDTO|null = await tramiteService.createTramite(tramiteForCreation);
-      const newIdFromTramite: number|undefined = tramiteMapped.id;
-      if(newIdFromTramite){
-
-      }
-      /*
-      1. create tramite in database
-      2. upload files to S3
-      3. register files one by one in database with id tramite
-      4. return response
-      */
+      const tramiteMapped: GetTramiteDTO|null = await tramiteService.createTramite(tramiteForCreation, "xx@xxx");
 
       console.log('get tramite: ', tramiteMapped);
       assert.isNotNull(tramiteMapped, 'Must not be null!!!')
