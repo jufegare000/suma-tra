@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { CreateTramiteObjectMapper } from '../../../../components/tramite/service/create-tramite/createTramite.objectMapper';
+import { CreateTramiteObjectMapper } from '../../../../components/tramite/service/object-mappers/createTramite.objectMapper';
 import { createTramiteDTOMock, createdTramiteDTOMock } from '../../mock/createTramite.mock.dto';
 import { tramitePendienteDeaprobacionMock } from '../../mock/tramite.mock'; 
 import { TramiteI } from '../../../../components/tramite/model/interface/tramite.interface';

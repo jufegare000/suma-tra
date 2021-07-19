@@ -1,6 +1,6 @@
 import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dto";
 import { TramiteRepository } from "../../tramite/repository/tramite.repository";
-import { GetTramitesObjectMapper } from "../../tramite/service/get-tramite/get-tramites.objectMapper";
+import { GetTramitesObjectMapper } from "../../tramite/service/object-mappers/get-tramites.objectMapper";
 import { UserModel } from "../model/db/user.model";
 import { UsersRepository } from "../repository/users.repository";
 
