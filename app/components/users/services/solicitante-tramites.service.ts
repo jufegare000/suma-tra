@@ -35,6 +35,15 @@ export class SolicitanteTramitesService {
         return null;
     }
 
+    async getUserByMailOrCreate(email: string): Promise<GetUserDTO | undefined> {
+        const possibleUsser = await this.userRepository.getUserByMail(email);
+        if(possibleUsser){
+            return this.getUserObjectMapper.mapModelToDto(possibleUsser);
+        }else{
+            await this.createInexistentSolicitanteByMail(email);
+        }
+    }
+
 
     async createInexistentSolicitanteByMail(email: string): Promise<GetUserDTO> {
         const userDtoForDB: UserI = {

@@ -14,7 +14,6 @@ export class TramiteRoutes extends CommonRoutesConfig {
         this.app.route(`/tramites`)
             .get(TramiteController.listTramites)
             .post(
-                TramiteMiddleware.validateRequiredUserBodyFields,
                 TramiteController.createTramite);
 
         this.app.route(`/tramites/:tramiteId`)

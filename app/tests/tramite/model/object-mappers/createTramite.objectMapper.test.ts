@@ -13,7 +13,7 @@ describe('Tramite object mapping testing', function() {
 
     it('Map CreateTramiteDTO to TramiteI', async function() {
 
-        const tramiteMapped: TramiteI = createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTOMock);
+        const tramiteMapped: TramiteI|undefined = createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTOMock);
         console.log('tramite mapped mock: ', tramiteMapped);
         console.log('TramiteI mock: ', tramitePendienteDeaprobacionMock);
         expect(tramiteMapped).to.eql(tramitePendienteDeaprobacionMock);

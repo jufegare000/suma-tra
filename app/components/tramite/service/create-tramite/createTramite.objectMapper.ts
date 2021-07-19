@@ -19,18 +19,34 @@ export class CreateTramiteObjectMapper {
         }
     }
 
-    mapDtoToTramiteI(createTramiteDTO:CreateTramiteDTO): TramiteI{
-        return {
-            cedula_comprador: createTramiteDTO.cedula_comprador,
-            cedula_vendedor: createTramiteDTO.cedula_vendedor,
-            direccion_solicitante: createTramiteDTO.direccion_solicitante,
-            estado_id: 1,
-            modelo: createTramiteDTO.modelo,
-            observaciones: createTramiteDTO.observaciones,
-            organismo_transito_id: createTramiteDTO.organismo_transito_id,
-            placa: createTramiteDTO.placa,
-            solicitante_id: createTramiteDTO.solicitante_id,
-            tipo_vehiculo: createTramiteDTO.tipo_vehiculo
+    mapDtoToTramiteI(createTramiteDTO: CreateTramiteDTO, solicitanteId?: number): TramiteI|undefined {
+        if (solicitanteId) {
+            return {
+                cedula_comprador: createTramiteDTO.cedula_comprador,
+                cedula_vendedor: createTramiteDTO.cedula_vendedor,
+                direccion_solicitante: createTramiteDTO.direccion_solicitante,
+                estado_id: 1,
+                modelo: createTramiteDTO.modelo,
+                observaciones: createTramiteDTO.observaciones,
+                organismo_transito_id: createTramiteDTO.organismo_transito_id,
+                placa: createTramiteDTO.placa,
+                solicitante_id: solicitanteId,
+                tipo_vehiculo: createTramiteDTO.tipo_vehiculo
+            }
+        } else if(createTramiteDTO.solicitante_id) {
+            return {
+                cedula_comprador: createTramiteDTO.cedula_comprador,
+                cedula_vendedor: createTramiteDTO.cedula_vendedor,
+                direccion_solicitante: createTramiteDTO.direccion_solicitante,
+                estado_id: 1,
+                modelo: createTramiteDTO.modelo,
+                observaciones: createTramiteDTO.observaciones,
+                organismo_transito_id: createTramiteDTO.organismo_transito_id,
+                placa: createTramiteDTO.placa,
+                solicitante_id: createTramiteDTO.solicitante_id,
+                tipo_vehiculo: createTramiteDTO.tipo_vehiculo
+            }
         }
+
     }
 }

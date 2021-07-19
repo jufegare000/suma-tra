@@ -10,9 +10,10 @@ import { UserValidators } from '../../users/midleware/user-validators.midleware'
 
 const log: debug.IDebugger = debug('app: tramite-controller');
 const tramiteService: TramiteService = new TramiteService();
+const userValidator: UserValidators = new UserValidators();
 class TramiteController {
 
-    private userValidator: UserValidators = new UserValidators();
+    
 
     async listTramites(req: express.Request, res: express.Response){
         const tramites = await tramiteService.getAllTramites();
@@ -21,11 +22,18 @@ class TramiteController {
     }
 
     async createTramite(req: express.Request, res: express.Response){
-        const email =  this.userValidator.validateEmailInHeaders(req)
-        const createTramiteDTO: CreateTramiteDTO = req.body;
-        log('request: ', createTramiteDTO);
-        const tramite = await tramiteService.createTramite(createTramiteDTO);
-        res.status(StatusCodes.CREATED).send(tramite);
+        const email =  userValidator.validateEmailInHeaders(req);
+        log(`'email: ', ${email}`);
+        if(email){
+            const createTramiteDTO: CreateTramiteDTO = req.body;
+            log('request: ', createTramiteDTO);
+            
+            const tramite = await tramiteService.createTramite(createTramiteDTO, email?.toString());
+            res.status(StatusCodes.CREATED).send(tramite);
+        }else{
+            res.status(StatusCodes.NOT_FOUND).send("email not found");
+        }
+        
     }
 
     async getTramiteById(req:express.Request, res: express.Response){
