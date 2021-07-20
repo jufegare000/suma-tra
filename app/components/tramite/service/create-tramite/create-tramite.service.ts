@@ -34,4 +34,22 @@ export class CreateTramiteService {
             throw new Error(`Error creating tramite: ${error}`)
         }
     }
+
+    async createTramiteX(createTramiteDTO: CreateTramiteDTO, solicitanteMail: string): Promise<CreateTramiteDTO | undefined> {
+        const solicitante: GetUserDTO | undefined = await this.solicitanteTramiteService.getUserByMailOrCreate(solicitanteMail);
+        try {
+            if (solicitante) {
+                const tramiteI: TramiteI | undefined = await this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO, solicitante.id);
+                if (tramiteI) {
+                    const tramiteCrudo: TramiteModel = await this.tramiteRepository.guardarTramiteModel(tramiteI);
+                    const tramiteResponse: CreateTramiteDTO = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
+                    await this.createDocumentService.createDocumentsForTramite(createTramiteDTO, tramiteResponse.id);
+                    return tramiteResponse;
+                }
+            }
+        } catch (error) {
+            log.error(`Error creating tramite: ${error}`);
+            throw new Error(`Error creating tramite: ${error}`)
+        }
+    }
 }

@@ -21,6 +21,7 @@ export class GetTramiteService {
                 return tramiteDTO;
             }
         } catch (ex) {
+            
             throw new Error(`Can't get Tramite`);
         }
         return null;

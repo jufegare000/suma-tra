@@ -31,7 +31,12 @@ class TramiteController {
         const idTramite: number = +req.params.tramiteId;
         log('id: ', idTramite);
         const tramite: GetTramiteDTO|null = await getTramiteService.getTramiteById(idTramite);
-        res.status(StatusCodes.OK).send(tramite);
+        if(tramite){
+            res.status(StatusCodes.OK).send(tramite);
+        }else{
+            res.status(StatusCodes.NOT_FOUND).send("not found");
+        }
+        
     }
 }
 

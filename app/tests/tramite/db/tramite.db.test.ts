@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { TramiUserModel } from '../../../models/tramiUser.model';
 import {TramiteModel} from '../../../components/tramite/model/db/tamite.model'
 import { TramiteRepository } from '../../../components/tramite/repository/tramite.repository';
 
