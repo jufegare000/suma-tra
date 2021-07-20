@@ -1,5 +1,5 @@
-export class SumatraTramiteResponse<T> {
-    public isSuccesss: boolean;
+export class SumatraTramiteResult<T> {
+    public isSuccess: boolean;
     public isFailure: boolean;
     public error?: T | string;
     private _value?: T | string;
@@ -13,7 +13,7 @@ export class SumatraTramiteResponse<T> {
             throw new Error("InvalidOperation: A falling result must to contain an error message");
         }
 
-        this.isSuccesss = issSuccess;
+        this.isSuccess = issSuccess;
         this.isFailure = !issSuccess
         this.error = error;
         this._value = value;
@@ -22,18 +22,18 @@ export class SumatraTramiteResponse<T> {
     }
 
     public getValue(): T {
-        if (!this.isSuccesss) {
+        if (!this.isSuccess) {
             return this.error as T;
         }
         return this._value as T;
     }
 
-    public static ok<U>(value?: U): SumatraTramiteResponse<U> {
-        return new SumatraTramiteResponse<U>(true, undefined, value);
+    public static ok<U>(value?: U): SumatraTramiteResult<U> {
+        return new SumatraTramiteResult<U>(true, undefined, value);
     }
 
-    public static fail<U> (error: any): SumatraTramiteResponse<U> {
-        return new SumatraTramiteResponse<U>(false, error);
+    public static fail<U> (error: any): SumatraTramiteResult<U> {
+        return new SumatraTramiteResult<U>(false, error);
     }
 }
 

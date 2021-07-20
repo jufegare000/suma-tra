@@ -8,6 +8,9 @@ import { UserI } from "../model/interfaces/tramiUser.interface";
 import { UsersRepository } from "../repository/users.repository";
 import { GetUserObjectMapper } from "./object-mapper/get-user.objectMapper";
 import { TramiUserService } from "./trami-user.service";
+import { Logger } from "tslog";
+
+const log: Logger = new Logger();
 
 export class SolicitanteTramitesService {
 
@@ -33,6 +36,7 @@ export class SolicitanteTramitesService {
     }
 
     async getUserByMailOrCreate(email: string): Promise<GetUserDTO | undefined> {
+        log.info(`validateing email: ${email}`);
         const possibleUsser = await this.userRepository.getUserByMail(email);
         if (possibleUsser) {
             return this.getUserObjectMapper.mapModelToDto(possibleUsser);

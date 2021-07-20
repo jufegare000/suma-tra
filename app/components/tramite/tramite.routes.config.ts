@@ -1,7 +1,12 @@
 import { CommonRoutesConfig } from '../common/routes/common.routes.config';
 import express from 'express';
+import {CreateTramiteController} from './controller/create-tramite.controller';
 import TramiteController from './controller/tramite.controller';
 import TramiteMiddleware from './middleware/tramite.middleware';
+import { CreateTramiteService } from './service/create-tramite/create-tramite.service';
+
+const createTramiteUseCase = new CreateTramiteService();
+const createTramiteController: CreateTramiteController = new CreateTramiteController(createTramiteUseCase)
 
 export class TramiteRoutes extends CommonRoutesConfig {
 
@@ -13,7 +18,7 @@ export class TramiteRoutes extends CommonRoutesConfig {
 
         this.app.route(`/tramites`)
             .post(
-                TramiteController.createTramite);
+                (req, res) => createTramiteController.execute(req, res));
 
         this.app.route(`/tramites/:tramiteId`)
             .all(TramiteMiddleware.validateTramiteExists)
