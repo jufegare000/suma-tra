@@ -1,11 +1,11 @@
 import { CommonRoutesConfig } from '../common/routes/common.routes.config';
 import express from 'express';
-import {CreateTramiteController} from './controller/create-tramite.controller';
-import TramiteController from './controller/tramite.controller';
+import { CreateTramiteController } from './controller/create-tramite.controller';
 import TramiteMiddleware from './middleware/tramite.middleware';
 import { CreateTramiteService } from './service/create-tramite/create-tramite.service';
 import { GetTramiteService } from './service/get-tramite/get-tramite.service';
 import { GetTramiteController } from './controller/get-tramite.controller';
+import CreateTramiteValidator from './middleware/create-tramite-validator.middleware';
 
 const createTramiteUseCase = new CreateTramiteService();
 const getTramiteUseCase = new GetTramiteService()
@@ -21,6 +21,9 @@ export class TramiteRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
 
         this.app.route(`/tramites`)
+            .all(CreateTramiteValidator.validateInputFields,
+                 CreateTramiteValidator.validateDocumentsPresentInRequest,
+                 CreateTramiteValidator.validateDocumentsFormatInReques)
             .post(
                 (req, res) => createTramiteController.execute(req, res));
 
@@ -31,12 +34,6 @@ export class TramiteRoutes extends CommonRoutesConfig {
             )
             .put((req: express.Request, res: express.Response) => {
                 res.status(200).send(`PUT requested for id ${req.params.tramiteId}`);
-            })
-            .patch((req: express.Request, res: express.Response) => {
-                res.status(200).send(`PATCH requested for id ${req.params.tramiteId}`);
-            })
-            .delete((req: express.Request, res: express.Response) => {
-                res.status(200).send(`DELETE requested for id ${req.params.tramiteId}`);
             });
 
         return this.app;

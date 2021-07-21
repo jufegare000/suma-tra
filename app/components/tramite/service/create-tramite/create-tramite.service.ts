@@ -16,6 +16,7 @@ export class CreateTramiteService {
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
     private createDocumentService: CreateDocumentService = new CreateDocumentService()
     private solicitanteTramiteService: SolicitanteTramitesService = new SolicitanteTramitesService();
+    private tramiteCreated: TramiteModel | null = null;
 
     async createTramite(createTramiteDTO: CreateTramiteDTO, solicitanteMail: string): Promise<CreateTramiteDTO | undefined> {
 
@@ -26,14 +27,19 @@ export class CreateTramiteService {
                 log.info(`id solicitante: ${tramiteI?.solicitante_id}`)
                 if (tramiteI) {
                     const tramiteCrudo: TramiteModel = await this.tramiteRepository.guardarTramiteModel(tramiteI);
-                    const tramiteResponse: CreateTramiteDTO = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
-                    await this.createDocumentService.createDocumentsForTramite(tramiteResponse, tramiteResponse.id);
+                    let tramiteResponse: CreateTramiteDTO = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
+                    tramiteResponse.archivos = createTramiteDTO.archivos;
+                    this.tramiteCreated = tramiteCrudo;
+                    await this.createDocumentService.createDocumentsForTramite(tramiteResponse);
+                    
                     return tramiteResponse;
                 }
             }
         } catch (error) {
             log.error(`Error creating tramite: ${error}`);
-            throw new Error(`Error creating tramite: ${error}`)
+            if (this.tramiteCreated)
+                this.tramiteRepository.eliminarTramite(this.tramiteCreated)
+            throw new Error(`Error creating tramite: ${error}`);
         }
     }
 

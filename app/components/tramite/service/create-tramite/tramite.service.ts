@@ -23,7 +23,7 @@ export class TramiteService {
             if (tramiteI) {
                 const tramiteCrudo = await this.tramiteRepository.guardarTramiteModel(tramiteI);
                 const tramiteResponse = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
-                await this.createDocumentService.createDocumentsForTramite(createTramiteDTO, tramiteResponse.id);
+                await this.createDocumentService.createDocumentsForTramite(tramiteResponse);
                 return tramiteResponse;
             }
         } 

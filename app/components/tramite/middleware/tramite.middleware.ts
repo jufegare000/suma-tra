@@ -4,14 +4,6 @@ import { TramiteService } from '../service/create-tramite/tramite.service';
 const tramiteSetvice: TramiteService = new TramiteService();
 
 class TramiteMiddleware {
-    async extractTramiteId(
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction
-    ) {
-        req.body.tramiteId = req.params.tramiteId;
-        next();
-    }
 
     async validateTramiteExists(
         req: express.Request,
@@ -37,7 +29,7 @@ class TramiteMiddleware {
             next();
         } else {
             res.status(400).send({
-                error: `Missing required fields email and password`,
+                error: `Missing required fields email and password`
             });
         }
     }
