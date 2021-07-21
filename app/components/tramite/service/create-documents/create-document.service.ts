@@ -20,13 +20,22 @@ export class CreateDocumentService {
     private tramiteId: number = 0;
     private tramiteDocumentoObjectMapper: CreateDocumentObjectMapper = new CreateDocumentObjectMapper();
 
-    async createDocumentsForTramite(createTramiteDTO: CreateTramiteDTO, tramiteId: number | undefined) {
-        const { solicitante_id } = createTramiteDTO;
-        if (tramiteId)
-            this.tramiteId = tramiteId
-        if (solicitante_id)
+    async createDocumentsForTramite(createTramiteDTO: CreateTramiteDTO) {
+        const { solicitante_id, id } = createTramiteDTO;
+        if (id)
+            this.tramiteId = id
+        if (solicitante_id) {
             this.userOfTramite = await this.tramiUserService.getTramiUserById(solicitante_id);
-        await this.mapDocumentForUploadToS3(createTramiteDTO)
+            log.info(`user returned: ${this.userOfTramite}`)
+        }
+        log.info(`user: ${this.userOfTramite?.email}`);
+        try {
+            await this.mapDocumentForUploadToS3(createTramiteDTO)
+        } catch (error) {
+
+            throw new Error(`Can not create tramite because: ${error}`)
+        }
+
     }
 
     async uploadFilesToS3Buckets(image: DocumentoTramiteDTO, description: string) {
@@ -49,6 +58,7 @@ export class CreateDocumentService {
             const matriculaUrls: string[] = await this.mapMatriculaImagesForUploadS3(imagenes_matricula);
             const documentosUrls: string[] = await this.mapDocumentosImplicados(documentos);
             await this.mapForsaveDocumentInDatabase(matriculaUrls, documentosUrls);
+            createTramiteDTO.archivos = undefined;
         }
     }
 

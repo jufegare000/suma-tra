@@ -12,17 +12,17 @@ describe('Tramite service testing', function() {
   const createTramiteService: CreateTramiteService = new CreateTramiteService();
   const getTramiteService: GetTramiteService = new GetTramiteService();
 
-    it.only('Get complete Tramite information', async function() {
+    it('Get complete Tramite information', async function() {
 
         const tramiteMapped: GetTramiteDTO|null = await getTramiteService.getTramiteById(45);
         log.info('get tramite: ', tramiteMapped);
         assert.isNotNull(tramiteMapped, 'Must not be null!!!')
     }); 
 
-    it('Create tramite in service', async function() {
+    it.only('Create tramite in service', async function() {
       const tramiteForCreation: CreateTramiteDTO = createTramiteDTOMock;
       log.info(`Creating tramite: ${tramiteForCreation}`)
-      const tramiteMapped: CreateTramiteDTO|undefined = await createTramiteService.createTramite(tramiteForCreation, "xx@xxx");
+      const tramiteMapped: CreateTramiteDTO|undefined = await createTramiteService.createTramite(tramiteForCreation, "nuevo@juangallo.tr");
 
       console.log('get tramite: ', tramiteMapped);
       assert.isNotNull(tramiteMapped, 'Must not be null!!!')
