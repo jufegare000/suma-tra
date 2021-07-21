@@ -13,19 +13,6 @@ const getTramiteService: GetTramiteService = new GetTramiteService();
 const userValidator: UserValidators = new UserValidators();
 class TramiteController {
 
-    async createTramite(req: express.Request, res: express.Response){
-        const email =  userValidator.validateEmailInHeaders(req);
-        log(`'email: ', ${email}`);
-        if(email){
-            const createTramiteDTO: CreateTramiteDTO = req.body;
-            log('request: ', createTramiteDTO);
-            const tramite = await createTramiteService.createTramite(createTramiteDTO, email?.toString());
-            res.status(StatusCodes.CREATED).send(tramite);
-        }else{
-            res.status(StatusCodes.NOT_FOUND).send("email not found");
-        }
-    }
-
     async getTramiteById(req:express.Request, res: express.Response){
         log('request: ', req);
         const idTramite: number = +req.params.tramiteId;

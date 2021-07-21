@@ -23,10 +23,11 @@ export class CreateTramiteService {
         try {
             if (solicitante) {
                 const tramiteI: TramiteI | undefined = await this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO, solicitante.id);
+                log.info(`id solicitante: ${tramiteI?.solicitante_id}`)
                 if (tramiteI) {
                     const tramiteCrudo: TramiteModel = await this.tramiteRepository.guardarTramiteModel(tramiteI);
                     const tramiteResponse: CreateTramiteDTO = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
-                    await this.createDocumentService.createDocumentsForTramite(createTramiteDTO, tramiteResponse.id);
+                    await this.createDocumentService.createDocumentsForTramite(tramiteResponse, tramiteResponse.id);
                     return tramiteResponse;
                 }
             }

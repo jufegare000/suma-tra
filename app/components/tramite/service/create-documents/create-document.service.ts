@@ -24,9 +24,11 @@ export class CreateDocumentService {
         const { solicitante_id } = createTramiteDTO;
         if (tramiteId)
             this.tramiteId = tramiteId
-        if (solicitante_id)
+        if (solicitante_id) {
             this.userOfTramite = await this.tramiUserService.getTramiUserById(solicitante_id);
-            log.info(`user: ${this.userOfTramite?.email}`);
+            log.info(`user returned: ${this.userOfTramite}`)
+       }
+        log.info(`user: ${this.userOfTramite?.email}`);
         await this.mapDocumentForUploadToS3(createTramiteDTO)
     }
 

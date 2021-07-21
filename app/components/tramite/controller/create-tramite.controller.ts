@@ -47,5 +47,3 @@ export class CreateTramiteController extends BaseController {
         }
     }
 }
-
-// export default new CreateTramiteController();

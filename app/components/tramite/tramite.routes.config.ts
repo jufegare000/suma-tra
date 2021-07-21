@@ -4,10 +4,14 @@ import {CreateTramiteController} from './controller/create-tramite.controller';
 import TramiteController from './controller/tramite.controller';
 import TramiteMiddleware from './middleware/tramite.middleware';
 import { CreateTramiteService } from './service/create-tramite/create-tramite.service';
+import { GetTramiteService } from './service/get-tramite/get-tramite.service';
+import { GetTramiteController } from './controller/get-tramite.controller';
 
 const createTramiteUseCase = new CreateTramiteService();
-const createTramiteController: CreateTramiteController = new CreateTramiteController(createTramiteUseCase)
+const getTramiteUseCase = new GetTramiteService()
 
+const createTramiteController: CreateTramiteController = new CreateTramiteController(createTramiteUseCase)
+const getTramiteController: GetTramiteController = new GetTramiteController(getTramiteUseCase);
 export class TramiteRoutes extends CommonRoutesConfig {
 
     constructor(app: express.Application) {
@@ -22,7 +26,9 @@ export class TramiteRoutes extends CommonRoutesConfig {
 
         this.app.route(`/tramites/:tramiteId`)
             .all(TramiteMiddleware.validateTramiteExists)
-            .get(TramiteController.getTramiteById)
+            .get(
+                (req, res) => getTramiteController.execute(req, res)
+            )
             .put((req: express.Request, res: express.Response) => {
                 res.status(200).send(`PUT requested for id ${req.params.tramiteId}`);
             })

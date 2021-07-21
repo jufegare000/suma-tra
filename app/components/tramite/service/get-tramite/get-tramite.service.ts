@@ -22,7 +22,7 @@ export class GetTramiteService {
             }
         } catch (ex) {
             
-            throw new Error(`Can't get Tramite`);
+            throw new Error(`Can't get Tramite because: ${ex}`);
         }
         return null;
     }
