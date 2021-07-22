@@ -2,6 +2,7 @@ import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dt
 import { TramiteRepository } from "../../tramite/repository/tramite.repository";
 import { GetTramitesObjectMapper } from "../../tramite/service/object-mappers/get-tramites.objectMapper";
 import { UserModel } from "../model/db/user.model";
+import { GetUserDTO } from "../model/dto/get-user.dto";
 import { UsersRepository } from "../repository/users.repository";
 
 export class TramitadorTramitesService {
@@ -11,17 +12,14 @@ export class TramitadorTramitesService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
 
 
-    async getTramitesTramitadorByMail(email: string): Promise<GetTramiteDTO[] | null> {
+    async getTramitesTramitadorByMail(userDto: GetUserDTO): Promise<GetTramiteDTO[] | null> {
         try {
-            const usuarioCrudo: UserModel | null = await this.userRepository.getUserByMail(email);
-            if (usuarioCrudo) {
-                const tramitadorId = usuarioCrudo.getDataValue("id")
-                const tramitesOfTramitador = await this.tramiteRepository.getTramitesTramitador(tramitadorId);
-                if (tramitesOfTramitador) {
-                    const tramitesDTO: GetTramiteDTO[] = this.getTramiteObjectMapper.mapModelToDto(tramitesOfTramitador);
-                    return tramitesDTO;
-                }
+            const tramitesOfTramitador = await this.tramiteRepository.getTramitesTramitador(userDto.id);
+            if (tramitesOfTramitador) {
+                const tramitesDTO: GetTramiteDTO[] = this.getTramiteObjectMapper.mapModelToDto(tramitesOfTramitador);
+                return tramitesDTO;
             }
+
         } catch (ex) {
             throw new Error(`Can't get user`);
         }

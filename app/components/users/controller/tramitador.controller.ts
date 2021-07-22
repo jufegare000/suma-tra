@@ -5,6 +5,8 @@ import { UserValidators } from "../midleware/user-validators.midleware";
 import {StatusCodes} from 'http-status-codes';
 import { TramitadorTramitesService } from "../services/tramitador-tramites.service";
 import { GetTramiteDTO } from "../../tramite/model/dto/get-tramite/getTramite.dto";
+import { UserEnum } from "../../../enums/user/solicitante.enum";
+import { GetUserDTO } from "../model/dto/get-user.dto";
 
 const log: Logger = new Logger();
 
@@ -14,10 +16,10 @@ const userValidators: UserValidators = new UserValidators();
 class TramitadorController {
 
     async getTramitadorTramites(req: express.Request, res: express.Response){
-        const email = userValidators.validateEmailInHeaders(req);
+        const user:GetUserDTO|null = await userValidators.validateEmailInHeaders(req, UserEnum.tramitadorRole);
 
-        if(email){
-            const tramites: GetTramiteDTO[] |null = await tramiteTramitadorService.getTramitesTramitadorByMail(email);
+        if(user){
+            const tramites: GetTramiteDTO[] |null = await tramiteTramitadorService.getTramitesTramitadorByMail(user);
             if(tramites && tramites.length > 0){
                 res.status(StatusCodes.OK).send(tramites);
             }else {

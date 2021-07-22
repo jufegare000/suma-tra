@@ -8,6 +8,8 @@ import { GetUserDTO } from "../../../users/model/dto/get-user.dto";
 import { TramiteI } from "../../model/interface/tramite.interface";
 import { TramiteModel } from "../../model/db/tamite.model";
 import { Logger } from "tslog";
+import { TramiUserService } from "../../../users/services/trami-user.service";
+import { UserEnum } from "../../../../enums/user/solicitante.enum";
 
 const log: Logger = new Logger();
 
@@ -16,14 +18,15 @@ export class CreateTramiteService {
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
     private createDocumentService: CreateDocumentService = new CreateDocumentService()
     private solicitanteTramiteService: SolicitanteTramitesService = new SolicitanteTramitesService();
+    private tramiUserService: TramiUserService = new TramiUserService();
     private tramiteCreated: TramiteModel | null = null;
 
     async createTramite(createTramiteDTO: CreateTramiteDTO, solicitanteMail: string): Promise<CreateTramiteDTO | undefined> {
-
-        const solicitante: GetUserDTO | undefined = await this.solicitanteTramiteService.getUserByMailOrCreate(solicitanteMail);
+        
         try {
-            if (solicitante) {
-                const tramiteI: TramiteI | undefined = await this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO, solicitante.id);
+            const userDto: GetUserDTO = await this.tramiUserService.validateTramiUserInDB(solicitanteMail, UserEnum.solicitanteRole);
+            if (userDto) {
+                const tramiteI: TramiteI | undefined = await this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO, userDto.id);
                 log.info(`id solicitante: ${tramiteI?.solicitante_id}`)
                 if (tramiteI) {
                     const tramiteCrudo: TramiteModel = await this.tramiteRepository.guardarTramiteModel(tramiteI);

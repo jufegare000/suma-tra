@@ -21,10 +21,10 @@ export class TramiteRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
 
         this.app.route(`/tramites`)
-            .all(CreateTramiteValidator.validateInputFields,
-                 CreateTramiteValidator.validateDocumentsPresentInRequest,
-                 CreateTramiteValidator.validateDocumentsFormatInReques)
-            .post(
+            .get((req, res) => getTramiteController.execute(req, res))
+            .post(CreateTramiteValidator.validateInputFields,
+                CreateTramiteValidator.validateDocumentsPresentInRequest,
+                CreateTramiteValidator.validateDocumentsFormatInReques,
                 (req, res) => createTramiteController.execute(req, res));
 
         this.app.route(`/tramites/:tramiteId`)

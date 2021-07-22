@@ -5,6 +5,8 @@ import { CreateTramiteService } from '../service/create-tramite/create-tramite.s
 import { BaseController } from '../../../shared/infra/http/models/base-controller';
 
 import { Logger } from "tslog";
+import { UserEnum } from '../../../enums/user/solicitante.enum';
+import { GetUserDTO } from '../../users/model/dto/get-user.dto';
 
 const log: Logger = new Logger();
 const userValidator: UserValidators = new UserValidators();
@@ -18,27 +20,20 @@ export class CreateTramiteController extends BaseController {
     }
 
     protected async executeImpl(req: express.Request, res: express.Response): Promise<void | any> {
-
-        try {
-            const email = await this.validateUser(req, res);
-            log.info('getted email: ' + email)
-            const createTramiteDTO: CreateTramiteDTO = req.body;
-            const result = await this.useCase.createTramite(createTramiteDTO, email.toString());
-            if (result) {
-                return this.ok(res, result);
+        const userDto: GetUserDTO | null = await userValidator.validateEmailInHeaders(req, UserEnum.solicitanteRole);
+        if (userDto) {
+            try {
+                log.info('getted email: ' + userDto)
+                const createTramiteDTO: CreateTramiteDTO = req.body;
+                const result = await this.useCase.createTramite(createTramiteDTO, userDto.email)
+                if (result) {
+                    return this.ok(res, result);
+                }
+            } catch (error: any) {
+                return this.clientError(res, error.toString());
             }
-        } catch (error: any) {
-            return this.clientError(res, error.toString());
         }
         return this.clientError(res, 'Unexpected error');
     }
 
-    async validateUser(req: express.Request, res: express.Response): Promise<string | express.Response<any, Record<string, any>>> {
-        const email = userValidator.validateEmailInHeaders(req);
-        if (!email) {
-            return this.clientError(res, "Invalid email")
-        } else {
-            return email;
-        }
-    }
 }
