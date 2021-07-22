@@ -19,7 +19,7 @@ describe('Tramite service testing', function() {
         assert.isNotNull(tramiteMapped, 'Must not be null!!!')
     }); 
 
-    it.only('Create tramite in service', async function() {
+    it('Create tramite in service', async function() {
       const tramiteForCreation: CreateTramiteDTO = createTramiteDTOMock;
       log.info(`Creating tramite: ${tramiteForCreation}`)
       const tramiteMapped: CreateTramiteDTO|undefined = await createTramiteService.createTramite(tramiteForCreation, "nuevo@juangallo.tr");

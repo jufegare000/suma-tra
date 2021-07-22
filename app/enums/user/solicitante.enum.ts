@@ -1,3 +1,4 @@
-export enum SolicitanteEnum {
-    role = "solicitante"
+export enum UserEnum {
+    solicitanteRole = "solicitante",
+    tramitadorRole = "tramitador"
 }

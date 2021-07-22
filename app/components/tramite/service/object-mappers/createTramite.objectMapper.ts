@@ -19,7 +19,7 @@ export class CreateTramiteObjectMapper {
         }
     }
 
-    mapDtoToTramiteI(createTramiteDTO: CreateTramiteDTO, solicitanteId?: number): TramiteI|undefined {
+    mapDtoToTramiteI(createTramiteDTO: CreateTramiteDTO, solicitanteId?: number): TramiteI {
         if (solicitanteId) {
             return {
                 cedula_comprador: createTramiteDTO.cedula_comprador,
@@ -33,7 +33,7 @@ export class CreateTramiteObjectMapper {
                 solicitante_id: solicitanteId,
                 tipo_vehiculo: createTramiteDTO.tipo_vehiculo
             }
-        } else if(createTramiteDTO.solicitante_id) {
+        } else {
             return {
                 cedula_comprador: createTramiteDTO.cedula_comprador,
                 cedula_vendedor: createTramiteDTO.cedula_vendedor,

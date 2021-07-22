@@ -1,6 +1,6 @@
 export interface TramiteI {
     id?: number;
-    solicitante_id: number;
+    solicitante_id?: number;
     tramitador_id?: number;
     tipo_vehiculo: number;
     placa: string;

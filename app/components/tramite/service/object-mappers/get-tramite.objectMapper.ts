@@ -23,8 +23,23 @@ export class GetTramiteObjectMapper {
         }
     }
 
-    addDocumentsToDTO() {
-        
+    mapArrayToDto(tramitesModel: TramiteModel[]): GetTramiteDTO[] {
+        const tramitesDto: GetTramiteDTO[] = tramitesModel.map(function (tramiteModel, index) {
+            const tramiteDto: GetTramiteDTO = {
+                id: tramiteModel.getDataValue('id'),
+                cedula_comprador: tramiteModel.getDataValue('cedula_comprador'),
+                cedula_vendedor: tramiteModel.getDataValue('cedula_vendedor'),
+                direccion_solicitante: tramiteModel.getDataValue('direccion_solicitante'),
+                modelo: tramiteModel.getDataValue('modelo'),
+                organismo_transito_id: tramiteModel.getDataValue('organismo_transito_id'),
+                placa: tramiteModel.getDataValue('placa'),
+                tipo_vehiculo: tramiteModel.getDataValue('tipo_vehiculo'),
+                observaciones: tramiteModel.getDataValue('observaciones')
+            }
+            return tramiteDto;
+        });
+
+        return tramitesDto;
     }
 
     async getUsuariosAsociadosAltramite(tramiteModel: TramiteModel) {

@@ -1,5 +1,6 @@
 import { Repository } from "sequelize-typescript";
 import { sequalize } from "../../../config/db/db";
+import { EstadoTramiteEnum } from "../../../enums/tramites/estado-tramite.enum";
 import { TramiteModel } from "../model/db/tamite.model";
 import { TramiteI } from "../model/interface/tramite.interface";
 
@@ -18,6 +19,15 @@ export class TramiteRepository {
         const tramiteRepo = this.getRepository();
         try {
             return await tramiteRepo.findAll();
+        }catch(ex) {
+            throw new Error(`Database error:${ex}`);
+        }
+    }
+
+    async getPendingTramites(): Promise<TramiteModel[] | null> {
+        const tramiteRepo = this.getRepository();
+        try {
+            return await tramiteRepo.findAll({where: {estado_id:EstadoTramiteEnum.PendienteDeAprobacion}});
         }catch(ex) {
             throw new Error(`Database error:${ex}`);
         }

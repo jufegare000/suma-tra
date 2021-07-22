@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { SolicitanteTramitesService } from "../../../components/users/services/solicitante-tramites.service";
-import { tramiUserSolicitanteMock } from '../mock/trami-user.mock';
+import { tramiUserSolicitanteDTO } from '../mock/trami-user.mock';
 
 describe('Solicitante Tramite user service testing', function () {
 
@@ -8,7 +8,7 @@ describe('Solicitante Tramite user service testing', function () {
 
   it('get tramites for solicitante', async function () {
     const tramiteMapped = await tramiUserService
-      .getTramitesSolicitanteByMail(tramiUserSolicitanteMock.email);
+      .getTramitesSolicitante(tramiUserSolicitanteDTO);
     console.log('get tramites: ', tramiteMapped);
     assert.isNotNull(tramiteMapped, 'Must not be null!!!')
   });

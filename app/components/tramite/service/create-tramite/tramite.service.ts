@@ -5,8 +5,6 @@ import { GetTramiteObjectMapper } from "../object-mappers/get-tramite.objectMapp
 import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
 import { CreateTramiteObjectMapper } from "../object-mappers/createTramite.objectMapper"
 import { CreateDocumentService } from "../create-documents/create-document.service";
-
-import { SolicitanteTramitesService } from "../../../users/services/solicitante-tramites.service";
 import { GetUserDTO } from "../../../users/model/dto/get-user.dto";
 
 export class TramiteService {
@@ -14,20 +12,19 @@ export class TramiteService {
     private getTramiteObjectMapper: GetTramiteObjectMapper = new GetTramiteObjectMapper();
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
     private createDocumentService: CreateDocumentService = new CreateDocumentService()
-    private solicitanteTramiteService: SolicitanteTramitesService = new SolicitanteTramitesService();
 
-    async createTramite(createTramiteDTO: CreateTramiteDTO, solicitanteMail: string) {
-        const solicitante: GetUserDTO | undefined = await this.solicitanteTramiteService.getUserByMailOrCreate(solicitanteMail);
-        if (solicitante) {
+    async createTramite(createTramiteDTO: CreateTramiteDTO, solicitante: GetUserDTO) {
+        try {
             const tramiteI = this.createTramiteObjectMapper.mapDtoToTramiteI(createTramiteDTO, solicitante.id);
-            if (tramiteI) {
-                const tramiteCrudo = await this.tramiteRepository.guardarTramiteModel(tramiteI);
-                const tramiteResponse = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
-                await this.createDocumentService.createDocumentsForTramite(tramiteResponse);
-                return tramiteResponse;
-            }
-        } 
-        return null;
+
+            const tramiteCrudo = await this.tramiteRepository.guardarTramiteModel(tramiteI);
+            const tramiteResponse = this.createTramiteObjectMapper.mapModelToDto(tramiteCrudo);
+            await this.createDocumentService.createDocumentsForTramite(tramiteResponse);
+            return tramiteResponse;
+
+        } catch (error) {
+            throw new Error(`Can not create tramite because: ${error}`)
+        }
     }
 
     async getTramiteById(tramiteId: number): Promise<GetTramiteDTO | null> {
@@ -35,7 +32,7 @@ export class TramiteService {
             const tramiteCrudo: TramiteModel | null = await this.tramiteRepository.getTramiteById(tramiteId);
             if (tramiteCrudo) {
                 const tramiteDTO: GetTramiteDTO = await this.getTramiteObjectMapper.mapModelToDto(tramiteCrudo);
-                
+
                 return tramiteDTO;
             }
         } catch (ex) {
