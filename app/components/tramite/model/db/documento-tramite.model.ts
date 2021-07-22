@@ -1,7 +1,5 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty } from "sequelize-typescript";
 import { TramiteDocumentoI } from "../interface/document-tramite.interface";
-
-
 @Table(
     {
         tableName: "documento_tramite",
