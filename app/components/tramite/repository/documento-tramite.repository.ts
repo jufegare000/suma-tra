@@ -2,7 +2,6 @@ import { Repository } from "sequelize-typescript";
 import { sequalize } from "../../../config/db/db";
 import { DocumentoTramiteModel } from "../model/db/documento-tramite.model";
 import { TramiteDocumentoI } from "../model/interface/document-tramite.interface";
-
 export class DocumentoTramiteRepository {
 
     repository: Repository<DocumentoTramiteModel> | undefined;

@@ -1,6 +1,5 @@
 import { GetUserDTO } from "../../../../users/model/dto/get-user.dto";
 import { GetDocumentosTramiteDTO } from "./get-documetos-tramite.dto";
-
 export interface GetTramiteDTO {
     id?: number;
     solicitante?: GetUserDTO | null;
