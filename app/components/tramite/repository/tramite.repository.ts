@@ -27,7 +27,7 @@ export class TramiteRepository {
     async getPendingTramites(): Promise<TramiteModel[] | null> {
         const tramiteRepo = this.getRepository();
         try {
-            return await tramiteRepo.findAll({where: {estudio_id:EstadoTramiteEnum.PendienteDeAprobacion}});
+            return await tramiteRepo.findAll({where: {estado_id:EstadoTramiteEnum.PendienteDeAprobacion}});
         }catch(ex) {
             throw new Error(`Database error:${ex}`);
         }

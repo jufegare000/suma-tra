@@ -6,6 +6,7 @@ import { CreateTramiteService } from './service/create-tramite/create-tramite.se
 import { GetTramiteService } from './service/get-tramite/get-tramite.service';
 import { GetTramiteController } from './controller/get-tramite.controller';
 import CreateTramiteValidator from './middleware/create-tramite-validator.middleware';
+import ListTramitesController from './controller/list-tramites.controllers';
 
 const createTramiteUseCase = new CreateTramiteService();
 const getTramiteUseCase = new GetTramiteService()
@@ -21,7 +22,7 @@ export class TramiteRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
 
         this.app.route(`/tramites`)
-            .get((req, res) => getTramiteController.execute(req, res))
+            .get((req, res) => ListTramitesController.executeImpl(req, res))
             .post(CreateTramiteValidator.validateInputFields,
                 CreateTramiteValidator.validateDocumentsPresentInRequest,
                 CreateTramiteValidator.validateDocumentsFormatInReques,

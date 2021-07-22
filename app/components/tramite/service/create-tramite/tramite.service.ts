@@ -5,18 +5,13 @@ import { GetTramiteObjectMapper } from "../object-mappers/get-tramite.objectMapp
 import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
 import { CreateTramiteObjectMapper } from "../object-mappers/createTramite.objectMapper"
 import { CreateDocumentService } from "../create-documents/create-document.service";
-
-import { SolicitanteTramitesService } from "../../../users/services/solicitante-tramites.service";
 import { GetUserDTO } from "../../../users/model/dto/get-user.dto";
-import { TramiUserService } from "../../../users/services/trami-user.service";
 
 export class TramiteService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private getTramiteObjectMapper: GetTramiteObjectMapper = new GetTramiteObjectMapper();
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
     private createDocumentService: CreateDocumentService = new CreateDocumentService()
-    private solicitanteTramiteService: SolicitanteTramitesService = new SolicitanteTramitesService();
-    private tramiUserService: TramiUserService = new TramiUserService();
 
     async createTramite(createTramiteDTO: CreateTramiteDTO, solicitante: GetUserDTO) {
         try {
@@ -28,11 +23,8 @@ export class TramiteService {
             return tramiteResponse;
 
         } catch (error) {
-
+            throw new Error(`Can not create tramite because: ${error}`)
         }
-
-
-        return null;
     }
 
     async getTramiteById(tramiteId: number): Promise<GetTramiteDTO | null> {

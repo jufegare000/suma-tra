@@ -1,4 +1,3 @@
-
 import express from 'express';
 import { GetTramiteDTO } from '../model/dto/get-tramite/getTramite.dto';
 import { BaseController } from '../../../shared/infra/http/models/base-controller';
@@ -10,7 +9,7 @@ import { UserEnum } from '../../../enums/user/solicitante.enum';
 const log: Logger = new Logger();
 const userValidators: UserValidators = new UserValidators();
 
-export class ListTramitesController extends BaseController {
+class ListTramitesController extends BaseController {
 
     private useCase: ListTramitesService = new ListTramitesService();
     
@@ -28,3 +27,5 @@ export class ListTramitesController extends BaseController {
         }
     }
 }
+
+export default new ListTramitesController();
