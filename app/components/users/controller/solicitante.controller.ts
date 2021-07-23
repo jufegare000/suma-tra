@@ -15,16 +15,14 @@ class SolicitanteController {
 
     async getSolicitanteTramites(req: express.Request, res: express.Response) {
         try {
-            const userDto: GetUserDTO|null = await userValidators.validateEmailInHeaders(req, UserEnum.solicitanteRole);
-            
+            const userDto: GetUserDTO | null = await userValidators.validateEmailInHeaders(req, UserEnum.solicitanteRole);
+
             const tramites: GetTramiteDTO[] | null = await tramiteSolicitanteService.getTramitesSolicitante(userDto);
-            if (tramites && tramites.length > 0) {
-                res.status(StatusCodes.OK).send(tramites);
-            } else {
-                res.status(StatusCodes.NOT_FOUND).send("No tramites found")
-            }
+
+            res.status(StatusCodes.OK).send(tramites);
+
         } catch (error) {
-            res.status(StatusCodes.NOT_FOUND).send("No email headers found")
+            res.status(StatusCodes.UNAUTHORIZED).send("No email headers found")
         }
     }
 }

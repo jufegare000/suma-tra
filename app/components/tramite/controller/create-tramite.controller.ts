@@ -33,7 +33,7 @@ export class CreateTramiteController extends BaseController {
                 return this.clientError(res, error.toString());
             }
         }
-        return this.clientError(res, 'Unexpected error');
+        return this.unauthorized(res, 'email was no setted in headers');
     }
 
 }

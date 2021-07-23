@@ -3,7 +3,6 @@ import { ArchivosTramiteDTO } from '../model/dto/create-tramite/archivos-tramite
 import { CreateTramiteDTO } from '../model/dto/create-tramite/create-tramite.dto';
 import { CreateTramiteValidator } from '../validators/create-tramite.validator';
 
-
 class CreateTramiteValidatorMiddleware {
 
     
