@@ -9,7 +9,7 @@ export class TramiteRepository {
     repository: Repository<TramiteModel> | undefined;
 
     getRepository(): Repository<TramiteModel> {
-        if(!this.repository){
+        if (!this.repository) {
             this.repository = sequalize.getRepository(TramiteModel);
         }
         return this.repository;
@@ -19,7 +19,7 @@ export class TramiteRepository {
         const tramiteRepo = this.getRepository();
         try {
             return await tramiteRepo.findAll();
-        }catch(ex) {
+        } catch (ex) {
             throw new Error(`Database error:${ex}`);
         }
     }
@@ -27,50 +27,64 @@ export class TramiteRepository {
     async getPendingTramites(): Promise<TramiteModel[] | null> {
         const tramiteRepo = this.getRepository();
         try {
-            return await tramiteRepo.findAll({where: {estado_id:EstadoTramiteEnum.PendienteDeAprobacion}});
-        }catch(ex) {
+            return await tramiteRepo.findAll({ where: { estado_id: EstadoTramiteEnum.PendienteDeAprobacion } });
+        } catch (ex) {
             throw new Error(`Database error:${ex}`);
         }
     }
 
-    async guardarTramiteModel(tramite: TramiteI): Promise<TramiteModel>{
+    async guardarTramiteModel(tramite: TramiteI): Promise<TramiteModel> {
         const tramiteRepo = this.getRepository();
         return await tramiteRepo.create(tramite);
     }
 
-    async eliminarTramite(tramiteModel: TramiteModel | null){
-        try{
-            if(tramiteModel)
-            await tramiteModel.destroy();
-        }catch(error){
+    async eliminarTramite(tramiteModel: TramiteModel | null) {
+        try {
+            if (tramiteModel)
+                await tramiteModel.destroy();
+        } catch (error) {
             return null;
         }
     }
 
-    async getTramiteById(id: number):Promise<TramiteModel|null>{
+    async getTramiteById(id: number): Promise<TramiteModel | null> {
         const tramiteRepo = this.getRepository();
-        try{
-            return tramiteRepo.findByPk(id);  
-        }catch(ex){
+        try {
+            return tramiteRepo.findByPk(id);
+        } catch (ex) {
             throw new Error('Not found exception');
-        }         
+        }
     }
 
-    async getTramitesTramitador(idTramitador:number): Promise<TramiteModel[]|null>{
+    async getTramitesTramitador(idTramitador: number): Promise<TramiteModel[] | null> {
         const tramiteRepo = this.getRepository();
-        try{
-            return tramiteRepo.findAll({where: {tramitador_id:idTramitador}});  
-        }catch(ex){
+        try {
+            return tramiteRepo.findAll({ where: { tramitador_id: idTramitador } });
+        } catch (ex) {
             throw new Error('Not found exception');
-        }      
+        }
     }
 
-    async getTramitesSolicitante(idSolicitante:number): Promise<TramiteModel[]|null>{
+    async updateTramiteWithTramitadorAndState(tramitadorId: number, tramiteId: number, state: number): Promise<[number, TramiteModel[]]> {
         const tramiteRepo = this.getRepository();
-        try{
-            return tramiteRepo.findAll({where: {solicitante_id:idSolicitante}});  
-        }catch(ex){
+        try {
+            return await tramiteRepo.update({
+                tramitador_id: tramitadorId,
+                estado_id: state
+            },
+                { where: { id: tramiteId } }
+            )
+        } catch (error) {
             throw new Error('Database error');
-        }      
+        }
+    }
+
+    async getTramitesSolicitante(idSolicitante: number): Promise<TramiteModel[] | null> {
+        const tramiteRepo = this.getRepository();
+        try {
+            return tramiteRepo.findAll({ where: { solicitante_id: idSolicitante } });
+        } catch (ex) {
+            throw new Error('Database error');
+        }
     }
 }

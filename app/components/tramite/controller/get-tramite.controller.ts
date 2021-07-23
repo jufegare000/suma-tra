@@ -24,7 +24,7 @@ export class GetTramiteController extends BaseController {
             return this.ok(res, tramite);
         } catch (error) {
             log.error(`Error during excecution: ${error}`)
-            return this.clientError(res, `Unexpected error: ${error}`);
+            return this.fail(res, `Unexpected error: ${error}`);
         }
     }
 }
