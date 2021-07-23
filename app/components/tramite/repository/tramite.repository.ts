@@ -70,7 +70,7 @@ export class TramiteRepository {
         try{
             return tramiteRepo.findAll({where: {solicitante_id:idSolicitante}});  
         }catch(ex){
-            throw new Error('Not found exception');
+            throw new Error('Database error');
         }      
     }
 }

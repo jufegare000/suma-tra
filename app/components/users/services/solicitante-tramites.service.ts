@@ -20,7 +20,7 @@ export class SolicitanteTramitesService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private tramiUserService: TramiUserService = new TramiUserService();
 
-    async getTramitesSolicitante(userDto: GetUserDTO | null): Promise<GetTramiteDTO[] | null> {
+    async getTramitesSolicitante(userDto: GetUserDTO | null): Promise<GetTramiteDTO[] | []> {
         if (userDto) {
             const solicitanteId = userDto.id;
             const tramitesOfSolicitante = await this.tramiteRepository.getTramitesSolicitante(solicitanteId);
@@ -28,7 +28,7 @@ export class SolicitanteTramitesService {
                 const tramitesDTO: GetTramiteDTO[] = this.getTramiteObjectMapper.mapModelToDto(tramitesOfSolicitante);
                 return tramitesDTO;
             }else{
-                return null;
+                return [];
             }
         }
         throw new Error(`Can't get user`);

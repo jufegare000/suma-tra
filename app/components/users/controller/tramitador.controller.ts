@@ -26,7 +26,7 @@ class TramitadorController {
                 res.status(StatusCodes.NOT_FOUND).send("No tramites found")
             }
         }else{
-            res.status(StatusCodes.NOT_FOUND).send("No email headers found")
+            res.status(StatusCodes.UNAUTHORIZED).send("No email headers found")
         }
     }
 }
