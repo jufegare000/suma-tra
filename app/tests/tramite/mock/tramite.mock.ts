@@ -3,6 +3,7 @@ import { TramiteI } from "../../../components/tramite/model/interface/tramite.in
 export const tramitePendienteDeaprobacionMock: TramiteI 
     = 
         {
+            fecha_creacion: new Date(),
             cedula_comprador: "1133444",
             cedula_vendedor: "1212111",
             direccion_solicitante: "Cl 44322 1122",

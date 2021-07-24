@@ -1,11 +1,6 @@
 import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
 import { TramiteModel } from "../../model/db/tamite.model";
-import { TramiUserService } from "../../../users/services/trami-user.service";
-
-
 export class GetTramitesObjectMapper {
-
-    private userService: TramiUserService = new TramiUserService();
 
     mapModelToDto(tramitesModel: TramiteModel[]): GetTramiteDTO[] {
 
@@ -13,6 +8,7 @@ export class GetTramitesObjectMapper {
         tramitesModel.forEach(tramiteModel => {
             tramitesDTO.push({
                 id: tramiteModel.getDataValue('id'),
+                fecha_creacion: tramiteModel.getDataValue('fecha_creacion'),
                 cedula_comprador: tramiteModel.getDataValue('cedula_comprador'),
                 cedula_vendedor: tramiteModel.getDataValue('cedula_vendedor'),
                 direccion_solicitante: tramiteModel.getDataValue('direccion_solicitante'),
