@@ -1,11 +1,6 @@
 import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
 import { TramiteModel } from "../../model/db/tamite.model";
-import { TramiUserService } from "../../../users/services/trami-user.service";
-
-
 export class GetTramitesObjectMapper {
-
-    private userService: TramiUserService = new TramiUserService();
 
     mapModelToDto(tramitesModel: TramiteModel[]): GetTramiteDTO[] {
 
