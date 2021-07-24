@@ -3,8 +3,6 @@ import { TramiteRepository } from "../../repository/tramite.repository";
 import { TramiteModel } from "../../model/db/tamite.model";
 import { GetTramiteObjectMapper } from "../object-mappers/get-tramite.objectMapper";
 import { GetTramiteDTO } from "../../model/dto/get-tramite/getTramite.dto";
-import { GetUserDTO } from "../../../users/model/dto/get-user.dto";
-
 export class ListTramitesService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private getTramiteObjectMapper: GetTramiteObjectMapper = new GetTramiteObjectMapper();

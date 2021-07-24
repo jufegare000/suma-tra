@@ -10,20 +10,17 @@ export class GetTramiteService {
     private getTramiteObjectMapper: GetTramiteObjectMapper = new GetTramiteObjectMapper();
     private getDocumentsService: GetDocumentsTramiteService = new GetDocumentsTramiteService()
 
-    async getTramiteById(tramiteId: number): Promise<GetTramiteDTO | null> {
-        try {
-            const tramiteCrudo: TramiteModel | null = await this.tramiteRepository.getTramiteById(tramiteId);
-            if (tramiteCrudo) {
-                let tramiteDTO: GetTramiteDTO = await this.getTramiteObjectMapper.mapModelToDto(tramiteCrudo);
+    async getTramiteById(tramiteId: number): Promise<GetTramiteDTO> {
 
-                const documents: GetDocumentosTramiteDTO | undefined = await this.getDocumentsService.getDocumentsFromTramiteByIdTramite(tramiteDTO.id)
-                tramiteDTO.archivos = documents;
-                return tramiteDTO;
-            }
-        } catch (ex) {
-            
-            throw new Error(`Can't get Tramite because: ${ex}`);
+        const tramiteCrudo: TramiteModel | null = await this.tramiteRepository.getTramiteById(tramiteId);
+        if (tramiteCrudo) {
+            let tramiteDTO: GetTramiteDTO = await this.getTramiteObjectMapper.mapModelToDto(tramiteCrudo);
+
+            const documents: GetDocumentosTramiteDTO | undefined = await this.getDocumentsService.getDocumentsFromTramiteByIdTramite(tramiteDTO.id)
+            tramiteDTO.archivos = documents;
+            return tramiteDTO;
         }
-        return null;
+
+        throw new Error(`Can't get Tramite`);
     }
 }

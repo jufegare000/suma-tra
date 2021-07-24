@@ -19,6 +19,7 @@ export class GetTramiteObjectMapper {
             solicitante: usuarios[0],
             tramitador: usuarios[1],
             tipo_vehiculo: tramiteModel.getDataValue('tipo_vehiculo'),
+            estado_id: tramiteModel.getDataValue('estado_id'),
             observaciones: tramiteModel.getDataValue('observaciones')
         }
     }
@@ -34,6 +35,7 @@ export class GetTramiteObjectMapper {
                 organismo_transito_id: tramiteModel.getDataValue('organismo_transito_id'),
                 placa: tramiteModel.getDataValue('placa'),
                 tipo_vehiculo: tramiteModel.getDataValue('tipo_vehiculo'),
+                estado_id: tramiteModel.getDataValue('estado_id'),
                 observaciones: tramiteModel.getDataValue('observaciones')
             }
             return tramiteDto;

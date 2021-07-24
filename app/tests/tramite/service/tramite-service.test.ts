@@ -14,7 +14,7 @@ describe('Tramite service testing', function() {
 
     it('Get complete Tramite information', async function() {
 
-        const tramiteMapped: GetTramiteDTO|null = await getTramiteService.getTramiteById(45);
+        const tramiteMapped: GetTramiteDTO = await getTramiteService.getTramiteById(45);
         log.info('get tramite: ', tramiteMapped);
         assert.isNotNull(tramiteMapped, 'Must not be null!!!')
     }); 

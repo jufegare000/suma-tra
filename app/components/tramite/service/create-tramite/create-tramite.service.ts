@@ -17,7 +17,6 @@ export class CreateTramiteService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private createTramiteObjectMapper: CreateTramiteObjectMapper = new CreateTramiteObjectMapper();
     private createDocumentService: CreateDocumentService = new CreateDocumentService()
-    private solicitanteTramiteService: SolicitanteTramitesService = new SolicitanteTramitesService();
     private tramiUserService: TramiUserService = new TramiUserService();
     private tramiteCreated: TramiteModel | null = null;
 
