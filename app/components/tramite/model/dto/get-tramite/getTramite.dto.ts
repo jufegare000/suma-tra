@@ -2,6 +2,7 @@ import { GetUserDTO } from "../../../../users/model/dto/get-user.dto";
 import { GetDocumentosTramiteDTO } from "./get-documetos-tramite.dto";
 export interface GetTramiteDTO {
     id?: number;
+    fecha_creacion?: Date;
     solicitante?: GetUserDTO | null;
     tramitador?: GetUserDTO | null;
     tipo_vehiculo: number;

@@ -10,6 +10,7 @@ export class GetTramiteObjectMapper {
         const usuarios = await this.getUsuariosAsociadosAltramite(tramiteModel);
         return {
             id: tramiteModel.getDataValue('id'),
+            fecha_creacion: tramiteModel.getDataValue('fecha_creacion'),
             cedula_comprador: tramiteModel.getDataValue('cedula_comprador'),
             cedula_vendedor: tramiteModel.getDataValue('cedula_vendedor'),
             direccion_solicitante: tramiteModel.getDataValue('direccion_solicitante'),
@@ -25,9 +26,10 @@ export class GetTramiteObjectMapper {
     }
 
     mapArrayToDto(tramitesModel: TramiteModel[]): GetTramiteDTO[] {
-        const tramitesDto: GetTramiteDTO[] = tramitesModel.map(function (tramiteModel, index) {
+        const tramitesDto: GetTramiteDTO[] = tramitesModel.map(function (tramiteModel) {
             const tramiteDto: GetTramiteDTO = {
                 id: tramiteModel.getDataValue('id'),
+                fecha_creacion: tramiteModel.getDataValue('fecha_creacion'),
                 cedula_comprador: tramiteModel.getDataValue('cedula_comprador'),
                 cedula_vendedor: tramiteModel.getDataValue('cedula_vendedor'),
                 direccion_solicitante: tramiteModel.getDataValue('direccion_solicitante'),

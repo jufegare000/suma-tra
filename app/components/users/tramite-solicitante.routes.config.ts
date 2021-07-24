@@ -10,7 +10,7 @@ export class TramiteSolicitanteRoutes extends CommonRoutesConfig {
     }
 
     configureRoutes(): express.Application {
-        this.app.route(`/tramites-solicitantes/`)
+        this.app.route(`/tramites-solicitante/`)
             .get(SolicitanteController.getSolicitanteTramites);
 
         return this.app;
