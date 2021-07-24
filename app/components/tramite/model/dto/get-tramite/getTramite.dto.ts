@@ -11,6 +11,7 @@ export interface GetTramiteDTO {
     direccion_solicitante: string;
     cedula_comprador: string;
     cedula_vendedor: string;
+    estado_id: string;
     observaciones?: string;
     archivos?: GetDocumentosTramiteDTO
 }

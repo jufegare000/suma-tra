@@ -7,10 +7,11 @@ import { GetTramiteService } from './service/get-tramite/get-tramite.service';
 import { GetTramiteController } from './controller/get-tramite.controller';
 import CreateTramiteValidator from './middleware/create-tramite-validator.middleware';
 import ListTramitesController from './controller/list-tramites.controllers';
+import { AttendTramiteController } from './controller/attend-tramte.controller'
 
 const createTramiteUseCase = new CreateTramiteService();
-const getTramiteUseCase = new GetTramiteService()
-
+const getTramiteUseCase = new GetTramiteService();
+const attendTramiteController = new AttendTramiteController();
 const createTramiteController: CreateTramiteController = new CreateTramiteController(createTramiteUseCase)
 const getTramiteController: GetTramiteController = new GetTramiteController(getTramiteUseCase);
 export class TramiteRoutes extends CommonRoutesConfig {
@@ -26,7 +27,9 @@ export class TramiteRoutes extends CommonRoutesConfig {
             .post(CreateTramiteValidator.validateInputFields,
                 CreateTramiteValidator.validateDocumentsPresentInRequest,
                 CreateTramiteValidator.validateDocumentsFormatInReques,
-                (req, res) => createTramiteController.execute(req, res));
+                (req, res) => createTramiteController.execute(req, res))
+            .put(TramiteMiddleware.validateTramiteIdInBody,
+                (req, res) => attendTramiteController.execute(req, res));
 
         this.app.route(`/tramites/:tramiteId`)
             .all(TramiteMiddleware.validateTramiteExists)

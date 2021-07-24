@@ -1,4 +1,5 @@
 import express from 'express';
+import { AttendTramiteDto } from '../model/dto/update-tramite/attend-tramite.dto';
 import { TramiteService } from '../service/create-tramite/tramite.service';
 
 const tramiteSetvice: TramiteService = new TramiteService();
@@ -20,16 +21,18 @@ class TramiteMiddleware {
         }
     }
 
-    async validateRequiredUserBodyFields(
+    async validateTramiteIdInBody(
         req: express.Request,
         res: express.Response,
         next: express.NextFunction
     ) {
-        if (req.body) {
+        const attendTramiteDto: AttendTramiteDto = req.body;
+        const tramite = await tramiteSetvice.getTramiteById(attendTramiteDto.tramite_id);
+        if (tramite) {
             next();
         } else {
-            res.status(400).send({
-                error: `Missing required fields email and password`
+            res.status(404).send({
+                error: `Tramite ${req.params.tramiteId} not found`
             });
         }
     }
