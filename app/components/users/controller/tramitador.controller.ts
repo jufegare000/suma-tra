@@ -16,19 +16,14 @@ const userValidators: UserValidators = new UserValidators();
 class TramitadorController {
 
     async getTramitadorTramites(req: express.Request, res: express.Response){
-        const user:GetUserDTO|null = await userValidators.validateEmailInHeaders(req, UserEnum.tramitadorRole);
-
-        if(user){
+        try {
+            const user:GetUserDTO|null = await userValidators.validateEmailInHeaders(req, UserEnum.tramitadorRole);
             const tramites: GetTramiteDTO[] |null = await tramiteTramitadorService.getTramitesTramitadorByMail(user);
-            if(tramites && tramites.length > 0){
-                res.status(StatusCodes.OK).send(tramites);
-            }else {
-                res.status(StatusCodes.NOT_FOUND).send("No tramites found")
-            }
-        }else{
+            res.status(StatusCodes.OK).send(tramites);
+        } catch (error) {
             res.status(StatusCodes.UNAUTHORIZED).send("No email headers found")
-        }
-    }
+        }       
+    }    
 }
 
 export default new TramitadorController();

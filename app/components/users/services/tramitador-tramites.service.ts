@@ -12,18 +12,22 @@ export class TramitadorTramitesService {
     private tramiteRepository: TramiteRepository = new TramiteRepository();
 
 
-    async getTramitesTramitadorByMail(userDto: GetUserDTO): Promise<GetTramiteDTO[] | null> {
-        try {
-            const tramitesOfTramitador = await this.tramiteRepository.getTramitesTramitador(userDto.id);
-            if (tramitesOfTramitador) {
-                const tramitesDTO: GetTramiteDTO[] = this.getTramiteObjectMapper.mapModelToDto(tramitesOfTramitador);
-                return tramitesDTO;
-            }
+    async getTramitesTramitadorByMail(userDto: GetUserDTO|null): Promise<GetTramiteDTO[] | []> {
+        if (userDto) {
+            try {
+                const tramitesOfTramitador = await this.tramiteRepository.getTramitesTramitador(userDto.id);
+                if (tramitesOfTramitador) {
+                    const tramitesDTO: GetTramiteDTO[] = this.getTramiteObjectMapper.mapModelToDto(tramitesOfTramitador);
+                    return tramitesDTO;
+                }
 
-        } catch (ex) {
-            throw new Error(`Can't get user`);
+            } catch (ex) {
+                throw new Error(`Can't get user`);
+            }
+            return [];
+        } else {
+            throw new Error(`Can not get user`)
         }
-        return null;
     }
 
 }
