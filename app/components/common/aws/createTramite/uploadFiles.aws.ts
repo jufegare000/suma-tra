@@ -46,7 +46,13 @@ export class UploadFilesForTramiteCreation {
     }
 
     parseToBufferFromBase64(fileStringInBase64: string): Buffer {
-        return Buffer.from(fileStringInBase64.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+        let replacedString = fileStringInBase64.split("base64,").pop();
+        if (replacedString) {
+            return Buffer.from(replacedString.toString(), 'base64');
+        }
+        else {
+            throw new Error(`can not parse b64 files`)
+        }
     }
 
 }
