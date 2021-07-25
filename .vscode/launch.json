@@ -20,7 +20,7 @@
                 "999999",
                 "--colors",
                 //"${workspaceFolder}/app/app.ts"
-                "${workspaceFolder}/app/tests/s3-bucket/*.ts"
+                "${workspaceFolder}/app/tests/tramite-management/**/*.ts"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",

@@ -2,7 +2,7 @@ import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty } 
 import { TramiteStateDetailI } from "../interface/detalle-estado-tramite.interface";
 @Table(
     {
-        tableName: "tramite",
+        tableName: "estado_tramite_detalle",
         timestamps: false
     }
 )
@@ -11,7 +11,7 @@ export class TramiteStateDetailModel extends Model implements TramiteStateDetail
     @AutoIncrement
     @PrimaryKey
     @Column
-    id?:number;
+    id?: number;
 
     @AllowNull(false)
     @NotEmpty

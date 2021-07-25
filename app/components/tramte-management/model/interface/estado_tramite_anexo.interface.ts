@@ -1,6 +1,7 @@
 export interface AnexoEstadoTramiteI {
-    id: number;
+    id?: number;
     id_detalle: number;
     url_anexo: string;
-    comentario?: string
+    descripcion_anexo: string;
+    comentario?: string;
 }
