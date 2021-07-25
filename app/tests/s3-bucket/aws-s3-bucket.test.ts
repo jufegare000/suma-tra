@@ -15,7 +15,7 @@ describe('AWS S3 bucket testing', function () {
   const s3Service: UploadFilesToS3Service = new UploadFilesToS3Service();
   const uploadFilesForTramiteCreation: UploadFilesForTramiteCreation = new UploadFilesForTramiteCreation()
   
-  it('send a pdf file', async function () {
+  it.only('send a pdf file', async function () {
 
     const contetTypeFile: string = 'application/pdf';
 
