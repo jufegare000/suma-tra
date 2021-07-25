@@ -2,6 +2,7 @@ import { ArchivosTramiteDTO } from "./archivos-tramite.dto";
 
 export interface CreateTramiteDTO {
     id?: number;
+    fecha_creacion?: Date
     solicitante_id?: number;
     tipo_vehiculo: number;
     placa: string;

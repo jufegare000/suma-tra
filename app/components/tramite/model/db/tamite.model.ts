@@ -16,6 +16,11 @@ export class TramiteModel extends Model implements TramiteI{
     @AllowNull(false)
     @NotEmpty
     @Column
+    fecha_creacion: Date = new Date();
+
+    @AllowNull(false)
+    @NotEmpty
+    @Column
     solicitante_id!: number;
 
     @AllowNull(true)

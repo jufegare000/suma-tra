@@ -8,6 +8,7 @@ export class GetTramitesObjectMapper {
         tramitesModel.forEach(tramiteModel => {
             tramitesDTO.push({
                 id: tramiteModel.getDataValue('id'),
+                fecha_creacion: tramiteModel.getDataValue('fecha_creacion'),
                 cedula_comprador: tramiteModel.getDataValue('cedula_comprador'),
                 cedula_vendedor: tramiteModel.getDataValue('cedula_vendedor'),
                 direccion_solicitante: tramiteModel.getDataValue('direccion_solicitante'),

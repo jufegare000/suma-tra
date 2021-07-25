@@ -1,5 +1,6 @@
 export interface TramiteI {
     id?: number;
+    fecha_creacion: Date;
     solicitante_id?: number;
     tramitador_id?: number;
     tipo_vehiculo: number;
