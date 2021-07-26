@@ -79,6 +79,19 @@ export class TramiteRepository {
         }
     }
 
+    async updateTramiteState(tramiteId: number, state: number) {
+        const tramiteRepo = this.getRepository();
+        try {
+            return await tramiteRepo.update({
+                estado_id: state
+            },
+                { where: { id: tramiteId } }
+            )
+        } catch (error) {
+            throw new Error('Database error');
+        }
+    }
+
     async getTramitesSolicitante(idSolicitante: number): Promise<TramiteModel[] | null> {
         const tramiteRepo = this.getRepository();
         try {

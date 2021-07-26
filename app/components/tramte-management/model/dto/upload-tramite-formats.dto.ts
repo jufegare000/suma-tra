@@ -1,6 +1,6 @@
 import { TramiteFormatsDTO } from "./tramite-formats.dto";
 
-export interface UploadTramiteFormats {
+export interface UploadTramiteFormatsDTO {
     archivos: TramiteFormatsDTO,
     tramite_id: number,
     observaciones?: string,

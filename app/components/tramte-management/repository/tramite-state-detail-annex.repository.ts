@@ -30,4 +30,9 @@ export class TramiteStateDetailAnnexRepository {
             throw new Error('Not found exception');
         }
     }
+
+    async saveDocumentsAnnex(documentosTramite: AnexoEstadoTramiteI[]){
+        const documentoTramiteRepo = this.getRepository();
+        return await documentoTramiteRepo.bulkCreate(documentosTramite);
+    }
 }

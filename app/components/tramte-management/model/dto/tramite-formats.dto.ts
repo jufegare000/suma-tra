@@ -2,7 +2,7 @@ import { DocumentoTramiteDTO } from "../../../tramite/model/dto/create-tramite/d
 
 export interface TramiteFormatsDTO {
     contratoCompraVenta: DocumentoTramiteDTO,
-    contratoMandto: DocumentoTramiteDTO,
+    contratoMandato: DocumentoTramiteDTO,
     formularioSolicitud: DocumentoTramiteDTO,
     impronta: DocumentoTramiteDTO
 }
