@@ -5,7 +5,6 @@ import { UploadFilesToS3Service } from "../../components/common/aws/createTramit
 import { UploadFilesForTramiteCreation } from "../../components/common/aws/createTramite/uploadFiles.aws";
 import { BASE64_FILE } from "./mock/base64File.mock";
 import { PDF_BASE_64 } from "./mock/pdfBase64.mock";
-import { bucketPathModelForJPEGMOCK } from "./mock/s3-path-params.mock";
 import { USER_MOCK } from "./mock/user-dummy.mock";
 
 
