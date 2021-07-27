@@ -7,7 +7,7 @@ import { GetTramiteService } from "../../../components/tramite/service/get-trami
 import { CreateTramiteService } from "../../../components/tramite/service/create-tramite/create-tramite.service";
 import { TramiUserService } from '../../../components/users/services/trami-user.service';
 import { GetUserDTO } from '../../../components/users/model/dto/get-user.dto';
-import { AttendTramiteService } from '../../../components/tramite/service/update-tramite/attend-tramite.service';
+import { AttendTramiteService } from '../../../components/tramite-attending/service/attend-tramite.service';
 
 const log: Logger = new Logger();
 describe('Update tramite service', function () {

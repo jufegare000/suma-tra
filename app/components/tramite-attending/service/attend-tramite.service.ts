@@ -1,6 +1,8 @@
-import { GetUserDTO } from "../../../users/model/dto/get-user.dto";
-import { TramiteRepository } from "../../repository/tramite.repository";
-import { GetTramiteService } from "../get-tramite/get-tramite.service";
+
+import { TramiteRepository } from "../../tramite/repository/tramite.repository";
+import { GetTramiteService } from "../../tramite/service/get-tramite/get-tramite.service";
+import { GetUserDTO } from "../../users/model/dto/get-user.dto";
+
 
 export class AttendTramiteService {
 
