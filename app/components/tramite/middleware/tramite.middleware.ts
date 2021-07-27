@@ -1,6 +1,7 @@
 import express from 'express';
+import { AttendTramiteDTO } from '../../tramite-attending/model/dto/attend-tramite.dto';
 import { UploadTramiteFormatsDTO } from '../../tramte-management/model/dto/upload-tramite-formats.dto';
-import { AttendTramiteDto } from '../model/dto/update-tramite/attend-tramite.dto';
+
 import { TramiteService } from '../service/create-tramite/tramite.service';
 
 const tramiteSetvice: TramiteService = new TramiteService();
@@ -43,7 +44,7 @@ class TramiteMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const attendTramiteDto: AttendTramiteDto = req.body;
+        const attendTramiteDto: AttendTramiteDTO = req.body;
         const tramite = await tramiteSetvice.getTramiteById(attendTramiteDto.tramite_id);
         if (tramite) {
             next();

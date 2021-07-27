@@ -8,6 +8,7 @@ import { CreateTramiteService } from "../../../components/tramite/service/create
 import { TramiUserService } from '../../../components/users/services/trami-user.service';
 import { GetUserDTO } from '../../../components/users/model/dto/get-user.dto';
 import { AttendTramiteService } from '../../../components/tramite-attending/service/attend-tramite.service';
+import { UpdateTramiteDTO } from '../../../components/tramite/model/dto/update-tramite/update-tramite.dto';
 
 const log: Logger = new Logger();
 describe('Update tramite service', function () {
@@ -16,7 +17,7 @@ describe('Update tramite service', function () {
     const tramiUserService: TramiUserService = new TramiUserService();
     const getTramiteService: GetTramiteService = new GetTramiteService();
     const attendTramiteService: AttendTramiteService = new AttendTramiteService();
-    it.only('Set tramite to information pending', async function () {
+    it('Set tramite to information pending', async function () {
 
         const tramiteMapped: GetTramiteDTO = await getTramiteService.getTramiteById(79);
         const userDto: GetUserDTO | null = await tramiUserService.getTramiUserById(1);
@@ -26,6 +27,17 @@ describe('Update tramite service', function () {
             const result = await attendTramiteService.handleTramiteWithTramitadorUser(userDto, 79);
             console.log(result);
         }
+    });
+
+    it('update general information', async function () {
+        const updateTramiteDto: UpdateTramiteDTO = {
+            cedula_comprador:"xx",
+            cedula_vendedor: "1214",
+            id:79,
+            modelo:1555
+        };
+
+        
     });
 
 });
