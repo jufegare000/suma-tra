@@ -1,7 +1,7 @@
-import { ArchivosTramiteDTO } from "../create-tramite/archivos-tramite.dto";
+import { UpdateArchivosTramiteDTO } from "./update-archivos-tramite.dto";
 
-export class UpdateTramiteDTO {
-    id?: number;
+export interface UpdateTramiteDTO {
+    id: number;
     tipo_vehiculo?: number;
     placa?: string;
     modelo?: number;
@@ -10,5 +10,5 @@ export class UpdateTramiteDTO {
     cedula_comprador?: string;
     cedula_vendedor?: string;
     observaciones?: string;
-    archivos?:ArchivosTramiteDTO
+    archivos?:UpdateArchivosTramiteDTO
 }

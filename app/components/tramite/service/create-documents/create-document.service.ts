@@ -14,7 +14,7 @@ const log: Logger = new Logger();
 
 export class CreateDocumentService {
     private tramiteRepository: DocumentoTramiteRepository = new DocumentoTramiteRepository();
-    private uploadFilesForTramiteCreation: UploadFilesForTramiteCreation = new UploadFilesForTramiteCreation()
+    private uploadFilesForTramiteCreation: UploadFilesForTramiteCreation = new UploadFilesForTramiteCreation();
     private userOfTramite: UserI | null = null;
     private tramiUserService: TramiUserService = new TramiUserService();
     private tramiteId: number = 0;

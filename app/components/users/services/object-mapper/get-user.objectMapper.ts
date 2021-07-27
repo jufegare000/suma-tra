@@ -1,5 +1,6 @@
 import { UserModel } from "../../model/db/user.model";
 import { GetUserDTO } from '../../model/dto/get-user.dto';
+import { UserI } from "../../model/interfaces/tramiUser.interface";
 
 export class GetUserObjectMapper {
 
@@ -13,5 +14,13 @@ export class GetUserObjectMapper {
             role: role
         }
         return userDto;
+    }
+
+    mapDTOToInterface(getUserDTO: GetUserDTO): UserI {
+        return {  
+            email: getUserDTO.email,
+            role: getUserDTO.role,
+            id: getUserDTO.id
+        }
     }
 }

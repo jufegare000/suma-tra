@@ -7,7 +7,7 @@ export class DocumentoTramiteRepository {
     repository: Repository<DocumentoTramiteModel> | undefined;
 
     getRepository(): Repository<DocumentoTramiteModel> {
-        if(!this.repository){
+        if (!this.repository) {
             this.repository = sequalize.getRepository(DocumentoTramiteModel);
         }
         return this.repository;
@@ -16,29 +16,42 @@ export class DocumentoTramiteRepository {
     async getDocumentosTramiteByIdTramite(idTramite: number): Promise<DocumentoTramiteModel[]> {
         const documentoTramiteRepo = this.getRepository();
         try {
-            return documentoTramiteRepo.findAll({where: {tramite_id!: idTramite}});
+            return documentoTramiteRepo.findAll({ where: { tramite_id!: idTramite } });
         } catch (error) {
             throw new Error(`Can not get all documentos for tramite ${idTramite}`)
         }
     }
 
-    async saveDocumentoTramite(documentoTramite: TramiteDocumentoI): Promise<DocumentoTramiteModel>{
+    async saveDocumentoTramite(documentoTramite: TramiteDocumentoI): Promise<DocumentoTramiteModel> {
         const documentoTramiteRepo = this.getRepository();
         return await documentoTramiteRepo.create(documentoTramite);
     }
 
-    async saveDocumentosTramite(documentosTramite: TramiteDocumentoI[]){
+    async saveDocumentosTramite(documentosTramite: TramiteDocumentoI[]) {
         const documentoTramiteRepo = this.getRepository();
         return await documentoTramiteRepo.bulkCreate(documentosTramite);
     }
 
-    async getTramiteDocumentoById(id: number):Promise<DocumentoTramiteModel|null>{
+    async getTramiteDocumentoById(id: number): Promise<DocumentoTramiteModel | null> {
         const documentoTramiteRepo = this.getRepository();
-        try{
-            return documentoTramiteRepo.findByPk(id);  
-        }catch(ex){
+        try {
+            return documentoTramiteRepo.findByPk(id);
+        } catch (ex) {
             throw new Error('Not found exception');
-        }         
+        }
     }
 
+
+    async updateTramiteDocument(tramiteId: number, url: string, descripcion: string) {
+        const repo = this.getRepository();
+        try {
+            return await repo.update({
+                url: url
+            },
+                { where: { tramite_id: tramiteId, descripcion: descripcion } }
+            )
+        } catch (error) {
+            throw new Error('Database error');
+        }
+    }
 }

@@ -121,5 +121,4 @@ export class TramiteRepository {
             throw new Error('Database error');
         }
     }
-
 }

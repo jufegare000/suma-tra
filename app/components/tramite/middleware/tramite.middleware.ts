@@ -44,8 +44,8 @@ class TramiteMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const attendTramiteDto: AttendTramiteDTO = req.body;
-        const tramite = await tramiteSetvice.getTramiteById(attendTramiteDto.tramite_id);
+        const attendTramiteDto = req.body.id;
+        const tramite = await tramiteSetvice.getTramiteById(attendTramiteDto);
         if (tramite) {
             next();
         } else {
