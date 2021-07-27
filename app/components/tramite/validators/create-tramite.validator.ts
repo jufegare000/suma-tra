@@ -1,5 +1,4 @@
 import { ArchivosTramiteDTO } from "../model/dto/create-tramite/archivos-tramite.dto";
-import { CreateTramiteDTO } from "../model/dto/create-tramite/create-tramite.dto";
 import { ValidatorResponse } from "./validator-response";
 
 export class CreateTramiteValidator {

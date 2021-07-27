@@ -2,6 +2,7 @@ import { Repository } from "sequelize-typescript";
 import { sequalize } from "../../../config/db/db";
 import { EstadoTramiteEnum } from "../../../enums/tramites/estado-tramite.enum";
 import { TramiteModel } from "../model/db/tamite.model";
+import { UpdateTramiteDTO } from "../model/dto/update-tramite/update-tramite.dto";
 import { TramiteI } from "../model/interface/tramite.interface";
 
 export class TramiteRepository {
@@ -97,6 +98,26 @@ export class TramiteRepository {
         try {
             return tramiteRepo.findAll({ where: { solicitante_id: idSolicitante } });
         } catch (ex) {
+            throw new Error('Database error');
+        }
+    }
+
+    async updateGeneralInformation(updatetramiteDTO: UpdateTramiteDTO) {
+        const tramiteRepo = this.getRepository();
+        try {
+            return await tramiteRepo.update({
+                tipo_vehiculo: updatetramiteDTO.tipo_vehiculo,
+                placa: updatetramiteDTO.placa,
+                modelo: updatetramiteDTO.modelo,
+                organismo_transito_id: updatetramiteDTO.organismo_transito_id,
+                direccion_solicitante: updatetramiteDTO.direccion_solicitante,
+                cedula_comprador: updatetramiteDTO.cedula_comprador,
+                cedula_vendedor: updatetramiteDTO.cedula_vendedor,
+                observaciones: updatetramiteDTO.observaciones
+            },
+                { where: { id: updatetramiteDTO.id } }
+            )
+        } catch (error) {
             throw new Error('Database error');
         }
     }
