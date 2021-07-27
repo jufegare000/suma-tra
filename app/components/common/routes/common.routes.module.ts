@@ -4,7 +4,8 @@ import {TramiteSolicitanteRoutes} from '../../users/tramite-solicitante.routes.c
 import {CommonRoutesConfig} from './common.routes.config';
 import {Application} from 'express';
 import { TramiteTramitadorRoutes } from '../../users/tramite-tramitador.routes.config';
-import { TramiteManagementRoutes } from '../../tramte-management/tramite.management.routes';
+import { TramiteManagementRoutes } from '../../tramte-management/tramite-management.routes';
+import { TramiteAttendingRoutes } from '../../tramite-attending/tramite-attending.routes.config';
 
 export class RoutesModule {
     routes: Array<CommonRoutesConfig> = [];
@@ -16,6 +17,7 @@ export class RoutesModule {
         this.routes.push(new TramiteSolicitanteRoutes(app))
         this.routes.push(new TramiteRoutes(app))
         this.routes.push(new TramiteManagementRoutes(app))
+        this.routes.push(new TramiteAttendingRoutes(app))
     }
 
 }

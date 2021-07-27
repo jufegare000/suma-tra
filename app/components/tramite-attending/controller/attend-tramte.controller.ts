@@ -4,12 +4,13 @@ import { BaseController } from '../../../shared/infra/http/models/base-controlle
 import { Logger } from "tslog";
 import { UserEnum } from '../../../enums/user/solicitante.enum';
 import { GetUserDTO } from '../../users/model/dto/get-user.dto';
-import { AttendTramiteService } from '../service/update-tramite/attend-tramite.service';
-import { AttendTramiteDto } from '../model/dto/update-tramite/attend-tramite.dto';
+import { AttendTramiteService } from '../service/attend-tramite.service';
+import { AttendTramiteDTO } from '../model/dto/attend-tramite.dto';
+
 
 const log: Logger = new Logger();
 const userValidator: UserValidators = new UserValidators();
-export class AttendTramiteController extends BaseController {
+class AttendTramiteController extends BaseController {
 
     private useCase: AttendTramiteService = new AttendTramiteService();
 
@@ -18,7 +19,7 @@ export class AttendTramiteController extends BaseController {
         if (userDto) {
             try {
                 log.info('getted email: ' + userDto)
-                const attendTramiteDto: AttendTramiteDto = req.body;
+                const attendTramiteDto: AttendTramiteDTO = req.body;
                 const result = await this.useCase.handleTramiteWithTramitadorUser(userDto, attendTramiteDto.tramite_id)
                 if (result) {
                     return this.ok(res, result);
@@ -30,3 +31,5 @@ export class AttendTramiteController extends BaseController {
         return this.unauthorized(res, 'email was no setted in headers');
     }
 }
+
+export default new AttendTramiteController();
