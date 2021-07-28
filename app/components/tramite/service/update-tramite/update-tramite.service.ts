@@ -12,9 +12,11 @@ export class UpdateTramiteService {
 
     async updateTramite(updateTramiteDto: UpdateTramiteDTO, getUserDto: GetUserDTO): Promise<TramiteModel|null> {
         await this.tramiteRepo.updateGeneralInformation(updateTramiteDto);
-
+        
         if (updateTramiteDto.archivos) {
+            
             const tramiteUser = this.getUserObjectMapper.mapDTOToInterface(getUserDto);
+            
             await this.updateTramiteDocumentsService.checkWhichDocumentsToUpdate(updateTramiteDto.archivos, tramiteUser,updateTramiteDto.id)
         }
         return this.tramiteRepo.getTramiteById(updateTramiteDto.id);

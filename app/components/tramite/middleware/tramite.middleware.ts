@@ -45,8 +45,9 @@ class TramiteMiddleware {
         next: express.NextFunction
     ) {
         const attendTramiteDto = req.body.id;
+        const attendTramiteDto2 = req.body.tramite_id;
         const tramite = await tramiteSetvice.getTramiteById(attendTramiteDto);
-        if (tramite) {
+        if (tramite || attendTramiteDto2) {
             next();
         } else {
             res.status(404).send({
