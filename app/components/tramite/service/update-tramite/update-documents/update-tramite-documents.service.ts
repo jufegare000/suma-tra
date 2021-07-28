@@ -19,13 +19,11 @@ export class UpdateTramiteDocumentsService {
     async checkWhichDocumentsToUpdate(updateArchivosTramiteDTO: UpdateArchivosTramiteDTO, userI: UserI, tramiteId: number) {
         this.userI = userI;
         this.tramiteId = tramiteId;
-
+        console.log("paso")
         updateArchivosTramiteDTO.documentos?.comprador ?
-            await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.documentos.comprador, "cedula_comprador") : undefined;
-
+            await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.documentos.comprador, "cedula_comprador") : console.log('Theres no document', updateArchivosTramiteDTO.documentos?.comprador);
         updateArchivosTramiteDTO.documentos?.vendedor ?
             await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.documentos.vendedor, "cedula_vendedor") : undefined;
-
         updateArchivosTramiteDTO.imagenes_matricula?.frontal ?
             await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.imagenes_matricula.frontal, "matricula_frontal") : undefined;
 
@@ -34,11 +32,14 @@ export class UpdateTramiteDocumentsService {
     }
 
     async createDocumentAndSentToAWS(documentoTramiteDTO: DocumentoTramiteDTO, description: string) {
+        console.log("paso 2");
+        
         const { ext } = documentoTramiteDTO;
         const bufferFile = this.uploadFilesForTramiteCreation.parseToBufferFromBase64(documentoTramiteDTO.b64);
         const uploadPath = this.uploadFilesForTramiteCreation.buildUploadPath(this.userI, this.tramiteId.toString(), description)
         const params = this.uploadFilesForTramiteCreation.buildParamsForS3Request(bufferFile, ext, uploadPath)
         const objectLocation = await this.uploadFilesForTramiteCreation.uploadImageToS3(params);
+        console.log(objectLocation);
         await this.documentoTramiteRepo.updateTramiteDocument(this.tramiteId, objectLocation, description);
     }
 }
