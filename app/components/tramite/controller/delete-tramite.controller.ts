@@ -14,7 +14,7 @@ export class DeleteTramiteController extends BaseController {
 
     async executeImpl(req: express.Request, res: express.Response) {
         try {
-            const idTramite: number = +req.body.id;
+            const idTramite: number = +req.params.tramiteId;
             log.info('id: ', idTramite.toString());
             await this.useCase.deleteTramiteById(idTramite);
             return this.ok(res, `tramite ${idTramite} deleted`)
