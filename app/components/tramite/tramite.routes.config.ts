@@ -32,7 +32,6 @@ export class TramiteRoutes extends CommonRoutesConfig {
                 CreateTramiteValidator.validateDocumentsFormatInReques,
                 (req, res) => createTramiteController.execute(req, res))
             .put(TramiteMiddleware.validateTramiteIdInBodyForHandling, (req, res) => updateTramiteDontroller.execute(req, res))
-            .delete(TramiteMiddleware.validateTramiteIdInBodyForHandling, (req, res) => deleteTramiteController.execute(req, res));
 
         this.app.route(`/tramites/:tramiteId`)
             .all(TramiteMiddleware.validateTramiteExists)
@@ -41,7 +40,8 @@ export class TramiteRoutes extends CommonRoutesConfig {
             )
             .put((req: express.Request, res: express.Response) => {
                 res.status(200).send(`PUT requested for id ${req.params.tramiteId}`);
-            });
+            })
+            .delete(TramiteMiddleware.validateTramiteExists, (req, res) => deleteTramiteController.execute(req, res));;
 
         return this.app;
     }
