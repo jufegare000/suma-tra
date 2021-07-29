@@ -20,15 +20,15 @@ export class UpdateTramiteDocumentsService {
         this.userI = userI;
         this.tramiteId = tramiteId;
         console.log("paso")
-        updateArchivosTramiteDTO.documentos?.comprador ?
+        !!updateArchivosTramiteDTO.documentos?.comprador ?
             await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.documentos.comprador, "cedula_comprador") : console.log('Theres no document', updateArchivosTramiteDTO.documentos?.comprador);
-        updateArchivosTramiteDTO.documentos?.vendedor ?
+        !!updateArchivosTramiteDTO.documentos?.vendedor ?
             await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.documentos.vendedor, "cedula_vendedor") : undefined;
-        updateArchivosTramiteDTO.imagenes_matricula?.frontal ?
+        !!updateArchivosTramiteDTO.imagenes_matricula?.frontal ?
             await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.imagenes_matricula.frontal, "matricula_frontal") : undefined;
 
-        updateArchivosTramiteDTO.imagenes_matricula?.trasera ?
-            await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.imagenes_matricula.trasera, "matricula_trasera") : undefined;
+        !!updateArchivosTramiteDTO.imagenes_matricula?.trasera ?
+            await this.createDocumentAndSentToAWS(updateArchivosTramiteDTO.imagenes_matricula.trasera, "matricula_trasera") : console.log('Theres no document', updateArchivosTramiteDTO.documentos?.comprador);;
     }
 
     async createDocumentAndSentToAWS(documentoTramiteDTO: DocumentoTramiteDTO, description: string) {
