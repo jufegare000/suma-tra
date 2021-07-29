@@ -6,8 +6,8 @@ export class GetDocumentObjectMapper {
     mapDocumentsToDto(documents: DocumentoTramiteModel[]): GetDocumentosTramiteDTO {
         const cedulaComprador = this.getCorrespondingDocumentByDescription(documents, 'cedula_comprador');
         const cedulaVendedor = this.getCorrespondingDocumentByDescription(documents, 'cedula_vendedor');
-        const matriculaFrontal = this.getCorrespondingDocumentByDescription(documents, 'matricula_ frontal');
-        const matriculaTrasera = this.getCorrespondingDocumentByDescription(documents, 'matricula_ trasera');
+        const matriculaFrontal = this.getCorrespondingDocumentByDescription(documents, 'matricula_frontal');
+        const matriculaTrasera = this.getCorrespondingDocumentByDescription(documents, 'matricula_trasera');
         if (cedulaComprador && cedulaVendedor && matriculaFrontal && matriculaTrasera) {
             const getDocumentosTramiteDTO: GetDocumentosTramiteDTO = {
                 documentos: {

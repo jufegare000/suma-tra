@@ -79,10 +79,10 @@ export class CreateDocumentService {
 
     async mapForsaveDocumentInDatabase(matriculaUrls: string[], documentosUrls: string[]) {
         const matriculaFrontalDocument = this.tramiteDocumentoObjectMapper.mapDtoToTramiteI(
-            "matricula_ frontal", this.tramiteId, matriculaUrls[0]);
+            "matricula_frontal", this.tramiteId, matriculaUrls[0]);
 
         const matriculaTraseraDocument = this.tramiteDocumentoObjectMapper.mapDtoToTramiteI(
-            "matricula_ trasera", this.tramiteId, matriculaUrls[1]);
+            "matricula_trasera", this.tramiteId, matriculaUrls[1]);
 
         const cedulaCompradorDocument = this.tramiteDocumentoObjectMapper.mapDtoToTramiteI(
             "cedula_comprador", this.tramiteId, documentosUrls[0]);
