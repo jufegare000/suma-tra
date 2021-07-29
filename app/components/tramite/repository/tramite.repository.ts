@@ -1,4 +1,5 @@
-import { Repository } from "sequelize-typescript";
+import { Repository, Not } from "sequelize-typescript";
+import { Op } from "sequelize"
 import { sequalize } from "../../../config/db/db";
 import { EstadoTramiteEnum } from "../../../enums/tramites/estado-tramite.enum";
 import { TramiteModel } from "../model/db/tamite.model";
@@ -60,7 +61,7 @@ export class TramiteRepository {
     async getTramitesTramitador(idTramitador: number): Promise<TramiteModel[] | null> {
         const tramiteRepo = this.getRepository();
         try {
-            return tramiteRepo.findAll({ where: { tramitador_id: idTramitador } });
+            return tramiteRepo.findAll({ where: { tramitador_id: idTramitador, estado_id: { [Op.not]: 0 } } });
         } catch (ex) {
             throw new Error('Not found exception');
         }
@@ -96,7 +97,7 @@ export class TramiteRepository {
     async getTramitesSolicitante(idSolicitante: number): Promise<TramiteModel[] | null> {
         const tramiteRepo = this.getRepository();
         try {
-            return tramiteRepo.findAll({ where: { solicitante_id: idSolicitante } });
+            return tramiteRepo.findAll({ where: { solicitante_id: idSolicitante, estado_id: { [Op.not]: 0 } } });
         } catch (ex) {
             throw new Error('Database error');
         }
