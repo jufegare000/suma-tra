@@ -1,4 +1,5 @@
 import { Repository } from "sequelize-typescript";
+import { Op } from "sequelize";
 import { sequalize } from "../../../config/db/db";
 import { DocumentoTramiteModel } from "../model/db/documento-tramite.model";
 import { TramiteDocumentoI } from "../model/interface/document-tramite.interface";
@@ -48,7 +49,9 @@ export class DocumentoTramiteRepository {
             return await repo.update({
                 url: url
             },
-                { where: { tramite_id: tramiteId, descripcion: descripcion } }
+                { where: { tramite_id: tramiteId, descripcion: {
+                    [Op.like]: "%" + descripcion + "%"
+                } } }
             )
         } catch (error) {
             throw new Error('Database error');
