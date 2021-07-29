@@ -8,13 +8,15 @@ import { GetTramiteController } from './controller/get-tramite.controller';
 import CreateTramiteValidator from './middleware/create-tramite-validator.middleware';
 import ListTramitesController from './controller/list-tramites.controllers';
 import { UpdateTramiteController } from './controller/update-tramite.controller';
+import { DeleteTramiteController } from './controller/delete-tramite.controller';
 
 
 const createTramiteUseCase = new CreateTramiteService();
 const getTramiteUseCase = new GetTramiteService();
 const createTramiteController: CreateTramiteController = new CreateTramiteController(createTramiteUseCase)
 const getTramiteController: GetTramiteController = new GetTramiteController(getTramiteUseCase);
-const updateTramiteDontroller: UpdateTramiteController = new UpdateTramiteController()
+const updateTramiteDontroller: UpdateTramiteController = new UpdateTramiteController();
+const deleteTramiteController: DeleteTramiteController = new DeleteTramiteController();
 export class TramiteRoutes extends CommonRoutesConfig {
 
     constructor(app: express.Application) {
@@ -29,7 +31,8 @@ export class TramiteRoutes extends CommonRoutesConfig {
                 CreateTramiteValidator.validateDocumentsPresentInRequest,
                 CreateTramiteValidator.validateDocumentsFormatInReques,
                 (req, res) => createTramiteController.execute(req, res))
-            .put(TramiteMiddleware.validateTramiteIdInBodyForHandling, (req, res) => updateTramiteDontroller.execute(req, res));
+            .put(TramiteMiddleware.validateTramiteIdInBodyForHandling, (req, res) => updateTramiteDontroller.execute(req, res))
+            .delete(TramiteMiddleware.validateTramiteIdInBodyForHandling, (req, res) => deleteTramiteController.execute(req, res));
 
         this.app.route(`/tramites/:tramiteId`)
             .all(TramiteMiddleware.validateTramiteExists)
