@@ -4,13 +4,11 @@ import path from 'path';
 
 const accessID: any = process.env.AWS_KEY;
 const accessKey: any = process.env.AWS_ACCESS;
-const token: any = process.env.AWS_TOKEN;
 const bucketName: any = process.env.BUCKET_NAME
 
 AWS.config.update({
     accessKeyId:accessID,
     secretAccessKey:accessKey,
-    sessionToken: token
 })
 
 const s3 = new AWS.S3();

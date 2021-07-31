@@ -30,7 +30,7 @@ describe('get documento tramite from database', function () {
     await newDocumento.destroy();
   });
 
-  it.only('Update document tramite', async function () {
+  it('Update document tramite', async function () {
    
     log.info('Mapping object to interface');
     const mappedTramiteDocumentoI: TramiteDocumentoI = tramiteDocumentoObjectMapper.mapDtoToTramiteI("dummy", 1, "urlproof");

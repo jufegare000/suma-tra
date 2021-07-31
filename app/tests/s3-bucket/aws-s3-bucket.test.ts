@@ -27,7 +27,7 @@ describe('AWS S3 bucket testing', function () {
  
   });
 
-  it('send a jpeg image', async function () {
+  it.only('send a jpeg image', async function () {
 
     const contetTypeFile: string = "image/jpeg";
 

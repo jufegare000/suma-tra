@@ -7,7 +7,6 @@ export class AWSConfig {
 
     accessID: any = process.env.AWS_KEY;
     accessKey: any = process.env.AWS_ACCESS;
-    token: any = process.env.AWS_TOKEN;
     bucketName: any = process.env.BUCKET_NAME
 
 
@@ -26,7 +25,6 @@ export class AWSConfig {
         AWS.config.update({
             accessKeyId: this.accessID,
             secretAccessKey: this.accessKey,
-            sessionToken: this.token
         });
         
     }
