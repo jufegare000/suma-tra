@@ -27,12 +27,15 @@ export class TramiteStateDetailRepository {
     }
 
 
-    async getTramiteById(id: number): Promise<TramiteStateDetailModel | null> {
+    async getTramiteStateDetailByIdTramite(tramiteId: number): Promise<TramiteStateDetailModel[] | []> {
         const tramiteRepo = this.getRepository();
         try {
-            return tramiteRepo.findByPk(id);
+            return tramiteRepo.findAll({ where: {
+                id_tramite: tramiteId
+            } });
         } catch (ex) {
             throw new Error('Not found exception');
         }
+        return [];
     }
 }
