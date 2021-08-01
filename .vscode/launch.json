@@ -19,8 +19,8 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                //"${workspaceFolder}/app/app.ts"
-                "${workspaceFolder}/app/tests/s3-bucket/*.ts"
+                "${workspaceFolder}/app/app.ts"
+                // "${workspaceFolder}/app/tests/tramite-historic/*.ts"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",

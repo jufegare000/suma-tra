@@ -1,4 +1,4 @@
 export interface TramiteStateDetailAnnexDTO {
-    description?: string,
+    description: string,
     url: string
 }

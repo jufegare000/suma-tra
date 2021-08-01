@@ -22,16 +22,20 @@ export class TramiteStateDetailAnnexRepository {
     }
 
 
-    async getTramiteById(id: number): Promise<TramiteStateDetailAnnexModel | null> {
+    async getTramiteStateDetailAnnexesByIdStateDetail(idTramiteStateDetail: number): Promise<TramiteStateDetailAnnexModel[] | []> {
         const tramiteRepo = this.getRepository();
         try {
-            return tramiteRepo.findByPk(id);
+            return tramiteRepo.findAll({
+                where: {
+                    id_detalle: idTramiteStateDetail
+                }
+            });
         } catch (ex) {
             throw new Error('Not found exception');
         }
     }
 
-    async saveDocumentsAnnex(documentosTramite: AnexoEstadoTramiteI[]){
+    async saveDocumentsAnnex(documentosTramite: AnexoEstadoTramiteI[]) {
         const documentoTramiteRepo = this.getRepository();
         return await documentoTramiteRepo.bulkCreate(documentosTramite);
     }

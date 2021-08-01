@@ -4,5 +4,5 @@ export interface TramiteStateDetailDto {
     idCurrentState: number,
     idPreviousState: number,
     stateChangeDate: Date,
-    annexes: TramiteStateDetailAnnexDTO
+    annexes?: TramiteStateDetailAnnexDTO[]
 }
