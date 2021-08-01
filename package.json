@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node ./dist/app.js",
+    "deploy": "node ./dist/app.js",
     "debug": "export DEBUG=app && npm run start",
     "test": "mocha -r ts-node/register app/tests/**/**/*.test.ts",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test"
