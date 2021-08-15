@@ -1,0 +1,20 @@
+import { CommonRoutesConfig } from '../common/routes/common.routes.config';
+import express from 'express';
+import TramiteMiddleware from '../tramite/middleware/tramite.middleware';
+import AttachExpenditureController from './controller/attach-expenditure.controller'
+
+export class TramiteExpenditureRoutes extends CommonRoutesConfig {
+
+    constructor(app: express.Application) {
+        super(app, 'TramitesExpendiruresRoutes');
+    }
+
+    configureRoutes(): express.Application {
+
+        this.app.route(`/tramite-expenditures`)
+            .all(TramiteMiddleware.validateTramiteIdInBodyForHandling)
+            .post((req, res) => AttachExpenditureController.execute(req, res))
+
+        return this.app;
+    }
+}

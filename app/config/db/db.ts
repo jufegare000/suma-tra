@@ -6,6 +6,7 @@ import { DocumentoTramiteModel } from '../../components/tramite/model/db/documen
 import { UserModel } from '../../components/users/model/db/user.model';
 import { TramiteStateDetailModel } from '../../components/tramte-management/model/bd/detalle-estado-tramite.model';
 import { TramiteStateDetailAnnexModel } from '../../components/tramte-management/model/bd/estado_tramite_anexo.model';
+import { TramiteExpenditureModel } from '../../components/tramite-expenditures/model/db/tramite_expenditure.model';
 
 dotenv.config();
 
@@ -27,4 +28,4 @@ export const sequalize = new Sequelize(dbn, userName, pass, {
 )
 
 sequalize.addModels([TramiteModel, TramiteStateDetailModel, TramiteStateDetailAnnexModel,
-     UserModel, DocumentoTramiteModel]);
+     UserModel, DocumentoTramiteModel, TramiteExpenditureModel]);
