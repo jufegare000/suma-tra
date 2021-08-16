@@ -19,7 +19,6 @@ export class ConvertToInterfaceObjectMapper {
         return parsedExpenditures;
     }
 
-    mapConceptsToInterface() {
-        
+    mapModelsToInterfaceArray() {
     }
 }
