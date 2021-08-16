@@ -14,5 +14,6 @@ export interface GetTramiteDTO {
     cedula_vendedor: string;
     estado_id: string;
     observaciones?: string;
-    archivos?: GetDocumentosTramiteDTO
+    archivos?: GetDocumentosTramiteDTO;
+    valor_total?: number
 }
