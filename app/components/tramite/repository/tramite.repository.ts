@@ -94,6 +94,19 @@ export class TramiteRepository {
         }
     }
 
+    async updateTramiteValue(tramiteId: number, value: number) {
+        const tramiteRepo = this.getRepository();
+        try {
+            return await tramiteRepo.update({
+                valor_total: value
+            },
+                { where: { id: tramiteId } }
+            )
+        } catch (error) {
+            throw new Error('Database error');
+        }
+    }
+
     async updateTramiteStateWithValue(tramiteId: number, state: number, value: number) {
         const tramiteRepo = this.getRepository();
         try {

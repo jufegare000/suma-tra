@@ -1,7 +1,9 @@
 import { CommonRoutesConfig } from '../common/routes/common.routes.config';
 import express from 'express';
 import TramiteMiddleware from '../tramite/middleware/tramite.middleware';
-import AttachExpenditureController from './controller/attach-expenditure.controller'
+import AttachExpenditureController from './controller/attach-expenditures.controller'
+import AttachAditionalExpenditureController from './controller/attach-additional-expenditure.controller'
+import ExpenditureHistoryController from './controller/expenditures-history.controller'
 
 export class TramiteExpenditureRoutes extends CommonRoutesConfig {
 
@@ -15,6 +17,13 @@ export class TramiteExpenditureRoutes extends CommonRoutesConfig {
             .all(TramiteMiddleware.validateTramiteIdInBodyForHandling)
             .post((req, res) => AttachExpenditureController.execute(req, res))
 
+        this.app.route(`/tramite-aditional-expenditure`)
+            .all(TramiteMiddleware.validateTramiteIdInBodyForHandling)
+            .post((req, res) => AttachAditionalExpenditureController.execute(req, res))
+
+        this.app.route(`/expenditures/:tramiteId`)
+            .all(TramiteMiddleware.validateTramiteExists)
+            .post((req, res) => ExpenditureHistoryController.execute(req, res))
         return this.app;
     }
 }
