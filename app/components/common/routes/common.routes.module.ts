@@ -8,6 +8,7 @@ import { TramiteManagementRoutes } from '../../tramte-management/tramite-managem
 import { TramiteAttendingRoutes } from '../../tramite-attending/tramite-attending.routes.config';
 import { TramiteHistoricRoutes } from '../../tramite-historic/tramite-historic.routes';
 import { TramiteExpenditureRoutes } from '../../tramite-expenditures/tramite-expenditures.routes'
+import { ExpenditureConceptRoutes } from '../../tramite-expenditures/expenditure-concept.routes';
 export class RoutesModule {
     routes: Array<CommonRoutesConfig> = [];
     app: Application;
@@ -21,6 +22,7 @@ export class RoutesModule {
         this.routes.push(new TramiteAttendingRoutes(app))
         this.routes.push(new TramiteHistoricRoutes(app))
         this.routes.push(new TramiteExpenditureRoutes(app))
+        this.routes.push(new ExpenditureConceptRoutes(app))
     }
 
 }
