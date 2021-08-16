@@ -63,4 +63,8 @@ export class TramiteModel extends Model implements TramiteI{
     @AllowNull(true)
     @Column
     observaciones?: string;
+
+    @AllowNull(true)
+    @Column
+    valor_total?: number;
 }

@@ -12,4 +12,5 @@ export interface TramiteI {
     cedula_vendedor: string;
     estado_id: number;
     observaciones?: string;
+    valor_total?: number;
 }
