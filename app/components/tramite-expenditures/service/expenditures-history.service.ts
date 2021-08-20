@@ -1,5 +1,4 @@
 import { TramiteExpenditureModel } from "../model/db/tramite_expenditure.model";
-import { AttachExpenditureDTO } from "../model/dto/attach-expediture.dto";
 import { TramiteExpenditureRepository } from "../repository/tramite-expenditure.repository";
 
 export class ExpenditureHistoryService {
