@@ -18,6 +18,7 @@ export class TramiteStateDetailService {
             observaciones: observations
         };
         const tramiteStatedetailnew = await this.tramiteStateDetailRepo.saveTramiteStateDetail(tramiteStateDetail);
-        return tramiteStatedetailnew.getDataValue('id');
+        
+        return tramiteStatedetailnew;
     }
 }

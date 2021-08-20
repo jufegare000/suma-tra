@@ -24,7 +24,7 @@ class AttachExpenditureController extends BaseController {
             try {
                 log.info('getted email: ' + userDto)
                 const requestWithFormats: AttachExpenditureDTO = req.body;
-                const result = await this.useCase.attachExpenditure(requestWithFormats);
+                const result = await this.useCase.attachExpenditure(requestWithFormats, userDto.id);
 
                 return this.ok(res, result);
 
