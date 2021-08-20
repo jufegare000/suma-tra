@@ -27,7 +27,7 @@ export class AttachExpenditureService {
         return await this.tramiteRepository.getTramiteById(tramiteId);
     }
 
-    async attachAditionalExpenditure(attachExpenditureDTO: AttachExpenditureDTO, informerId: number) {
+    async attachAditionalExpenditure(attachExpenditureDTO: AttachExpenditureDTO) {
         const tramiteId = attachExpenditureDTO.tramite_id;
         const expenditures: TramiteExpenditureModel[] = await this.tramiteExpenditureRepo.getTramiteExpenditures(tramiteId);
         const tramiteExpenditures: TramiteExpenditureI[] = this.objectMapper.mappDtoToInferface(attachExpenditureDTO);
