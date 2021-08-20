@@ -94,11 +94,12 @@ export class TramiteRepository {
         }
     }
 
-    async updateTramiteValue(tramiteId: number, value: number) {
+    async updateTramiteValueAndState(tramiteId: number, value: number, stateId: number) {
         const tramiteRepo = this.getRepository();
         try {
             return await tramiteRepo.update({
-                valor_total: value
+                valor_total: value,
+                estado_id: stateId
             },
                 { where: { id: tramiteId } }
             )
