@@ -31,7 +31,8 @@ export class GetTramiteHistoricService {
                     annexes: parsedAnnexes,
                     idCurrentState: tramiteStateDetail.getDataValue("id_estado_actual"),
                     idPreviousState: tramiteStateDetail.getDataValue("id_estado_anterior"),
-                    stateChangeDate: tramiteStateDetail.getDataValue("fecha_cambio_estado")
+                    stateChangeDate: tramiteStateDetail.getDataValue("fecha_cambio_estado"),
+                    observations: tramiteStateDetail.getDataValue("observaciones")
                 }
                 return tramiteStateDetailParsed;
             }));
