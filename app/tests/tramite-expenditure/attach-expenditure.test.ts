@@ -20,7 +20,7 @@ describe('Attach expenditures to tramite', function () {
         tramite_id: 1,
           expenditures:ependitures
       }
-    const tramiteMapped = await attachExpenditureService.attachExpenditure(attachExpenditureDTO);
+    const tramiteMapped = await attachExpenditureService.attachExpenditure(attachExpenditureDTO, 1);
       
     console.log('get tramites: ', tramiteMapped);
     assert.isNotNull(tramiteMapped, 'Must not be null!!!')
