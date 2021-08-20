@@ -21,7 +21,7 @@ export class UploadAnnexService {
 
     async uploadAnnexForTramiteStateDetail(uploadTramiteFormatsDTO: UploadTramiteFormatsDTO, userDto: GetUserDTO, detailId: number) {
         const tramiteId = uploadTramiteFormatsDTO.tramite_id;
-        this.userOfTramite = userDto;
+        this.setUserContext(userDto)
         this.tramiteId = tramiteId;
         this.detailId = detailId;
         log.info(`user: ${this.userOfTramite?.email}`);
@@ -31,11 +31,14 @@ export class UploadAnnexService {
 
             throw new Error(`Can not create tramite because: ${error}`)
         }
-
     }
 
-    async uploadFilesToS3Buckets(image: DocumentoTramiteDTO, description: string) {
+    setUserContext(userDto:GetUserDTO){
+        this.userOfTramite = userDto;
+    }
 
+    async uploadFilesToS3Buckets(image: DocumentoTramiteDTO, description: string): Promise<string> {
+        
         const bufferFile: Buffer = this.uploadFilesForTramiteCreation.parseToBufferFromBase64(image.b64);
         if (this.userOfTramite) {
             const pathForUpload: string = this.uploadFilesForTramiteCreation.buildUploadPath(this.userOfTramite, this.tramiteId.toString(), description);
