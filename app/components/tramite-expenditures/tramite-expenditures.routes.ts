@@ -2,8 +2,7 @@ import { CommonRoutesConfig } from '../common/routes/common.routes.config';
 import express from 'express';
 import TramiteMiddleware from '../tramite/middleware/tramite.middleware';
 import AttachExpenditureController from './controller/attach-expenditures.controller'
-import ExpenditureHistoryController from './controller/expenditures-history.controller'
-import AttachAditionalExpenditureController from './controller/expenditures-tramite-historic.controller'
+import AttachAditionalExpenditureController from './controller/attach-additional-expenditure.controller'
 export class TramiteExpenditureRoutes extends CommonRoutesConfig {
 
     constructor(app: express.Application) {
