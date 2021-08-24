@@ -24,6 +24,15 @@ export class TramiteExpenditureRepository {
         }
     }
 
+    async saveSingleExpenditure(tramiteExpenditure: TramiteExpenditureI) {
+        try {
+            const tramiteSDRepo = this.getRepository();
+            return await tramiteSDRepo.create(tramiteExpenditure);
+        } catch (error) {
+            throw new Error(`Can not create expenditure because: ${error}`)
+        }
+    }
+
     async getTramiteExpenditures(tramiteId: number): Promise<TramiteExpenditureModel[]> {
         try {
             const tramiteSDRepo = this.getRepository();

@@ -1,3 +1,4 @@
+import { AttachAditionalExpenditureDTO } from "../model/dto/attach-aditiona-expenditure.dto";
 import { AttachExpenditureDTO } from "../model/dto/attach-expediture.dto";
 import { ExpenditureDTO } from "../model/dto/expenditure.dto";
 import { TramiteExpenditureI } from "../model/interface/tramite_expenditure.interface";
@@ -19,6 +20,15 @@ export class ConvertToInterfaceObjectMapper {
         return parsedExpenditures;
     }
 
-    mapModelsToInterfaceArray() {
+    mapSingleExpenditureDTO(attachAditionalExpenditureDTO: AttachAditionalExpenditureDTO): TramiteExpenditureI {
+        const {expenditure, tramite_id} = attachAditionalExpenditureDTO
+        const parsedExpenditure: TramiteExpenditureI = {
+            fecha_creacion : new Date(),
+            gasto_id : expenditure.id_concept,
+            tramite_id: tramite_id,
+            valor: expenditure.value,
+            descripcion: expenditure.description
+        }
+        return (parsedExpenditure);
     }
 }

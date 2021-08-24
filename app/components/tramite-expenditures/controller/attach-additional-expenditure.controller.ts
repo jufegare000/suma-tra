@@ -9,6 +9,7 @@ import { UserEnum } from '../../../enums/user/solicitante.enum';
 import { GetUserDTO } from '../../users/model/dto/get-user.dto';
 import { AttachExpenditureService } from '../service/attach-expenditures.service';
 import { AttachExpenditureDTO } from '../model/dto/attach-expediture.dto';
+import { AttachAditionalExpenditureDTO } from '../model/dto/attach-aditiona-expenditure.dto';
 
 const log: Logger = new Logger();
 const userValidator: UserValidators = new UserValidators();
@@ -23,7 +24,7 @@ class AttachAditionalExpenditureController extends BaseController {
         if (userDto) {
             try {
                 log.info('getted email: ' + userDto)
-                const requestWithFormats: AttachExpenditureDTO = req.body;
+                const requestWithFormats: AttachAditionalExpenditureDTO = req.body;
                 const result = await this.useCase.attachAditionalExpenditure(requestWithFormats);
 
                 return this.ok(res, result);
