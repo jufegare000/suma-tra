@@ -33,7 +33,7 @@ export class AttachExpenditureService {
         const tramiteExpenditures: TramiteExpenditureI = this.objectMapper.mapSingleExpenditureDTO(attachExpenditureDTO);
         await this.tramiteExpenditureRepo.saveAllExpenditures([tramiteExpenditures]);
         const newTotalValue =   expenditures.map(item=> item.getDataValue('valor')).reduce((prev, nex) => prev+nex) + attachExpenditureDTO.expenditure.value;
-        await this.tramiteRepository.updateTramiteValueAndState(tramiteId, newTotalValue, EstadoTramiteEnum.PendienteDePago);
+        await this.tramiteRepository.updateTramiteValue(tramiteId, newTotalValue);
 
         return await this.tramiteRepository.getTramiteById(tramiteId);
     }
