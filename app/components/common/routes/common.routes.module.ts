@@ -11,6 +11,7 @@ import { TramiteExpenditureRoutes } from '../../tramite-expenditures/tramite-exp
 import { ExpenditureConceptRoutes } from '../../tramite-expenditures/expenditure-concept.routes';
 import { TramiteHistoryExpenditureRoutes } from '../../tramite-expenditures/tramite-expenditure-historic.routes';
 import { TramitePaymentsRoutes } from '../../tramite-payments/tramite-payments.routes';
+import { TramiteSupportPaymentsRoutes } from '../../tramite-support-payments/tramite-payments.routes';
 export class RoutesModule {
     routes: Array<CommonRoutesConfig> = [];
     app: Application;
@@ -27,6 +28,7 @@ export class RoutesModule {
         this.routes.push(new ExpenditureConceptRoutes(app))
         this.routes.push(new TramiteHistoryExpenditureRoutes(app))
         this.routes.push(new TramitePaymentsRoutes(app))
+        this.routes.push(new TramiteSupportPaymentsRoutes(app))
     }
 
 }
