@@ -23,19 +23,34 @@ export class TramiteStateDetailRepository {
         } catch (error) {
             throw new Error(`Can not create detail because: ${error}`)
         }
-        
+
     }
 
 
-    async getTramiteStateDetailByIdTramite(tramiteId: number): Promise<TramiteStateDetailModel[] | []> {
-        const tramiteRepo = this.getRepository();
+    async getTramiteStateDetailByIdTramite(tramiteId: number): Promise<TramiteStateDetailModel[]> {
+        const tramiteRepo: Repository<TramiteStateDetailModel> = this.getRepository();
         try {
-            return tramiteRepo.findAll({ where: {
-                id_tramite: tramiteId
-            } });
+            return tramiteRepo.findAll({
+                where: {
+                    id_tramite: tramiteId
+                }
+            });
         } catch (ex) {
             throw new Error('Not found exception');
         }
-        return [];
+    }
+
+    async getTramiteStateDetailByLastStateAndIdTramite(tramiteId: number, lastStateId: number): Promise<TramiteStateDetailModel | null> {
+        const tramiteRepo: Repository<TramiteStateDetailModel> = this.getRepository();
+        try {
+            return tramiteRepo.findOne({
+                where: {
+                    id_tramite: tramiteId,
+                    id_estado_actual: lastStateId
+                }
+            });
+        } catch (ex) {
+            throw new Error('Not found exception');
+        }
     }
 }

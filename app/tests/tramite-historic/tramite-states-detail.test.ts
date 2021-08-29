@@ -23,7 +23,7 @@ describe('Tramite historic of states', function () {
         
     });
 
-    it.only('map tramiteStateDetail to DTO', async function () {
+    it('map tramiteStateDetail to DTO', async function () {
         const tramitesStateDetail = await tramiteStateDetailRepo.getTramiteStateDetailByIdTramite(99);
         expect(tramitesStateDetail[0]).to.be.instanceOf(TramiteStateDetailModel);
         const tramiteStatesDetailsParsed =  await Promise.all(tramitesStateDetail.map(async (tramiteStateDetail: TramiteStateDetailModel) => {
