@@ -10,28 +10,34 @@ import { AddInitialPaymentDTO } from "../model/dto/add-initial-payment.dto";
 
 export class AddInitialPaymentService {
 
-    private tramiteRepo:TramiteRepository= new TramiteRepository();
+    private tramiteRepo: TramiteRepository = new TramiteRepository();
     private uploadAnnexService: UploadAnnexService = new UploadAnnexService();
     private tramiteStateDetailService: TramiteStateDetailService = new TramiteStateDetailService();
     private annexRepository: TramiteStateDetailAnnexRepository = new TramiteStateDetailAnnexRepository();
     private tramiteStateAnnexObjectMapper: TramiteStateAnnexObjectMapper = new TramiteStateAnnexObjectMapper()
 
     async addInitialPayment(addInitialPaymentDTO: AddInitialPaymentDTO, userDto: GetUserDTO) {
-        const {tramite_id, observaciones } = addInitialPaymentDTO
-        const createTramiteStateDetailDTO: CreateTramiteStateDetailDTO = { 
-            currentState: EstadoTramiteEnum.EnTramite,
-            lastState: EstadoTramiteEnum.PendienteDePago,
-            idTramite: tramite_id, 
-            infInformer: userDto.id,
-            observations: observaciones
-        }
-        await this.tramiteRepo.updateTramiteState(tramite_id, EstadoTramiteEnum.EnTramite);
-        const newTramiteStateDetail = await this.tramiteStateDetailService.createTramiteStateDetail(createTramiteStateDetailDTO);
-        this.uploadAnnexService.setUserContext(userDto);
-        const urlResultFromS3 = await this.uploadAnnexService.uploadFilesToS3Buckets(addInitialPaymentDTO.soportePago, `pago para tramite${tramite_id}`)
-        const paymentDOcument = this.tramiteStateAnnexObjectMapper.mapUrlsToInterface(
-            urlResultFromS3, "payment", newTramiteStateDetail.getDataValue('id'), observaciones);
+        const { tramite_id, observaciones } = addInitialPaymentDTO
+        const lastTramiteStateDetail = await this.tramiteStateDetailService.getLastTramiteStateDetailByIdAndState(tramite_id, EstadoTramiteEnum.PendienteDePago)
+        if (lastTramiteStateDetail) {
+            const createTramiteStateDetailDTO: CreateTramiteStateDetailDTO = {
+                currentState: EstadoTramiteEnum.EnTramite,
+                lastState: EstadoTramiteEnum.PendienteDePago,
+                idTramite: tramite_id,
+                infInformer: userDto.id,
+                observations: observaciones
+            }
+            await this.tramiteRepo.updateTramiteState(tramite_id, EstadoTramiteEnum.EnTramite);
+            await this.tramiteStateDetailService.createTramiteStateDetail(createTramiteStateDetailDTO);
+            this.uploadAnnexService.setUserContext(userDto);
 
-        return await this.annexRepository.saveTramiteStateDetailAnnex(paymentDOcument);
+            const urlResultFromS3 = await this.uploadAnnexService.uploadFilesToS3Buckets(addInitialPaymentDTO.soportePago, `pago para tramite${tramite_id}`)
+            const paymentDOcument = this.tramiteStateAnnexObjectMapper.mapUrlsToInterface(
+                urlResultFromS3, "payment", lastTramiteStateDetail.getDataValue('id'), observaciones);
+
+            return await this.annexRepository.saveTramiteStateDetailAnnex(paymentDOcument);
+        }else{
+            throw new Error('Can not get last tramite state detal of tramite: ' + tramite_id);
+        }
     }
 }
