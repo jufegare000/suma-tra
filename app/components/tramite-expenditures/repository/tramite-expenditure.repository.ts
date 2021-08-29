@@ -59,6 +59,20 @@ export class TramiteExpenditureRepository {
         } catch (error) {
             throw new Error(`Can not create expenditure because: ${error}`)
         }
+    }
 
+    async updateTramiteExpenditureWithSupportURLByPetitioner(idExpenditure: number, supportUrl: string){
+        try {
+            const tramiteSDRepo = this.getRepository();
+
+            return await tramiteSDRepo.update({
+                pago_soporte_url: supportUrl,
+                fecha_actualizacion: new Date()
+            },
+                { where: { id: idExpenditure } }
+            )
+        } catch (error) {
+            throw new Error(`Can not create expenditure because: ${error}`)
+        }
     }
 }

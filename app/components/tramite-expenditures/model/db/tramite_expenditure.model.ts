@@ -34,6 +34,11 @@ export class TramiteExpenditureModel extends Model implements TramiteExpenditure
     @Column
     soporte_url?: string;
 
+    @AllowNull(true)
+    @NotEmpty
+    @Column
+    pago_soporte_url?: string;
+
     @AllowNull(false)
     @NotEmpty
     @Column
