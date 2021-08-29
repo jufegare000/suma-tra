@@ -4,6 +4,7 @@ export interface TramiteExpenditureI {
     gasto_id: number, 
     valor: number,
     soporte_url?: string,
+    pago_soporte_url?: string,
     fecha_creacion: Date,
     fecha_actualizacion?: Date,
     descripcion?: string

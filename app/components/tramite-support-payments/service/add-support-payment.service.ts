@@ -19,4 +19,13 @@ export class AddSupportPaymentService {
         
         return await this.expenditureRepository.updateTramiteExpenditureWithSupportURL(id_expenditure, urlResultFromS3);
     }
+
+    async addSupportPaymentDocumentByPetitioner(addSupportPaymentDTO: AddSupportPaymentDTO, userDto: GetUserDTO) {
+        const { id_expenditure, support_file } = addSupportPaymentDTO
+
+        this.uploadAnnexService.setUserContext(userDto);
+        const urlResultFromS3 = await this.uploadAnnexService.uploadFilesToS3Buckets(support_file, `pago para gasto: ${id_expenditure} solicitante`)
+        
+        return await this.expenditureRepository.updateTramiteExpenditureWithSupportURLByPetitioner(id_expenditure, urlResultFromS3);
+    }
 }
