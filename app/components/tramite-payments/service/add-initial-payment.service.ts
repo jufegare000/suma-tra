@@ -18,7 +18,7 @@ export class AddInitialPaymentService {
 
     async addInitialPayment(addInitialPaymentDTO: AddInitialPaymentDTO, userDto: GetUserDTO) {
         const { tramite_id, observaciones } = addInitialPaymentDTO
-        const lastTramiteStateDetail = await this.tramiteStateDetailService.getLastTramiteStateDetailByIdAndState(tramite_id, EstadoTramiteEnum.EnValidacion)
+        const lastTramiteStateDetail = await this.tramiteStateDetailService.getLastTramiteStateDetailByIdAndState(tramite_id, EstadoTramiteEnum.PendienteDePago)
         if (lastTramiteStateDetail) {
             const createTramiteStateDetailDTO: CreateTramiteStateDetailDTO = {
                 currentState: EstadoTramiteEnum.EnTramite,
