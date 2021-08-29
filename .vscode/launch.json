@@ -19,8 +19,8 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                //"${workspaceFolder}/app/app.ts"
-                "${workspaceFolder}/app/tests/tramite-management/tramite-state-detail/*.ts"
+                "${workspaceFolder}/app/app.ts"
+                //"${workspaceFolder}/app/tests/tramite-management/tramite-state-detail/*.ts"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
