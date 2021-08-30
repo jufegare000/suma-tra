@@ -29,7 +29,6 @@ export class TramiteStateDetailAnnexModel extends Model implements AnexoEstadoTr
     descripcion_anexo!: string;
 
     @AllowNull(true)
-    @NotEmpty
     @Column
     comentario?: string;
 
