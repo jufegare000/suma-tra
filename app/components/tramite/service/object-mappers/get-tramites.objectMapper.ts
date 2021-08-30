@@ -19,7 +19,8 @@ export class GetTramitesObjectMapper {
                 tramitador: tramiteModel.getDataValue('tramitador_id'),
                 tipo_vehiculo: tramiteModel.getDataValue('tipo_vehiculo'),
                 estado_id: tramiteModel.getDataValue('estado_id'),
-                observaciones: tramiteModel.getDataValue('observaciones')
+                observaciones: tramiteModel.getDataValue('observaciones'),
+                valor_total: tramiteModel.getDataValue('valor_total')
             });
         });
         return tramitesDTO;
