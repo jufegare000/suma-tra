@@ -23,7 +23,7 @@ export class UploadTramiteFormatsService {
             lastState: lastState,
             idTramite: tramite_id, 
             infInformer: informerId,
-            observations: observaciones? observaciones: ""
+            observations: observaciones
         }
         await this.tramiteRepo.updateTramiteState(uploadTramiteFormatsDTO.tramite_id, EstadoTramiteEnum.EnValidacion);
         const newTramiteStateDetail = await this.tramiteStateDetailService.createTramiteStateDetail(createTramiteStateDetailDTO);

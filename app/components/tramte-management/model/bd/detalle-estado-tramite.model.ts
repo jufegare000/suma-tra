@@ -39,7 +39,6 @@ export class TramiteStateDetailModel extends Model implements TramiteStateDetail
     fecha_cambio_estado!: Date;
 
     @AllowNull(true)
-    @NotEmpty
     @Column
     observaciones?: String;
 
