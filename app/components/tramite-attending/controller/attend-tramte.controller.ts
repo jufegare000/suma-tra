@@ -26,6 +26,7 @@ class AttendTramiteController extends BaseController {
                 }
             } catch (error: any) {
                 return this.clientError(res, error.toString());
+
             }
         }
         return this.unauthorized(res, 'email was no setted in headers');
