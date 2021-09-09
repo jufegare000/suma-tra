@@ -6,14 +6,15 @@ import { UserEnum } from '../../../enums/user/solicitante.enum';
 import { GetUserDTO } from '../../users/model/dto/get-user.dto';
 import { TramiteDeliveryService } from '../service/tramite-delivery.service';
 import { AttendTramiteDTO } from '../../tramite-attending/model/dto/attend-tramite.dto';
+import { TramiteFinalizationService } from '../service/tramite-finalization.service';
 
 
 
 const log: Logger = new Logger();
 const userValidator: UserValidators = new UserValidators();
-class TramiteDeliveryController extends BaseController {
+class TramiteDinalizationController extends BaseController {
 
-    private useCase: TramiteDeliveryService = new TramiteDeliveryService();
+    private useCase: TramiteFinalizationService = new TramiteFinalizationService();
 
     protected async executeImpl(req: express.Request, res: express.Response): Promise<void | any> {
         const userDto: GetUserDTO | null = await userValidator.validateEmailInHeaders(req, UserEnum.solicitanteRole);
@@ -21,7 +22,7 @@ class TramiteDeliveryController extends BaseController {
             try {
                 log.info('getted email: ' + userDto)
                 const attendTramiteDto: AttendTramiteDTO = req.body;
-                const result = await this.useCase.deliverTramite(userDto, attendTramiteDto.tramite_id)
+                const result = await this.useCase.terminateTramite(userDto, attendTramiteDto.tramite_id)
                 if (result) {
                     return this.ok(res, result);
                 }
@@ -34,4 +35,4 @@ class TramiteDeliveryController extends BaseController {
     }
 }
 
-export default new TramiteDeliveryController();
+export default new TramiteDinalizationController();

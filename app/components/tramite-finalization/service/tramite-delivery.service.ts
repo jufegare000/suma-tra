@@ -11,11 +11,11 @@ export class TramiteDeliveryService {
     private getTramiteService: GetTramiteService = new GetTramiteService();
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private tramiteStateDetailService: TramiteStateDetailService = new TramiteStateDetailService();
-    async handleTramiteWithTramitadorUser(tramitador: GetUserDTO, tramiteId: number) {
-        const currentState: number = EstadoTramiteEnum.PendienteDeInformacion;
-        const lastState: number = EstadoTramiteEnum.PendienteDeAprobacion;
+    async deliverTramite(tramitador: GetUserDTO, tramiteId: number) {
+        const currentState: number = EstadoTramiteEnum.PendienteDeEntrega;
+        const lastState: number = EstadoTramiteEnum.EnTramite;
         const tramitadorId: number = tramitador.id;
-        await this.tramiteRepository.updateTramiteWithTramitadorAndState(tramitador.id, tramiteId, currentState);
+        await this.tramiteRepository.updateTramiteState(tramiteId, currentState);
         const createTramiteStateDetailDTO: CreateTramiteStateDetailDTO = {
             currentState: currentState,
             lastState: lastState,

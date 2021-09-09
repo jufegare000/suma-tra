@@ -1,22 +1,21 @@
 
 import { EstadoTramiteEnum } from "../../../enums/tramites/estado-tramite.enum";
+import { CreateTramiteStateDetailDTO } from "../../tramite-attending/model/dto/create-tramite-state-detail.dto";
+import { TramiteStateDetailService } from "../../tramite-attending/service/tramite-state-detail.service";
 import { TramiteRepository } from "../../tramite/repository/tramite.repository";
 import { GetTramiteService } from "../../tramite/service/get-tramite/get-tramite.service";
 import { GetUserDTO } from "../../users/model/dto/get-user.dto";
-import { CreateTramiteStateDetailDTO } from "../model/dto/create-tramite-state-detail.dto";
-import { TramiteStateDetailService } from "./tramite-state-detail.service";
 
-
-export class AttendTramiteService {
+export class TramiteFinalizationService {
 
     private getTramiteService: GetTramiteService = new GetTramiteService();
     private tramiteRepository: TramiteRepository = new TramiteRepository();
     private tramiteStateDetailService: TramiteStateDetailService = new TramiteStateDetailService();
-    async handleTramiteWithTramitadorUser(tramitador: GetUserDTO, tramiteId: number) {
-        const currentState: number = EstadoTramiteEnum.PendienteDeInformacion;
-        const lastState: number = EstadoTramiteEnum.PendienteDeAprobacion;
+    async terminateTramite(tramitador: GetUserDTO, tramiteId: number) {
+        const currentState: number = EstadoTramiteEnum.Entregado;
+        const lastState: number = EstadoTramiteEnum.PendienteDeEntrega;
         const tramitadorId: number = tramitador.id;
-        await this.tramiteRepository.updateTramiteWithTramitadorAndState(tramitador.id, tramiteId, currentState);
+        await this.tramiteRepository.updateTramiteState(tramiteId, currentState);
         const createTramiteStateDetailDTO: CreateTramiteStateDetailDTO = {
             currentState: currentState,
             lastState: lastState,
