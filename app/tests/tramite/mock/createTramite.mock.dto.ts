@@ -37,7 +37,7 @@ const documentosImplicados: DocumentosImplicadosTramiteDTO = {
     comprador:cedulaComprador,
     vendedor: cedulaVendedor
 }
-const matriculaFrontal: DocumentoTramiteDTO = {
+export const matriculaFrontal: DocumentoTramiteDTO = {
     b64:pdfFileMock,
     ext: "pdf"
 }

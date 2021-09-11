@@ -31,13 +31,13 @@ export class TramiteDeliveryService {
             idTramite: tramite_id,
             infInformer: tramitadorId
         }
-        const lastTramiteStateDetail = await this.tramiteStateDetailService.getLastTramiteStateDetailByIdAndState(tramite_id, EstadoTramiteEnum.PendienteDeEntrega)
-        const idLastramiteDetail: number = lastTramiteStateDetail? lastTramiteStateDetail.getDataValue('id'): -1;
-        await this.tramiteStateDetailService.createTramiteStateDetail(createTramiteStateDetailDTO);
+        
+        const idLastramiteDetail =   await this.tramiteStateDetailService.createTramiteStateDetail(createTramiteStateDetailDTO);
+        
         this.uploadAnnexService.setUserContext(tramitador);
         const urlResultFromS3 = await this.uploadAnnexService.uploadFilesToS3Buckets(documentoTramite, `matrícula: ${tramite_id}`)
             const paymentDOcument = this.tramiteStateAnnexObjectMapper.mapUrlsToInterface(
-                urlResultFromS3, "payment", idLastramiteDetail , 'Tramite entregado');
+                urlResultFromS3, "matricula_nueva", idLastramiteDetail.getDataValue('id') , 'Tramite entregado');
 
         await this.annexRepository.saveTramiteStateDetailAnnex(paymentDOcument);
         
